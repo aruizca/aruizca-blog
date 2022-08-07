@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>aruizca-blog</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.release>11</maven.compiler.release>
+        <jbake.maven.version>0.3.5</jbake.maven.version>
+        <asciidoctor.version>2.5.5</asciidoctor.version>
+        <markdown.version>0.64.0</markdown.version>
+        <thymeleaf.version>3.0.15.RELEASE</thymeleaf.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jbake</groupId>
+                <artifactId>jbake-maven-plugin</artifactId>
+                <version>${jbake.maven.version}</version>
+                <configuration>
+                    <inputDirectory>${project.basedir}/src/main/resources/jbake</inputDirectory>
+                    <outputDirectory>dist</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-generate</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctor.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.vladsch.flexmark</groupId>
+                        <artifactId>flexmark</artifactId>
+                        <version>${markdown.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.vladsch.flexmark</groupId>
+                        <artifactId>flexmark-profile-pegdown</artifactId>
+                        <version>${markdown.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.thymeleaf</groupId>
+                        <artifactId>thymeleaf</artifactId>
+                        <version>${thymeleaf.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
