@@ -87,13 +87,27 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	<div class="page-header">
-		<h1>Third Post</h1>
-	</div>
+<header id="indexhead_willsong">
+    <div id="description_willsong" class="respowidth_willsong">
+        <h3>- For everything that is worth writing about in more than 140 characters -</h3>
 
-	<p><em>26 September 2013</em></p>
+        <h3>For everything else follow me <a href="https://twitter.com/aruizca" target="_twitter">@aruizca <i class="fa fa-twitter fa-lg"></i></a></h3>
+    </div>
+</header>
+<section id="main_willsong" role="main">
+	<article id="thearticle_willsong" class="respowidth_willsong" role="article" itemscope
+			 itemtype="http://schema.org/Article">
+		<h2 class="posttitle_willsong" itemprop="headline">Third Post</h2>
 
-	<p><div class="paragraph">
+		<div class="articledetails_willsong">
+
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="26 September 2013" itemprop="datePublished">{{date format='DD MMM YYYY'}}</time></span>
+			<i class="fa fa-user fa-lg"></i><span>{{author.name}}</span>
+			<i class="fa fa-tag fa-lg"></i><span>{{tags separator=", "}}</span>
+		</div>
+
+		<div class="postcontent_willsong">
+			<div class="paragraph">
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.</p>
 </div>
 <div class="ulist">
@@ -114,9 +128,34 @@ ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia
 id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In
 consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere
 libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.</p>
-</div></p>
+</div>
+		</div>
 
-	<hr />
+		<div id="sharepost_willsong">
+			<span>Share this post:</span><br><br>
+			<a class="sharelink_willsong" target="_blank"
+			   href="http://www.facebook.com/sharer.php?u={{url absolute="true"}}"><i class="fa fa-facebook fa-lg"></i></a>
+			<a class="sharelink_willsong" target="_blank"
+			   href="http://twitter.com/share?text={{title}}&url={{url absolute="true"}}"><i class="fa fa-twitter fa-lg"></i></a>
+			<a class="sharelink_willsong" target="_blank"
+			   href="https://plus.google.com/share?url={{url absolute="true"}}"><i class="fa fa-google-plus-square fa-lg"></i></a>
+		</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'aruizca'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>	</article>
+</section>
+
 	
 
 <footer>
