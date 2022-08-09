@@ -24,7 +24,7 @@
                 <version>${jbake.maven.version}</version>
                 <configuration>
                     <inputDirectory>${project.basedir}/src/main/resources/jbake</inputDirectory>
-                    <outputDirectory>generated-site</outputDirectory>
+                    <outputDirectory>docs</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
