@@ -1,6 +1,4 @@
-		</div>
-		<div id="push"></div>
-    </div>
+
     
     <div id="footer">
       <div class="container">
@@ -15,5 +13,3 @@
     <script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>js/bootstrap.min.js"></script>
     <script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>js/prettify.js"></script>
     
-  </body>
-</html>
