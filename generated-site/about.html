@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8"/>
     <title>About</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
     <meta name="generator" content="JBake">
 
-    <!-- Le styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/asciidoctor.css" rel="stylesheet">
-    <link href="css/base.css" rel="stylesheet">
-    <link href="css/prettify.css" rel="stylesheet">
+    <!--Responsive Meta Tags-->
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-    <![endif]-->
+    <!--Bing search engine validation-->
+    <meta name="msvalidate.01" content="C6990C0351F7B20ED3C944A3BB3BECD9"/>
+
+    <!--Styles, change style.css-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Poly|Roboto:400,700,300|Roboto+Condensed' rel='stylesheet' type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
+    <style>
+        #themecover_mobileworking_willsong {
+            background: url(img/common/background.png) repeat-y;
+            background-size: 100%;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 30px;
+            width: 100%;
+            z-index: -100;
+        }
+    </style>
+
+    <!--Scripts-->
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+
 
     <!-- Fav and touch icons -->
     <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
@@ -26,10 +49,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
     <link rel="shortcut icon" href="favicon.ico">
-  </head>
+</head>
 
 	<!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div id="mainnav" class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,7 +61,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="">JBake</a>
+          <a id="blogname_willsong" class="navbar-brand" href="">
+            aruizca&#x27;s blog = brain.collect {idea -&gt; post(idea)}
+          </a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -62,7 +87,6 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-    <div class="container">
 	<div class="page-header">
 		<h1>About</h1>
 	</div>
@@ -86,17 +110,34 @@ libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.
 	<hr />
 
 
-    
-    <div id="footer">
-      <div class="container">
-        <p class="muted credit">&copy; 2014 | Mixed with <a href="http://getbootstrap.com/">Bootstrap v3.1.1</a> | Baked with <a href="http://jbake.org">JBake v2.6.7</a></p>
-      </div>
+<footer>
+    <!--Social Media -->
+    <div id="socialmedia_willsong">
+        <a href="https://twitter.com/aruizca" class="sociallink_willsong"><i class="fa fa-twitter fa-lg"></i></a>
+        <a href="https://plus.google.com/u/0/+ÁngelRuiz" class="sociallink_willsong"><i class="fa fa-google-plus-square fa-lg"></i></a>
+        <a href="http://au.linkedin.com/in/angelruiz/" target="linkedin" class="sociallink_willsong"><i class="fa fa-linkedin fa-lg"></i></a>
+        <a href="{{@blog.url}}/rss" target="_rss" class="sociallink_willsong"><i class="fa fa-rss fa-lg"></i></a>
     </div>
-    
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/prettify.js"></script>
+
+    <p id="copyright_willsong">
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">aruizca's blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://aruizca.com" property="cc:attributionName" rel="cc:attributionURL">Angel Ruiz Calvo</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        <br/>
+        Prowdly powered by <a href="http://ghost.org" target="_blank">Ghost</a>. Look&Feel based on Wilson theme created by <a href="http://marcosn.com" target="_blank">Marcosn.com</a>
+    </p>
+</footer>
+
+<script src="js/vendor/jquery/jquery.fitvids.js"></script>
+<script src="js/vendor/jquery/jquery.appear.js"></script>
+<script src="js/main.js"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41135257-3', 'aruizca.com');
+    ga('require', 'linkid', 'linkid.js');
+    ga('send', 'pageview');
+
+</script>
     
