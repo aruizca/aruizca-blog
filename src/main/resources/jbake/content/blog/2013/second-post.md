@@ -18,4 +18,4 @@ id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis
 consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere 
 libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.
 
-![Beach](./img/beach.jpg)
+![Beach](/img/beach.jpg)
