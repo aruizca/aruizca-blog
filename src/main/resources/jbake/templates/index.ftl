@@ -22,12 +22,12 @@
                             <i class="fa fa-user fa-lg fa-fw"></i>
                             <span>post.author</span>
                         </div>
-                        <#--			{{#if tags}}-->
-                        <div>
-                            <i class="fa fa-tag fa-lg fa-fw"></i>
-                            <span>{{tags separator=", "}}</span>
-                        </div>
-                        <#--			{{/if}}-->
+                        <#if post.tags?size != 0>
+                            <div>
+                                <i class="fa fa-tag fa-lg fa-fw"></i>
+                                <span>${post.tags?join(", ")}</span>
+                            </div>
+                        </#if>
                     </div>
                     <div class="mainright_willsong">
                         <h2 class="posttitle_willsong" itemprop="headline"><a href="${post.uri}" rel="bookmark">${post.title}</a></h2>
@@ -41,16 +41,16 @@
                             </span>
 
                             <i class="fa fa-user fa-lg fa-fw"></i>
-                            <span>post.author</span>
+                            <span>${post.author}</span>
 
-                            <#--					{{#if tags}}-->
-                            <i class="fa fa-tag fa-lg fa-fw"></i>
-                            <span>{{tags separator=", "}}</span>
-                            <#--					{{/if}}-->
+                            <#if post.tags?size != 0>
+                                <i class="fa fa-tag fa-lg fa-fw"></i>
+                                <span>${post.tags?join(", ")}</span>
+                            </#if>
                         </div>
 
                         <div class="postcontent_willsong">
-                            ${post.body?truncate(80)}
+                            ${post.body?truncate(400, '')}
                         </div>
 
                         <a href="${post.uri}" class="readmore_willsong">Read More</a>

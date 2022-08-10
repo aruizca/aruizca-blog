@@ -1,6 +1,7 @@
 = Fourth Post
 Jonathan Bullock
 2013-10-17
+:jbake-author: Angel Ruiz
 :jbake-type: post
 :jbake-status: published
 :jbake-tags: blog, asciidoc

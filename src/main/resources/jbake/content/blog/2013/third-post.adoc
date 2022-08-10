@@ -1,5 +1,6 @@
 title=Third Post
 date=2013-09-26
+author=Angel Ruiz
 type=post
 tags=blog, asciidoc
 status=published

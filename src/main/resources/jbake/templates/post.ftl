@@ -12,10 +12,10 @@
 		<div class="articledetails_willsong">
 
 			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="${content.date?string("dd MMMM yyyy")}" itemprop="datePublished">{{date format='DD MMM YYYY'}}</time></span>
-			<i class="fa fa-user fa-lg"></i><span>{{author.name}}</span>
-<#--				{{#if tags}}-->
-			<i class="fa fa-tag fa-lg"></i><span>{{tags separator=", "}}</span>
-<#--				{{/if}}-->
+			<i class="fa fa-user fa-lg"></i><span>${content.author}</span>
+			<#if content.tags?size != 0>
+			<i class="fa fa-tag fa-lg"></i><span>${content.tags?join(", ")}</span>
+			</#if>
 		</div>
 
 		<div class="postcontent_willsong">

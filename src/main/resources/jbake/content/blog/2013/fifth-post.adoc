@@ -1,6 +1,7 @@
 = Oliver's Post
 Oliver Fischer
 2013-11-11
+:jbake-author: Angel Ruiz
 :jbake-type: post
 :jbake-status: published
 :jbake-tags: blog, asciidoc
