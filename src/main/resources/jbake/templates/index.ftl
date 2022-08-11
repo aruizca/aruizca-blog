@@ -20,7 +20,7 @@
                         </div>
                         <div>
                             <i class="fa fa-user fa-lg fa-fw"></i>
-                            <span>post.author</span>
+                            <span>${post.author}</span>
                         </div>
                         <#if post.tags?size != 0>
                             <div>

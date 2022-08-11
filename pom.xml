@@ -26,7 +26,7 @@
                 <version>${jbake.maven.version}</version>
                 <configuration>
                     <inputDirectory>${project.basedir}/src/main/resources/jbake</inputDirectory>
-                    <outputDirectory>${project.build.directory}/blog</outputDirectory>
+                    <outputDirectory>${project.basedir}/blog</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
@@ -59,53 +59,6 @@
                         <version>${freemarker.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <skipDeploy>true</skipDeploy>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.7.1</version>
-                <configuration>
-                    <skipDeploy>true</skipDeploy>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.0.0</version>
-            </plugin>
-
-            <plugin>
-                <!-- Deploy the web site -->
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                        <!-- select the Maven phase in which the plugin will be executed -->
-                        <phase>site</phase>
-                        <configuration>
-                            <!-- Plugin configuration ges here -->
-                            <outputDirectory>${project.build.directory}/blog</outputDirectory>
-                            <noJekyll>true</noJekyll>
-                            <server>github</server>
-                            <!-- The commit message -->
-                            <message>Building site for my project</message>
-                            <!-- Use merge or override the content -->
-                            <merge>true</merge>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,5 +1,5 @@
 <#include "header.ftl">
-	
+<div id="themecover_mobileworking_willsong"></div>
 <#include "menu.ftl">
 
 <#include "common-heading.ftl">
@@ -11,7 +11,7 @@
 
 		<div class="articledetails_willsong">
 
-			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="${content.date?string("dd MMMM yyyy")}" itemprop="datePublished">{{date format='DD MMM YYYY'}}</time></span>
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="${content.date?string("dd MMMM yyyy")}" itemprop="datePublished">${content.date?string("dd MMMM yyyy")}</time></span>
 			<i class="fa fa-user fa-lg"></i><span>${content.author}</span>
 			<#if content.tags?size != 0>
 			<i class="fa fa-tag fa-lg"></i><span>${content.tags?join(", ")}</span>
