@@ -6,6 +6,10 @@
     /*font-style: normal*/
 /*}*/
 
+ul.pager li.page-index {
+    margin: 0 .5em;
+}
+
 [class^="icon-"], [class*=" icon-"] {
     font-family: 'icomoon';
     speak: none;

@@ -8,7 +8,7 @@
 <section id="main_willsong" role="main">
     <div id="articles_willsong" class="respowidth_willsong">
         <#list posts as post>
-            <#if (post.status == "published")>
+            <#if (post.status == "published"  && post?index >= (currentPageNumber-1) * config.index_posts_per_page?eval && post?index < currentPageNumber * config.index_posts_per_page?eval)>
                 <article class="article_willsong" role="article" itemscope itemtype="http://schema.org/Article">
                     <div class="postdetails_willsong">
                         <div>
@@ -59,7 +59,23 @@
             </#if>
         </#list>
         <div id="pagination_willsong">
-            <p>Older posts are available in the <a href="${content.rootpath}${config.archive_file}">archive</a>.</p>
+            <ul class="pager">
+                <#if (currentPageNumber > 1)>
+                    <li>
+                        <a href="${config.site_host}/${(currentPageNumber==2)?then('', currentPageNumber-1)}">
+                            <i class="fa fa-arrow-left fa-lg fa-fw"></i>
+                        </a>
+                    </li>
+                </#if>
+                <li class="page-index">Page: ${currentPageNumber}/${numberOfPages}</li>
+                <#if (currentPageNumber < numberOfPages)>
+                    <li>
+                        <a href="${config.site_host}/${currentPageNumber + 1}">
+                            <i class="fa fa-arrow-right fa-lg fa-fw"></i>
+                        </a>
+                    </li>
+                </#if>
+            </ul>
         </div>
     </div>
 </section>
