@@ -15,8 +15,8 @@
     </p>
 </footer>
 
-<script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>js/vendor/jquery/jquery.fitvids.js"></script>
-<script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>js/vendor/jquery/jquery.appear.js"></script>
+<script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>vendor/jquery/jquery.fitvids.js"></script>
+<script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>vendor/jquery/jquery.appear.js"></script>
 <script src="<#if (content.rootpath)??>${content.rootpath}<#else></#if>js/main.js"></script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
