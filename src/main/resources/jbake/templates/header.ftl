@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
     <style>
         #themecover_mobileworking_willsong {
-            background: url(<#if (content.rootpath)??>${content.rootpath}<#else></#if>img/common/background.png) repeat-y;
+            background: url(<#if (content.rootpath)??>${content.rootpath}<#else></#if>img/background.png) repeat-y;
             background-size: 100%;
             height: 100%;
             left: 0;

@@ -17,4 +17,4 @@ public class Test {
 }
 ```
 
-![Beach](/img/beach.jpg)
+![Beach](img/beach.jpg)

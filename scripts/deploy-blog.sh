@@ -26,3 +26,6 @@ cd $directory &&
 
 echo -e "\033[0;32mCleaning up...\033[0m"
 git worktree remove $directory
+
+echo -e "\033[0;32mGenerating site to resume work...\033[0m"
+build_command

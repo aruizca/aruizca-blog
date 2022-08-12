@@ -58,24 +58,21 @@
                 </article>
             </#if>
         </#list>
+
         <div id="pagination_willsong">
-            <ul class="pager">
+            <nav class="pagination" role="navigation">
                 <#if (currentPageNumber > 1)>
-                    <li>
-                        <a href="${config.site_host}/${(currentPageNumber==2)?then('', currentPageNumber-1)}">
-                            <i class="fa fa-arrow-left fa-lg fa-fw"></i>
-                        </a>
-                    </li>
+                <a class="newer-posts" href="${config.site_host}/${(currentPageNumber==2)?then('', currentPageNumber-1)}">
+                    <i class="fa fa-arrow-left fa-lg fa-fw"></i> Newer Posts
+                </a>
                 </#if>
-                <li class="page-index">Page: ${currentPageNumber}/${numberOfPages}</li>
+                <span class="page-number">Page ${currentPageNumber} of ${numberOfPages}</span>
                 <#if (currentPageNumber < numberOfPages)>
-                    <li>
-                        <a href="${config.site_host}/${currentPageNumber + 1}">
-                            <i class="fa fa-arrow-right fa-lg fa-fw"></i>
-                        </a>
-                    </li>
+                <a class="older-posts" href="${config.site_host}/${currentPageNumber + 1}">
+                    Older Posts <i class="fa fa-arrow-right fa-lg fa-fw"></i>
+                </a>
                 </#if>
-            </ul>
+            </nav>
         </div>
     </div>
 </section>
