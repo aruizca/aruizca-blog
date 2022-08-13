@@ -6,9 +6,55 @@
     <atom:link href="https://aruizca.github.io/aruizca-blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Thu., 11 Aug. 2022 20:16:33 +0200</pubDate>
-    <lastBuildDate>Thu., 11 Aug. 2022 20:16:33 +0200</lastBuildDate>
+    <pubDate>Sat., 13 Aug. 2022 11:15:33 +0200</pubDate>
+    <lastBuildDate>Sat., 13 Aug. 2022 11:15:33 +0200</lastBuildDate>
 
+    <item>
+      <title>My MongoDB presentation at the CJUG</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/02-my-mongodb-presentation-at-the-cjug.html</link>
+      <pubDate>Wed., 15 Jan. 2014 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2014/02-my-mongodb-presentation-at-the-cjug.html</guid>
+      	<description>
+	&lt;iframe id=&quot;mongodb-preso&quot; src=&quot;/other/mongodb-talk/mongodb.
+htm&quot; style=&quot;width: 100%; height: 500px&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
+&lt;p&gt;Long overdue, here is the presentation I did for the &lt;a href=&quot;http://www.cjugaustralia.org/&quot;&gt;Canberra J(ava) Users Group&lt;/a&gt; on&lt;br&gt; the 14th of August 2013.&lt;/p&gt; 
+&lt;p&gt;Please click once inside the presentation area and then use the spacebar or the arrow keys to go through the&lt;br&gt; presentation.&lt;/p&gt; 
+&lt;p&gt;The presentation was created using the &lt;a href=&quot;http://bartaz.github.io/impress.js&quot;&gt;impress.js&lt;/a&gt; library, which seems to be discontinued. The effects are cool but after a few slides is starts to get a bit cumbersome. At the end I was able to manage the presentation using an online editor specifically designed for impress.js called &lt;a href=&quot;http://strut.io/&quot;&gt;Strut&lt;/a&gt;. Although now it looks like the editor supports other presentation frameworks.&lt;/p&gt; 
+&lt;p&gt;In my opinion, the mayor drawback of this library is the lack of partial steps within the same slide. Unfortunately when I realized about that I was too advanced to go back.&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>How to upgrade your HDMI dongle MK809II to Android 4.2.2 with the Finless ROM 2.0</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20.html</link>
+      <pubDate>Sun., 12 Jan. 2014 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20.html</guid>
+      	<description>
+	&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/mk809II-Android-4.2.png&quot; alt=&quot;mk809II&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;This post is a concise and comprehensive summary of the steps I have followed to upgrade my HDMI dongle MK809II (Rochip RK3066 chipset) to use the &lt;strong&gt;4.2.2&lt;/strong&gt; version of &lt;strong&gt;Android&lt;/strong&gt;.&lt;/p&gt; 
+&lt;p&gt;After reading plenty of confusing guides, finally I stambled upon this video bellow which explains the process for the older 1.7 version of the Finless ROM. But if all you want is to flash a ROM, you can &lt;strong&gt;skip to the 26:30 minute&lt;/strong&gt;.&lt;/p&gt; &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/VYdMydq7css&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
+&lt;p&gt;Once I watched the video, I had to search for un updated version of the ROM, tools and drivers, as the Finless ROM version 1.7 that appears on the video is based on Android 4.1.1. For your conveniece, I have included here all the files that are required to flash the new ROM:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;a href=&quot;https://dl.dropboxusercontent.com/u/8256463/blog-files/imito_mx1_2_finless_20_jb422.zip&quot;&gt;Finless ROM 2.0 for imito MX1 and MX2 devices (compatible) + the ROM Flashing tool RKAndroidTool 1.35&lt;/a&gt;.&lt;/li&gt; 
+ &lt;li&gt;&lt;a href=&quot;https://dl.dropboxusercontent.com/u/8256463/blog-files/Rockchip_Batch_Tool_v1.7.rar&quot;&gt;Rockchip Batch Tool 1.7 + Rock USB drivers 3.5 for Windows&lt;/a&gt;.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;div class=&quot;alert alert-warning&quot;&gt;
+  Disclaimer!! Perform these steps at your own risk. I performed them succesfully in my device, but there is not 100% guaratee that you won&apos;t have some sort of issue along the way. 
+&lt;/div&gt; 
+&lt;p&gt;Next are the steps I followed to flash de ROM:&lt;/p&gt; 
+&lt;ol&gt; 
+ &lt;li&gt; &lt;p&gt;Connect your device to your PC using the microUSB connector located at the bottom which is labeled as &lt;code&gt;&quot;DC&quot;&lt;/code&gt;.&lt;br&gt; Remember that in order to provide with enough electric current, generally you need to connect the device to either a USB 3.0 port, 2 USB 2.0 ports or a USB 2.0 hub with external power supply.&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Enable the option &lt;code&gt;&quot;Connect to PC&quot;&lt;/code&gt;in your device. This options is located under &lt;code&gt;Settings -&amp;gt; USB&lt;/code&gt;.&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/RKBatchTool.png&quot; alt=&quot;Rockchip batch Tool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;All you need to do is click on the &lt;code&gt;&quot;Switch&quot;&lt;/code&gt; button. If you had it connected to a screen you should see the video go off.&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;The first time you do this, Windows will try to install the new device without success and that is why you have the drivers included in one of the files listed above. Use the &lt;code&gt;&quot;Windows Device Manager&quot;&lt;/code&gt; to install the drivers.&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Now is time to open the ROM Flash tool &lt;code&gt;&quot;RKAndoidTool&quot;&lt;/code&gt; included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/RKAndroidTool.png&quot; alt=&quot;Flash ROM tool RKAndroidTool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Notice that in the footer of the tool, it should appera the message: &lt;code&gt;&quot;Found RKAndroid Mass Storage USB&quot;&lt;/code&gt;. If that&apos;s the case, you are good to press the &lt;code&gt;&quot;Flash ROM&quot;&lt;/code&gt; button.&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Once it is finished the device will reboot itself. Please be patient and wait for the first boot to happen.&lt;/p&gt; &lt;/li&gt; 
+&lt;/ol&gt; 
+&lt;p&gt;I hope you find it useful. Please let me know if you have any problems.&lt;/p&gt; 
+&lt;p&gt;Cheers,&lt;/p&gt;
+	</description>
+    </item>
     <item>
       <title>Oliver&amp;#8217;s Post</title>
       <link>https://aruizca.github.io/aruizca-blog/blog/2013/fifth-post.html</link>
@@ -31,7 +77,7 @@
       	<description>
 	&lt;div class=&quot;imageblock&quot;&gt; 
  &lt;div class=&quot;content&quot;&gt; 
-  &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt; 
+  &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt; 
  &lt;/div&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
@@ -83,7 +129,7 @@
 
 }
 &lt;/code&gt;&lt;/pre&gt; 
-&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt;&lt;/p&gt;
 	</description>
     </item>
     <item>

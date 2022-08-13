@@ -10,6 +10,12 @@ ul.pager li.page-index {
     margin: 0 .5em;
 }
 
+div.postcontent_willsong > p:first-of-type > img {
+    width: 100%;
+}
+
+/********************************************/
+
 [class^="icon-"], [class*=" icon-"] {
     font-family: 'icomoon';
     speak: none;
