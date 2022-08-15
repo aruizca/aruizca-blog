@@ -6,8 +6,8 @@
     <atom:link href="https://aruizca.github.io/aruizca-blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sat., 13 Aug. 2022 11:15:33 +0200</pubDate>
-    <lastBuildDate>Sat., 13 Aug. 2022 11:15:33 +0200</lastBuildDate>
+    <pubDate>Mon., 15 Aug. 2022 16:30:22 +0200</pubDate>
+    <lastBuildDate>Mon., 15 Aug. 2022 16:30:22 +0200</lastBuildDate>
 
     <item>
       <title>My MongoDB presentation at the CJUG</title>
@@ -15,8 +15,7 @@
       <pubDate>Wed., 15 Jan. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/02-my-mongodb-presentation-at-the-cjug.html</guid>
       	<description>
-	&lt;iframe id=&quot;mongodb-preso&quot; src=&quot;/other/mongodb-talk/mongodb.
-htm&quot; style=&quot;width: 100%; height: 500px&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
+	&lt;iframe id=&quot;mongodb-preso&quot; src=&quot;https://aruizca.github.io/mongodb-presentation&quot; style=&quot;width: 100%; height: 500px&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
 &lt;p&gt;Long overdue, here is the presentation I did for the &lt;a href=&quot;http://www.cjugaustralia.org/&quot;&gt;Canberra J(ava) Users Group&lt;/a&gt; on&lt;br&gt; the 14th of August 2013.&lt;/p&gt; 
 &lt;p&gt;Please click once inside the presentation area and then use the spacebar or the arrow keys to go through the&lt;br&gt; presentation.&lt;/p&gt; 
 &lt;p&gt;The presentation was created using the &lt;a href=&quot;http://bartaz.github.io/impress.js&quot;&gt;impress.js&lt;/a&gt; library, which seems to be discontinued. The effects are cool but after a few slides is starts to get a bit cumbersome. At the end I was able to manage the presentation using an online editor specifically designed for impress.js called &lt;a href=&quot;http://strut.io/&quot;&gt;Strut&lt;/a&gt;. Although now it looks like the editor supports other presentation frameworks.&lt;/p&gt; 
