@@ -6,8 +6,7 @@ tags=mongodb, presentation
 status=published
 ~~~~~~
 
-<iframe id="mongodb-preso" src="/other/mongodb-talk/mongodb.
-htm" style="width: 100%; height: 500px" frameborder="0" allowfullscreen></iframe>
+<iframe id="mongodb-preso" src="https://aruizca.github.io/mongodb-presentation" style="width: 100%; height: 500px" frameborder="0" allowfullscreen></iframe>
 
 Long overdue, here is the presentation I did for the [Canberra J(ava) Users Group](http://www.cjugaustralia.org/) on 
 the 14th of August 2013.

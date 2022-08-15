@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Based on blog post: https://sangsoonam.github.io/2019/02/08/using-git-worktree-to-deploy-github-pages.html
+
 cd "$(dirname "$0")"/..
 
 directory=blog
@@ -25,6 +27,7 @@ cd $directory &&
   git push origin $branch
 
 echo -e "\033[0;32mCleaning up...\033[0m"
+cd ..
 git worktree remove $directory
 
 echo -e "\033[0;32mGenerating site to resume work...\033[0m"
