@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="postcontent_willsong">
-                            ${post.body?truncate(400, '')}
+                            ${post.body?truncate(500, '')}
                         </div>
 
                         <a href="${post.uri}" class="readmore_willsong">Read More</a>
