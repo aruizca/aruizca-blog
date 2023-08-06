@@ -120,7 +120,64 @@
                         <div class="postcontent_willsong">
                             <p><img src="https://aruizca.github.io/aruizca-blog/blog/2016/img/git-clean.png" alt="git clean"></p> 
 <p>Recently I was faced with the task of cleaning up a Git repository whose branches were not "pruned" for a few years, so I am talking about several hundreds of branches.</p> 
-<p>This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That's why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged 
+<p>This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That's why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged to a "higher level" branch. Because they became <strong>"redundant"</strong>.</p> 
+<p>The real task here is to clean up the remote branch as you can always clone the repo locally again and start from scratch. I started deleting them manually because I am not a Git guru and I am very cautius whenever I have to tempre with the remote repositorory. Soon enough I realized I was not getting anywhere and start looking for a script to help me.</p> 
+<h1>Script to clean up the remote repository</h1> 
+<div class="alert alert-danger" role="alert"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Please use it at your own risk. <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+ <br> It worked for me using Git 2.9.2, but it should work with earlier versions. 
+ <br> Although branches are removed, the metadata of the branch and the relevant commits will remain there, so it is always possible to recreate any branch that should not have been deleted. 
+</div> 
+<pre><code>## Remove remote branches that are already merged with master
+git checkout master
+# Dry-run: check the branch names list before they get deleted for good
+git branch -ar --merged master | grep -v HEAD | grep -v master
+# If you are really sure, then remove them from remote repo
+git branch -ar --merged master | grep -v HEAD | grep -v master | sed "s/origin\///" | xargs -n 1 git push origin --delete
+</code></pre> 
+<h2>Breaking it down</h2> 
+<pre><code>git checkout master
+</code></pre> 
+<ul> 
+ <li>In this case I chose the master branch, but if you want to clean more recent branches you can replace all the <code>master</code> branch references with <code>develop</code> in all the commands.</li> 
+</ul> 
+<pre><code>git branch -ar --merged master
+</code></pre> 
+<ul> 
+ <li>Get list of remote branches that have already been merged with the <code>master</code> branch</li> 
+</ul> 
+<pre><code>grep -v HEAD | grep -v master
+</code></pre> 
+<ul> 
+ <li>Remove those items from the list that contains the words <code>HEAD</code> or <code>master</code></li> 
+</ul> 
+<pre><code>sed "s/origin\///"
+</code></pre> 
+<ul> 
+ <li>For each remaining element in the list, remove the <code>origin/</code> name prefix</li> 
+</ul> 
+<pre><code>xargs -n 1 git push origin --delete
+</code></pre> 
+<ul> 
+ <li>Execute the git remote branch delete command for each element in the list.</li> 
+</ul> 
+<h1>Script to clean up the local repository</h1> 
+<div class="alert alert-danger" role="alert"> 
+ <h3>Deprecated</h3> 
+ <p>Just use <a href="https://github.com/tj/git-extras" target="_blank">Git Extras</a> instead (eg: `git delete-merged-branches` or `git delete-squashed-branches`</p> 
+</div> 
+<p>If you have been working on a repository for a while, it might be that you have local copy of a few branches that are no longer valid and need to be "pruned".</p> 
+<p>To achieve that we can execute a small variation of the previous script.</p> 
+<pre><code>## Remove local branches that are already merged with master
+
+git checkout master
+# Dry-run: check the branch names list before they are deleted
+git branch --merged master | grep -v "master"
+# If you are really sure, then remove them from local repo
+git branch --merged master | grep -v "master" | xargs -n 1 git branch -d
+</code></pre> 
+<h3>Acknowlegment</h3> 
+<p>Thanks to <a href="https://twitter.com/stevenharman">@StevenHarman</a>, whose <a href="http://stevenharman.net/git-clean-delete-already-merged-branches">post</a> showed me how to clean the local repo and gave me the idea to do same on the remote repo.</p> 
+<p>Feedback and improvements are welcome!! :-)</p>
                         </div>
 
                         <a href="blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories.html" class="readmore_willsong">Read More</a>
@@ -164,7 +221,62 @@
 
                         <div class="postcontent_willsong">
                             <p><a href="https://www.webjars.org/" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2015/img/gradle-webjars.png" alt="gradle and webjars"><br> </a></p> 
-<p>For those of you who never heard of it before, <a href="http://www.webjars.org/">WebJars</a> is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file 
+<p>For those of you who never heard of it before, <a href="http://www.webjars.org/">WebJars</a> is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file that contains a set of curated files (Classic WebJars) for a given library. Recently you can also reference Bower and NPM packages but I would not recommend it.</p> 
+<p>Previously I have tried using Bower alongside both Grunt and Gulp and they brought me straight back to the times were Ant was the predominant build tool in the Java EE world where everyone was doing its own thing with a complete lack of conventions.</p> 
+<p>After using WebJars in Java web projects I started looking how to use it in static web sites, more especifically those generated with <a href="http://jbake.org/">jBake</a>.</p> 
+<p>The final aim is to avoid checking in the web dependencies, like Javaacript based libraries, in our SCM tool. It turns out that <a href="http://melix.github.io/blog/2014/02/hosting-jbake-github.html">jBake can be used with Gradle</a>, which means that we have the chance of managing all my dependencies using a single tool that happens to be a lot better than anything available on the Javascript-Node ecosystem.</p> 
+<p>Declaring your WebJars dependency is as easy as declaring any other Maven based dependency, but in this case we group them in a <a href="https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html#configurations">custom Gradle dependency configuration</a> that we will call <code>webjars</code>:</p> 
+<pre><code>...
+dependencies {
+    webjars 'org.webjars:jquery:2.1.3'
+    webjars 'org.webjars:bootstrap:3.3.4'
+    webjars 'org.webjars:highlightjs:8.4-4'
+    webjars 'org.webjars:font-awesome:4.3.0-1'
+    webjars 'org.webjars:jquery.tocify.js:1.9.0'
+    webjars 'org.webjars:Magnific-Popup:1.0.0'
+}
+...
+</code></pre> 
+<p>In the case of jBake we need a custom task to extract the web dependencies assets at build time from the resolved WebJars:</p> 
+<pre><code>task('webjars resources extraction', type: Copy) {
+    configurations.webjars.each {jar -&gt;
+
+        def config = configurations.webjars.resolvedConfiguration
+        def artifact = config.resolvedArtifacts.find {
+            it.file.toString() == jar.absolutePath
+        }
+
+        def upStreamVersion = "${artifact.moduleVersion.id.version}"
+        upStreamVersion = upStreamVersion.replaceAll(/(-[\d.-]+)/, '')
+
+        copy {
+            from zipTree(jar)
+            into file("${buildDir}/webjars-content/${artifact.name}")
+        }
+        copy {
+            from "${buildDir}/webjars-content/${artifact.name}/META-INF/resources/webjars/${artifact.name}/${upStreamVersion}",
+                 "${buildDir}/webjars-content/${artifact.name}/META-INF/resources/webjars/${artifact.name}/${artifact.moduleVersion.id.version}"
+
+            into "${jbake.input}/assets/vendor/${artifact.name}"
+        }
+    }
+}
+</code></pre> 
+<p>This task will extract all the libraries inside a folder called <code>/assets/vendor/</code>. As you can appreciate this script can be easily customized to fit other platforms and build processes.</p> 
+<p>You can check my entire <a href="https://github.com/aruizca/ajaxanywhere-site/blob/master/build.gradle"><code>build.gradle</code> file at GitHub for reference</a>.</p> 
+<p>There are two things that I would like to stand out and I hope, albeit improbable, the message will get out there:</p> 
+<ol> 
+ <li>By 2016, no project should store their web dependencies in their SCM tool. The same way we don do it with our server side dependencies or IDE metadata.</li> 
+ <li>The fact that I am using jBake here is just an anecdote. This proof of concept sets the basis on which to develop applications for all sort of platforms, including NodeJS, using Gradle as the build tool to perform all kind of operations including the web dependencies resolution using with the WebJars. I am pretty sure that <strong>Gradle + WebJars combined with the <a href="https://github.com/bertramdev/asset-pipeline-core/">Asset-Pipeline</a> are the best toolset to develop multiplatform web applications</strong>.</li> 
+</ol> 
+<p>It took me long enough time to find out, so I thought I would make a post for anyone else who is after the answer in the future.</p> 
+<p>In Groovy code:</p> 
+<pre><code class="language-groovy">log.debug("ElasticSearch Query using Java Client API:\n${searchRequestBuilder.internalBuilder()}")
+</code></pre> 
+<p>And this in Java:</p> 
+<pre><code class="language-java">log.debug("ElasticSearch Query using Java Client API:\n" + searchRequestBuilder.internalBuilder());
+</code></pre> 
+<p>The output is prettified by default.</p>
                         </div>
 
                         <a href="blog/2015/04-extract-webjars-static-resources-with-gradle.html" class="readmore_willsong">Read More</a>
@@ -208,7 +320,142 @@
 
                         <div class="postcontent_willsong">
                             <p><a href="https://elementary.io/" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2015/img/elementary-os-icon.png" alt="elementary os"><br> </a></p> 
-<p>I have decided to give a go to the latest release of the <a href="https://elementary.io/">elementaryOS Linux distribution</a>, <strong>Freya</strong>, and see if it can become my distro of choice for software development. Main reason being that: elementary OS is essentially a Ubuntu (14.04 in this case) based Linux system 
+<p>I have decided to give a go to the latest release of the <a href="https://elementary.io/">elementaryOS Linux distribution</a>, <strong>Freya</strong>, and see if it can become my distro of choice for software development. Main reason being that: elementary OS is essentially a Ubuntu (14.04 in this case) based Linux system that just works but wrapped in a really beautiful, smooth and minimalistic interface. All its features make the elementary os usage experience to stand out from all the other Linux distributions I have tried. Even the command line terminal has its own personality, definitely contributing as a differentiation factor.</p> 
+<p>You only have to boot the OS once and after 4 to 5 seconds (I am using a SSD) you instantly feel atracted to the aesthetics of the desktop. Then after a few minutes using it, everything: the screen transitions, the animations, the notifications, ... makes a delight to your eyes and leaves you with a pleasant sense of lightness and responsiveness. Give it a go and you'll see that the praises don't stop with the looks :-)</p> 
+<p>So far I have been using it in a VM with good results, so I am going to leave here all the steps I followed in order to get it ready for "business" in my laptop after I finished the standard installation process:</p> 
+<h3>Using "oduso" to install many desktop applications automatically</h3> 
+<p>They have a wide range of common used apps available like web browsers ,text editors and many others...</p> 
+<p>Just go to their website and choose the apps, icons sets, themes and options you want: <a href="https://oduso.com/">https://oduso.com/</a></p> 
+<p>It will then generate a unique url and give you the command that needs to be executed to start the automatic installation process:</p> 
+<p>Mine for instance is:</p> 
+<pre><code>wget -O - oduso.com/dt2r.sh | bash
+</code></pre> 
+<h3>Install Linuxbrew:</h3> 
+<ul> 
+ <li>Website: <a href="https://github.com/Homebrew/linuxbrew">https://github.com/Homebrew/linuxbrew</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+</code></pre> 
+<pre><code>ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+</code></pre> 
+<p>Add this to <code>.bashrc</code> or <code>.profile</code>:</p> 
+<pre><code>export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+</code></pre> 
+<h3>Install JDK 8</h3> 
+<ul> 
+ <li>Original guide: <a href="http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html">http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>su -
+echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+apt-get update
+apt-get install oracle-java8-installer
+exit
+</code></pre> 
+<ul> 
+ <li>Modify <code>.profile</code> to add <code>JAVA_HOME</code> system variable and set bin folder inside the <code>PATH</code> variable:</li> 
+</ul> 
+<pre><code>export JAVA_HOME="/usr/lib/jvm/java-8-oracle/"
+export PATH=$PATH:$JAVA_HOME/bin
+</code></pre> 
+<h3>Install GVM</h3> 
+<ul> 
+ <li>Website: <a href="http://gvmtool.net/">http://gvmtool.net/</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>curl -s get.gvmtool.net | bash
+source "~/.gvm/bin/gvm-init.sh"
+</code></pre> 
+<h3>Install Maven</h3> 
+<ul> 
+ <li>Website: <a href="http://maven.apache.org/">http://maven.apache.org/</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>brew install maven
+</code></pre> 
+<h3>Install Git</h3> 
+<ul> 
+ <li>Website: <a href="http://git-scm.com/">http://git-scm.com/</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>brew install git
+</code></pre> 
+<h3>Install IntellijIDEA</h3> 
+<ul> 
+ <li>Website: <a href="https://www.jetbrains.com/idea/">https://www.jetbrains.com/idea/</a></li> 
+ <li>Original guide: <a href="http://askubuntu.com/questions/272314/setup-and-install-intellij-with-jdk">http://askubuntu.com/questions/272314/setup-and-install-intellij-with-jdk</a></li> 
+ <li>Installation:</li> 
+ <li>Download latest release from website: <a href="https://www.jetbrains.com/idea/download/">https://www.jetbrains.com/idea/download/</a></li> 
+ <li>Extract content:</li> 
+</ul> 
+<pre><code>tar -zxvf Downloads/ideaIU-xxx.tar.gz
+</code></pre> 
+<ul> 
+ <li>Move ideaIU-xxx folder to <code>/opt/idea</code>:</li> 
+</ul> 
+<pre><code>$ sudo mv idea-IU-xxx/ /opt/idea
+</code></pre> 
+<ul> 
+ <li>Create symlink inside <code>/usr/local/bin</code> to <code>/opt/idea/bin/idea.sh</code>:</li> 
+</ul> 
+<pre><code>sudo ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
+</code></pre> 
+<ul> 
+ <li>Create file <code>idea.desktop</code> with the following content:</li> 
+</ul> 
+<pre><code>[Desktop Entry]
+Name=IntelliJ IDEA
+Type=Application
+Exec=idea
+Terminal=false
+Icon=idea
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=IntelliJ IDEA 
+</code></pre> 
+<ul> 
+ <li>Install previus file:</li> 
+</ul> 
+<pre><code>sudo desktop-file-install idea.desktop
+</code></pre> 
+<ul> 
+ <li>Install icon so it is displayed in the menu:</li> 
+</ul> 
+<pre><code>sudo cp /opt/idea/bin/idea.png /usr/share/pixmaps/idea.png
+</code></pre> 
+<h3>Install Applications menu editor "MenuLibre"</h3> 
+<ul> 
+ <li>Website: <a href="http://smdavis.us/projects/menulibre/">http://smdavis.us/projects/menulibre/</a></li> 
+ <li>Original guide: <a href="http://eos-snippets.blogspot.com.au/2014/02/menu-editor-menulibre.html">http://eos-snippets.blogspot.com.au/2014/02/menu-editor-menulibre.html</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>sudo apt-add-repository ppa:versable/elementary-update
+sudo apt-get update
+sudo apt-get install menulibre
+
+</code></pre> 
+<h3>Install Microsoft fonts</h3> 
+<ul> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>sudo apt-get install ttf-mscorefonts-installer
+</code></pre> 
+<h3>Install Skype</h3> 
+<ul> 
+ <li>Website: <a href="http://www.skype.com/en/download-skype/skype-for-computer/">http://www.skype.com/en/download-skype/skype-for-computer/</a></li> 
+ <li>Original guide: <a href="http://linuxg.net/skype-4-3-is-now-available-via-the-canonical-partner-repository-for-ubuntu-14-04-and-ubuntu-12-04-installation-instructions/">http://linuxg.net/skype-4-3-is-now-available-via-the-canonical-partner-repository-for-ubuntu-14-04-and-ubuntu-12-04-installation-instructions/</a></li> 
+ <li>Installation:</li> 
+</ul> 
+<pre><code>sudo add-apt-repository "deb http://archive.canonical.com/ trusty partner"
+sudo apt-get update
+sudo apt-get install skype
+</code></pre>
                         </div>
 
                         <a href="blog/2015/03-my-steps-to-setup-elementaryos-freya.html" class="readmore_willsong">Read More</a>
@@ -254,7 +501,12 @@
                             <p><a href="https://www.elastic.co/products/elasticsearch" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2015/img/elasticsearch-java-json.png" alt="elasticsearch-java-json"><br> </a></p> 
 <p>It took me long enough time to find out, so I thought I would make a post for anyone else who is after the answer in the future.</p> 
 <p>In Groovy code:</p> 
-<pre><code class="language-groovy">log.debug("ElasticSearch Query using Java Client 
+<pre><code class="language-groovy">log.debug("ElasticSearch Query using Java Client API:\n${searchRequestBuilder.internalBuilder()}")
+</code></pre> 
+<p>And this in Java:</p> 
+<pre><code class="language-java">log.debug("ElasticSearch Query using Java Client API:\n" + searchRequestBuilder.internalBuilder());
+</code></pre> 
+<p>The output is prettified by default.</p>
                         </div>
 
                         <a href="blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries.html" class="readmore_willsong">Read More</a>
@@ -301,7 +553,142 @@
 <div class="alert alert-warning"> <i class="fa fa-exclamation-triangle fa-fw"></i> This guide was written using <strong>Grails 2.4.4</strong> although it should work the same for Grails 2.3.x and 3.x (almost the same :-P)
  <br> 
 </div> 
-<p>Since current <a 
+<p>Since current <a href="http://grails.github.io/grails-doc/2.4.x/guide/testing.html">official documentation</a> only covers unit testing for controllers and that it took me a while to to figure them out completely, I thought I would leave it here in case it helps someone else.</p> 
+<p>The reason for writing these tests was to validate some REST API endpoints implemented using Grails Controllers.</p> 
+<p>So given the following simple and pure didactic domain object:</p> 
+<pre><code class="language-groovy">class Book {
+
+    String title
+
+    static constraints = {
+        title blank: false, unique: true
+    }
+}
+</code></pre> 
+<p>and its respective controller:</p> 
+<pre><code class="language-groovy">import grails.converters.JSON
+import grails.rest.RestfulController
+
+class BookController extends RestfulController&lt;Book&gt; {
+    static responseFormats = ['json']
+
+    BookController() {
+        super(Book)
+    }
+
+    @Override
+    def save() {
+        def jsonParams = request.JSON
+        render new Book(title: jsonParams.title).save() as JSON
+    }
+}
+</code></pre> 
+<p>with its respective URL mapping:</p> 
+<pre><code>...
+"/books/$id?"(controller: 'book') {
+	action = [POST: 'save']
+}
+...
+</code></pre> 
+<p>These are the two type of tests you can implement:</p> 
+<h2>Integration Test</h2> 
+<p>First of all, forget about the <code>@TestFor</code> annotations, because those are just for unit tests.</p> 
+<p>This is how the integration test looks like:</p> 
+<pre><code class="language-groovy">import grails.test.spock.IntegrationSpec
+import rest.sample.Book
+import rest.sample.BookController
+import spock.lang.Shared
+
+class BookControllerSpec extends IntegrationSpec {
+
+    @Shared BookController controller = new BookController()
+
+    def setup() {
+        // Initialize DB
+        new Book(title: "title1").save()
+    }
+
+    def cleanup() {
+    }
+
+    void "test creating a book"() {
+        when:
+        // Set request JSON body
+        controller.request.json = [
+            title: "title2"
+        ]
+        controller.save()
+        def response = controller.response.json
+
+        then:
+        response.title == "title2"
+        Book.count == 2
+    }
+}
+</code></pre> 
+<p>As you can appreciate <strong>this is not really the best way to test a REST API</strong> in my opinion. Not only look a bit cumbersome but also and more importantly, it is not a really end to end (e2e) test.</p> 
+<p>So how do we implemet a complete e2e test using a REST client if the Integration tests does not run a web server and Grails lacks built-in support for Functional testing (Grails 3.x <a href="http://grails.github.io/grails-doc/3.0.x/guide/testing.html#functionalTesting">has it</a>)? Let's find the answer in the next section.</p> 
+<h2>Functional Test</h2> 
+<p>First of all we need to enable functional test via plugin. There are quite a few to choose from but we need those that support Spock tests like:</p> 
+<ul> 
+ <li><a href="https://grails.org/plugin/funky-spock">Funcky Spock Plugin</a>: which is good enough to test a REST API.</li> 
+ <li><a href="https://grails.org/plugin/geb">Geb integration for Grails Plugin</a>: on top of enabling functional Spock tests, it also allows you to use the <a href="http://www.gebish.org/"><strong>Geb</strong> e2e browser testing framework</a></li> 
+</ul> 
+<p>Although the first one is more than enough, I chose the Geb plugin to be inline with Grails 3 choice :-) <strong>To integrate the Geb plugin</strong>, we need to add the following dependencies in our <code>BuildConfig.groovy</code>:</p> 
+<pre><code>dependencies {
+  ...
+  test "org.gebish:geb-spock:0.10.0"
+  ...
+}
+
+plugins {
+  ...
+  test ":geb:0.10.0"
+  ...
+}
+</code></pre> 
+<p>Then I had to create the folder: <code>/tests/functional</code> to put our functional tests there.</p> 
+<p>As the REST client I will be using the <a href="http://grails.org/plugin/rest-client-builder"><strong>Rest Client Builder plugin</strong></a>.</p> 
+<p>This is how the functional test looks like with the forementioned "ingredients":</p> 
+<pre><code class="language-groovy">import grails.plugins.rest.client.RestBuilder
+import grails.plugins.rest.client.RestResponse
+import grails.test.spock.IntegrationSpec
+import rest.sample.Book
+import spock.lang.Shared
+
+class BookControllerFunctionalSpec extends IntegrationSpec {
+    
+    @Shared
+    def grailsApplication
+
+    def setup() {
+        // Initialize DB
+        new Book(title: "title1").save()
+    }
+
+    def cleanup() {
+    }
+
+    void "test creating a book"() {
+        given:
+        RestBuilder rest = new RestBuilder()
+
+        when:
+        RestResponse response = rest.post("http://localhost:8080/${grailsApplication.metadata.'app.name'}/books") {
+            json([
+                title: "title2"
+            ])
+        }
+
+        then:
+        response.status == 200
+        response.json.title == "title2"
+        Book.count == 2
+    }
+}
+</code></pre> 
+<p>Thank you for reaching this paragraph. I hope it helped you. If any of you guys think there is a better approach, by all means, please let me know.</p> 
+<p>You can find the rpoject with the source code here: <a href="https://github.com/aruizca/rest-api-test-example">https://github.com/aruizca/rest-api-test-example</a></p>
                         </div>
 
                         <a href="blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock.html" class="readmore_willsong">Read More</a>

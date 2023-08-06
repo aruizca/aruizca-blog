@@ -131,7 +131,47 @@
 }
 </code></pre> 
 <ol> 
- <li>Render the model attribute 
+ <li>Render the model attribute without encoding using the raw() method</li> 
+</ol> 
+<pre><code class="language-groovy">&lt;r:script&gt;
+	var data = ${raw(data)};
+&lt;/r:script&gt;
+</code></pre> 
+<p>Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:</p> 
+<pre><code class="language-html">&lt;script&gt;
+	var data = {&amp;quot;whatever&amp;quot;:&amp;quot;whatever&amp;quot;};
+&lt;script&gt;
+</code></pre> 
+<p>It took me a while to find a way of doing it using the <strong>applyCodec</strong> taglib. Just replace the previous second step with this:</p> 
+<pre><code class="language-groovy">&lt;r:script&gt;
+	&lt;g:applyCodec encodeAs="none"&gt;
+		var data = ${data};
+    &lt;/g:applyCodec&gt;
+&lt;/r:script&gt;
+</code></pre> 
+<p>as a result you will see that is has been rendered properly:</p> 
+<pre><code class="language-html">&lt;script&gt;
+	var data = {"whatever":"whatever"};
+&lt;script&gt;
+</code></pre> 
+<p>Link to related issues:</p> 
+<ul> 
+ <li><a href="https://jira.grails.org/browse/GRAILS-11829">https://jira.grails.org/browse/GRAILS-11829</a></li> 
+</ul> 
+<h2>Update</h2> 
+<p>You can also use gsp page directives like these ones to set the encoding mechanism on a single page basis:<br> - Remove enconding from EL expressions:</p> 
+<pre><code>&lt;%@ expressionCodec="none" %&gt;
+</code></pre> 
+<ul> 
+ <li>Remove encoding from scriplets:</li> 
+</ul> 
+<pre><code>&lt;%@ scriptletCodec="none" %&gt;
+</code></pre> 
+<ul> 
+ <li>Remove encoding everywhere in the page:</li> 
+</ul> 
+<pre><code>&lt;%@ defaultCodec="none" %&gt;
+</code></pre>
                         </div>
 
                         <a href="blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag.html" class="readmore_willsong">Read More</a>
@@ -176,7 +216,34 @@
                         <div class="postcontent_willsong">
                             <p><a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/rabbitvcs-post-logo.png" alt="RabbitVCS Git client in Ubuntu"><br> </a></p> 
 <p>There are still some instances of very nice applications that do not work straight away after installing them via the apt package manager and unfortunately RabbitVCS is one of them.</p> 
-<p><a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank">RabbitVCS</a> is for 
+<p><a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank">RabbitVCS</a> is for Linux what <a href="https://code.google.com/p/tortoisegit/" title="TortoiseGit website" target="_blank">TortoiseGit</a> and <a href="http://tortoisesvn.net/" title="TortoiseSVN website" target="_blank">TortoiseSVN</a> are for the Windows platform. It is a SCM client that integrates itself with the OS file manager to manage local Git or SVN repositories.</p> 
+<p>Today I wanted to install RabbitVCS (v0.16.0) in Ubuntu 14.04 which has the tool already available in the default package repositories. So normally, it should be enough to execute the following commands and have it ready to go:</p> 
+<pre><code>	$ sudo apt-get update
+	$ sudo apt-get install rabbitvcs-nautilus3
+    # Optional
+    $ sudo apt-get install rabbitvcs-gedit
+	$ sudo apt-get install rabbitvcs-cli
+</code></pre> 
+<p>sadly that did not happen for me, so I decided to summarize the set of commands I have gathered to make it work:</p> 
+<ul> 
+ <li>~~Create symlinks~~</li> 
+</ul> 
+<pre><code>	$ sudo ln -sf /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 /usr/lib/
+	$ sudo ln -sf /usr/lib/x86_64-linux-gnu/libpython2.7.so.1 /usr/lib/
+</code></pre> 
+<ul> 
+ <li>~~Replace RabbitVCS.py script with latest from source code~~</li> 
+</ul> 
+<pre><code>    $ wget http://rabbitvcs.googlecode.com/svn/trunk/clients/nautilus-3.0/RabbitVCS.py  /usr/share/nautilus-python/extensions
+</code></pre> 
+<ul> 
+ <li>Change access rights to your local RabbitCVS configuration folder. It did not worked until I did this, so previous steps might not be needed. If you try let me know please.</li> 
+</ul> 
+<pre><code>    $ chown -R $USER:$USER ~/.config/rabbitvcs
+    
+</code></pre> 
+<p>When working you should be able to see the RabbitVCS context submenu when using Nautilus like in the following snapshot:</p> 
+<p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/rabbitvcs-nautilus-integration.png" alt="RabbitVCS Nautilus integration"></p>
                         </div>
 
                         <a href="blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr.html" class="readmore_willsong">Read More</a>
@@ -220,7 +287,118 @@
 
                         <div class="postcontent_willsong">
                             <p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png" alt="Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes"></p> 
-<p>Since the advent of the <a href="http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29" title="Infrastructure as a Service" target="_blank">IaaS</a> and <a href="http://en.wikipedia.org/wiki/Platform_as_a_service" title="Platform as a Service" target="_blank">PaaS</a> providers, the decline in usage of 
+<p>Since the advent of the <a href="http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29" title="Infrastructure as a Service" target="_blank">IaaS</a> and <a href="http://en.wikipedia.org/wiki/Platform_as_a_service" title="Platform as a Service" target="_blank">PaaS</a> providers, the decline in usage of monolithic architectures (e.g.: application server + relational DB) and the need for distributed and automatically scalable applications, as software developers we have to be increasingly more aware and skilled in the tools and techniques used to orchestrate and automate the deployment of all the different components that our architecture might end up with.</p> 
+<p>Among these tools, normally encompassed in the DevOps space, I am currently very interested in <a href="http://www.vagrantup.com/" title="Vagrant Website" target="_blank"><strong>Vagrant</strong></a>, <a href="https://www.docker.io/" title="Docker Website" target="_blank"><strong>Docker</strong></a>, <a href="http://www.ansible.com" title="Ansible Website" target="_blank"><strong>Ansible</strong></a> and <a href="https://juju.ubuntu.com/" title="Ubuntu JuJu Website" target="_blank"><strong>Ubuntu JuJu</strong></a>. Although I already use Vagrant, today I decided I wanted to know how to create my own <a href="http://docs.vagrantup.com/v2/boxes/base.html" title="What is a Vagrant Base Box?" target="_blank"><strong>Base Boxes</strong></a> that I can reuse. My idea is to have two Linux Base Boxes with Ubuntu Server and Ubuntu Desktop respectively and then another two with Windows 7 and 8. Once Vagrant is covered I want to get deeper with Docker because I see a lot of potential in lightweight containers instead of using heavy virtual machines.</p> 
+<p>Most of the guides out there focus on Linux distributions without GUI, so I decided that while I am creating my Vagrant Base Box with Ubuntu 14.04 Desktop I would document all the relevant steps next:</p> 
+<hr> 
+<h2>Step 1: Create the Virtual Machine with Virtual Box</h2> 
+<h3>- Install VirtualBox</h3> 
+<p>Download relevant VirtualBox installable package for your host system from the website: <a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></p> 
+<h3>- Download Ubuntu ISO</h3> 
+<p>I have downloaded the 64bit Desktop ISO: <a href="http://www.ubuntu.com/download/desktop">http://www.ubuntu.com/download/desktop</a></p> 
+<h3>- Define your Virtual Machine taking into consideration that:</h3> 
+<ol> 
+ <li>The first network interface (adapter 1) must be a NAT adapter.</li> 
+ <li>For convenience the Virtual Disk should be Dynamic (<strong>VMDK</strong>), so don't bee too stingy with the disk size ( &gt;= 10GB IMO ).</li> 
+</ol> 
+<p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/virtualbox-settings.png" alt="VirtualBox settings"></p> 
+<h3>- Load the ISO as part of the VM storage and install the OS.</h3> 
+<h3>- Username and Password should be: <strong>vagrant</strong> (for convenience, not for security).</h3> 
+<h3>- Once installed unload the ISO and restart the VM.</h3> 
+<h3>- Install the <strong>"Guest Additions"</strong></h3> 
+<p>Before installing the Guest Additions, you will have to prepare your guest system for building external kernel modules:</p> 
+<pre><code>	$ sudo apt-get install dkms
+	$ sudo /etc/init.d/vboxadd setup
+</code></pre> 
+<p>and install the build-essential package and linux headers to compile the Guest Additions propertly</p> 
+<pre><code>	$ sudo apt-get install -y build-essential linux-headers-server
+</code></pre> 
+<p>Then Mount guest additions ISO via virtualbox window and follow the indications to run the installation script :</p> 
+<p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/vitualbox-guest-addtions.png" alt="VirtualBox Guest Additions"></p> 
+<p>If the sytems does not install it automatically you can use the following commands:</p> 
+<pre><code>	$ sudo mount /dev/cdrom /media/cdrom
+	$ sudo /media/cdrom/VBoxLinuxAdditions.run
+	$ sudo umount /media/cdrom
+	$ sudo apt-get clean
+</code></pre> 
+<h2>Step 2: Setup guest OS (Ubuntu 14.04 64bit) with the minimum necessary.</h2> 
+<h3>- Use "Software Updater" to get latest updates. Or if you are using the command line:</h3> 
+<pre><code>	$ sudo apt-get update -y
+	$ sudo apt-get upgrade -y
+	# Restart the machine
+	$ sudo shutdown -r now
+</code></pre> 
+<h3>- Add the <strong>vagrant</strong> user to sudoers file:</h3> 
+<pre><code>	$ sudo su -
+	$ visudo
+	# Add the following line to the end of the file.
+	vagrant ALL=(ALL) NOPASSWD:ALL
+</code></pre> 
+<h3>- Install Vagrant Public Keys</h3> 
+<p>This way we can SSH to the machine without entering the password:</p> 
+<pre><code>	$ mkdir -p /home/vagrant/.ssh
+	$ wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
+	# Ensure we have the correct permissions set
+	$ chmod 0700 /home/vagrant/.ssh
+	$ chmod 0600 /home/vagrant/.ssh/authorized_keys
+	$ chown -R vagrant /home/vagrant/.ssh
+</code></pre> 
+<h3>Install OpenSSH Server</h3> 
+<pre><code>	$ sudo apt-get install -y openssh-server
+	$ sudo vi /etc/ssh/sshd_config
+</code></pre> 
+<p>Ensure the following is set:</p> 
+<ul> 
+ <li>Port 22</li> 
+ <li>PubKeyAuthentication yes</li> 
+ <li>AuthorizedKeysFile %h/.ssh/authorized_keys</li> 
+ <li>PermitEmptyPasswords no</li> 
+</ul> 
+<pre><code>	$ sudo service ssh restart
+</code></pre> 
+<p>Save &amp; close the file then restart SSH.</p> 
+<h2>Step 3: Package the Box</h2> 
+<h3>Compact space and shut the VM down</h3> 
+<p>You can remove those packages that you don't consider necessary (e.g.: LibreOffice) and execute the following commands to save space and shut the VM down:</p> 
+<pre><code>	$ sudo dd if=/dev/zero of=/EMPTY bs=1M
+	$ sudo rm -f /EMPTY
+	# Shutdown the machine
+	$ sudo shutdown -h now
+</code></pre> 
+<h3>Create Vagrant Base Box</h3> 
+<p>Asuming you already have Vagrant installed in the host system, just run the following command:</p> 
+<pre><code>	$ vagrant package –-base &lt;VitualBox VM Name&gt;
+</code></pre> 
+<p>in my case:</p> 
+<pre><code>	$ vagrant package –-base Ubuntu-14.04-64-Desktop
+</code></pre> 
+<p>this will create a file called <strong>package.box</strong></p> 
+<h3>Install the box</h3> 
+<pre><code>	$ vagrant box add {boxname} package.box
+</code></pre> 
+<p>in my case:</p> 
+<pre><code>	$ vagrant box add Ubuntu-14.04-64-Desktop package.box
+</code></pre> 
+<h3>Init a Vagrant Box by referencing the Base one we have created</h3> 
+<p>Go to a different folder and type:</p> 
+<pre><code>	$ vagrant init {boxname}
+</code></pre> 
+<p>in my case:</p> 
+<pre><code>	$ vagrant init Ubuntu-14.04-64-Desktop
+</code></pre> 
+<h3>Enable GUI</h3> 
+<p>Edit the generated <strong>Vagrantfile</strong> by uncommenting the following lines:</p> 
+<pre><code>	config.vm.provider "virtualbox" do |v|
+	v.gui = true
+	end
+</code></pre> 
+<h3>Spin it up!</h3> 
+<pre><code>	$ vagrant up
+</code></pre> 
+<p>and you should be able to SSH the machine and see the VM running:</p> 
+<p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/vagrant-box-running.png" alt="VirtualBox Guest Running"></p> 
+<p>Please let me know if you find something that is incorrect or inaccurate.</p> 
+<p>Cheers.</p>
                         </div>
 
                         <a href="blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox.html" class="readmore_willsong">Read More</a>
@@ -313,7 +491,159 @@
 <p>I am writing this post to record all the things I have done in order to migrate an existing Grails 2.2.x app to 2.3.x.</p> 
 <p>The reasons for me to upgrade are:</p> 
 <ul> 
- <li>Project progress is at an early stage where is not very risky to do that. We also have a considerable amount of automatic tests. You have also need to take into 
+ <li>Project progress is at an early stage where is not very risky to do that. We also have a considerable amount of automatic tests. You have also need to take into consideration that the more major versions you skip, the harder it gets to migrate to the latest version.</li> 
+ <li>Switched dependency resolution engine from Ivy to Aether. I have had problems with Ivy resolving transitive dependencies and snapshots of my own plugin dependencies.</li> 
+ <li><strong>"Forked Execution"</strong> and the <strong>"Test Runner Daemon"</strong> should speed up the tests execution and therefore speed up<br> the tests development. This is one of the mayor caveats I have found in Grails so far. We'll see if they have fixed it with this two new features.</li> 
+</ul> 
+<p>First of all I have read the following posts about this subject, which I think are essential to perform the task at hand:</p> 
+<ul> 
+ <li><a href="http://grails.org/doc/2.3.x/guide/upgradingFromPreviousVersionsOfGrails.html">Upgrading from Grails 2.2 - Reference Documentation</a></li> 
+ <li><a href="http://www.objectpartners.com/2013/10/08/migrating-to-grails-2-3/">Migrating to Grails 2.3</a></li> 
+ <li><a href="http://blog.milesburton.com/2013/12/11/upgrading-to-grails-2-3-gotchas/">Upgrading to Grails 2.3 – Gotchas</a></li> 
+</ul> 
+<p>I decided to follow a different approach by specifying what files need to be changed, why and how:</p> 
+<h2>Files I had to alter:</h2> 
+<hr> 
+<h3>application.properties</h3> 
+<p>You need to upgrade the grails version number:</p> 
+<pre><code>app.grails.version=2.3.7
+</code></pre> 
+<h3>BuildConfig.groovy</h3> 
+<ul> 
+ <li> <p>The groupId should be now in the Config.groovy file. Se next file changes</p> </li> 
+ <li> <p>Enable forked execution (host app and plugins):</p> </li> 
+</ul> 
+<pre><code class="language-groovy">grails.project.fork = [
+    // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
+    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+
+    // configure settings for the test-app JVM, uses the daemon by default
+    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    // configure settings for the run-app JVM
+    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    // configure settings for the run-war JVM
+    war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    // configure settings for the Console UI JVM
+    console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
+]
+</code></pre> 
+<div class="alert alert-warning"> <i class="fa fa-exclamation-triangle fa-fw"></i> <strong>Important note!!</strong>
+ <br> At the end I had to disable the forked execution becaue it does not get along very well with IntelliJ IDEA debugging :-( 
+</div> 
+<ul> 
+ <li>Explicitely set Maven Aether as the default dependency resolution engine (host app and plugins):</li> 
+</ul> 
+<pre><code>grails.project.dependency.resolver = "maven" // or ivy
+</code></pre> 
+<ul> 
+ <li>Upgrade the following plugin dependencies if you are planning to upgrade a Grails host app:</li> 
+</ul> 
+<pre><code>// plugins for the build system only
+build ":tomcat:7.0.52.1"
+
+// plugins for the compile step
+compile ":scaffolding:2.0.3"
+
+// plugins needed at runtime but not for compilation
+runtime ":hibernate4:4.3.4.1" // or ":hibernate:3.6.10.9"
+runtime ":database-migration:1.3.8"
+runtime ":resources:1.2.7"
+// Uncomment these (or add new ones) to enable additional resources capabilities
+//runtime ":zipped-resources:1.0.1"
+//runtime ":cached-resources:1.1"
+//runtime ":yui-minify-resources:0.1.5"
+</code></pre> 
+<ul> 
+ <li>If as the snipped above, you want to use Hibernate 4 instead of Hibernate 3, you will have to make sure that your plugin dependencies exclude the Hibernate 3 dependency. This is due to the fact that they are using different artifactId ("<strong>hibernate4</strong>" instead of "<strong>hibernate</strong>"). You can exclude dependencies in plugins like this:</li> 
+</ul> 
+<pre><code>compile(':plugin-artifactId:version') {
+    excludes "hibernate"
+}
+</code></pre> 
+<ul> 
+ <li> <p>Remove Spock dependencies as they already come built-in with Grails 2.3 (host app and plugins).</p> </li> 
+ <li> <p>Upgrade the following plugin dependencies if you are planning to upgrade a Grails plugin:</p> </li> 
+</ul> 
+<pre><code>build(":release:3.0.1",
+    ":rest-client-builder:1.0.3") {
+    export = false
+}
+</code></pre> 
+<p>Note that you might need to upgrade some other plugins.</p> 
+<h3>Config.groovy</h3> 
+<ul> 
+ <li>Automatic reloading is not enabled by default, so if you want it back add the following line:</li> 
+</ul> 
+<pre><code>grails.reload.enabled = true
+</code></pre> 
+<ul> 
+ <li>And then the change mentioned in teh previous section that says that the groupId should be specified here now:</li> 
+</ul> 
+<pre><code>grails.project.groupId = "whatever" // change this to alter the default package name and Maven publishing destination
+</code></pre> 
+<ul> 
+ <li>There are quite a few other little changes. So I suggest creating a new empty Grails app from scratch using Grails 2.3.x and compare the resulting Config.groovy file with your own.</li> 
+</ul> 
+<h3>All Integration Tests that extend GroovyTestCase</h3> 
+<p>All these tests need to remove that inheritance and annotate the class with this Mixin:</p> 
+<pre><code>@TestMixin(IntegrationTestMixin)
+</code></pre> 
+<h3>~/.grails/settings.groovy</h3> 
+<p>If like me, you have your repositories and credentials declared globally, then your settings.xml file should go from this:</p> 
+<pre><code>...
+grails.project.ivy.authentication = {
+    repositories {
+        mavenRepo "whatever url"
+
+    credentials {
+        realm = "Sonatype Nexus Repository Manager"
+        host = "whatever"
+        username = "whatever"
+        password = "whatever"
+    }
+}
+...
+</code></pre> 
+<p>to this:</p> 
+<pre><code>...
+grails.project.ivy.authentication = {
+    repositories {
+    	mavenLocal()
+        mavenRepo("whatever url") {
+          if (owner.grailsVersion ==~ /2\.3\..*/) {
+              updatePolicy "always"
+              auth([
+                  username: 'whatever',
+                  password: 'whatever'
+              ])
+          }
+    	}
+    }
+
+    credentials {
+        realm = "Sonatype Nexus Repository Manager"
+        host = "whatever"
+        username = "whatever"
+        password = "whatever"
+    }
+}
+...
+</code></pre> 
+<p>The possible values for <strong><em>"updatePolicy"</em></strong> are:</p> 
+<ul> 
+ <li><strong>never</strong> – Never check for new snapshots.</li> 
+ <li><strong>always</strong> – Always check for new snapshots.</li> 
+ <li><strong>daily</strong> – Check once a day for new snapshots (the default).</li> 
+ <li><strong>interval:x</strong> – Check once every x minutes for new snapshots.</li> 
+</ul> 
+<p>I will keep updating this post if I encounter another migration issue.</p> 
+<p>I hope you find it useful. Cheers.</p> 
+<hr> 
+<ul> 
+ <li> <p><strong>Update 1</strong>: Class reloading has to be enabled inside the Config.groovy file not the BuildConfig.groovy file.</p> </li> 
+ <li> <p><strong>Update 2</strong>: Disabled forked execution because it breaks debugging in IntelliJ IDEA</p> </li> 
+ <li> <p><strong>Update 3</strong>: Added possible values for the updatePolicy maven repository settings parameter</p> </li> 
+</ul>
                         </div>
 
                         <a href="blog/2014/04-migrating-from-grails-22-to-23.html" class="readmore_willsong">Read More</a>
