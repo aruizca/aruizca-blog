@@ -8,6 +8,10 @@
 <section id="main_willsong" role="main">
     <div id="articles_willsong" class="respowidth_willsong">
         <#list posts as post>
+            <#assign postUri = post.uri>
+            <#if (currentPageNumber > 1)>
+                <#assign postUri = "../" + post.uri>
+            </#if>
             <#if (post.status == "published"  && post?index >= (currentPageNumber-1) * config.index_posts_per_page?eval && post?index < currentPageNumber * config.index_posts_per_page?eval)>
                 <article class="article_willsong" role="article" itemscope itemtype="http://schema.org/Article">
                     <div class="postdetails_willsong">
@@ -30,7 +34,7 @@
                         </#if>
                     </div>
                     <div class="mainright_willsong">
-                        <h2 class="posttitle_willsong" itemprop="headline"><a href="${post.uri}" rel="bookmark">${post.title}</a></h2>
+                        <h2 class="posttitle_willsong" itemprop="headline"><a href="${postUri}" rel="bookmark">${post.title}</a></h2>
 
                         <div class="lores_postdetails_willsong">
                             <i class="fa fa-clock-o fa-lg fa-fw"></i>
@@ -52,8 +56,7 @@
                         <div class="postcontent_willsong">
                             ${post.body}
                         </div>
-
-                        <a href="${post.uri}" class="readmore_willsong">Read More</a>
+                        <a href="${postUri}" class="readmore_willsong">Read More</a>
                     </div>
                 </article>
             </#if>
