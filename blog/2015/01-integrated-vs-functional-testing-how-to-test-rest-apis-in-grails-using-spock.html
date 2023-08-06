@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
+    <title>Integrated vs Functional testing: how to test REST APIs in Grails using Spock</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -81,70 +81,156 @@
 <section id="main_willsong" role="main">
 	<article id="thearticle_willsong" class="respowidth_willsong" role="article" itemscope
 			 itemtype="http://schema.org/Article">
-		<h2 class="posttitle_willsong" itemprop="headline">How to render JSON properly (without escaping quotes) inside a GSP script tag</h2>
+		<h2 class="posttitle_willsong" itemprop="headline">Integrated vs Functional testing: how to test REST APIs in Grails using Spock</h2>
 
 		<div class="articledetails_willsong">
 
-			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="19 November 2014" itemprop="datePublished">19 November 2014</time></span>
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="19 March 2015" itemprop="datePublished">19 March 2015</time></span>
 			<i class="fa fa-user fa-lg"></i><span>Angel Ruiz</span>
-			<i class="fa fa-tag fa-lg"></i><span>grails, how-to, javascript, json</span>
+			<i class="fa fa-tag fa-lg"></i><span>grails, spock, testing</span>
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
-<div class="alert alert-warning">
-  This issue was encountered while using Grails version 2.3.11 
+			<p><a href="https://spockframework.org/" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2015/img/grails-spock.png" alt="Grails and Spock"><br> </a></p> 
+<div class="alert alert-warning"> <i class="fa fa-exclamation-triangle fa-fw"></i> This guide was written using <strong>Grails 2.4.4</strong> although it should work the same for Grails 2.3.x and 3.x (almost the same :-P)
+ <br> 
 </div> 
-<p>In theory it should be as simple as:</p> 
-<ol> 
- <li>Return JSON in your model from your controller</li> 
-</ol> 
-<pre><code class="language-groovy">def index() = {
-	[data: data as JSON]
+<p>Since current <a href="http://grails.github.io/grails-doc/2.4.x/guide/testing.html">official documentation</a> only covers unit testing for controllers and that it took me a while to to figure them out completely, I thought I would leave it here in case it helps someone else.</p> 
+<p>The reason for writing these tests was to validate some REST API endpoints implemented using Grails Controllers.</p> 
+<p>So given the following simple and pure didactic domain object:</p> 
+<pre><code class="language-groovy">class Book {
+
+    String title
+
+    static constraints = {
+        title blank: false, unique: true
+    }
 }
 </code></pre> 
-<ol> 
- <li>Render the model attribute without encoding using the raw() method</li> 
-</ol> 
-<pre><code class="language-groovy">&lt;r:script&gt;
-	var data = ${raw(data)};
-&lt;/r:script&gt;
+<p>and its respective controller:</p> 
+<pre><code class="language-groovy">import grails.converters.JSON
+import grails.rest.RestfulController
+
+class BookController extends RestfulController&lt;Book&gt; {
+    static responseFormats = ['json']
+
+    BookController() {
+        super(Book)
+    }
+
+    @Override
+    def save() {
+        def jsonParams = request.JSON
+        render new Book(title: jsonParams.title).save() as JSON
+    }
+}
 </code></pre> 
-<p>Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:</p> 
-<pre><code class="language-html">&lt;script&gt;
-	var data = {&amp;quot;whatever&amp;quot;:&amp;quot;whatever&amp;quot;};
-&lt;script&gt;
+<p>with its respective URL mapping:</p> 
+<pre><code>...
+"/books/$id?"(controller: 'book') {
+	action = [POST: 'save']
+}
+...
 </code></pre> 
-<p>It took me a while to find a way of doing it using the <strong>applyCodec</strong> taglib. Just replace the previous second step with this:</p> 
-<pre><code class="language-groovy">&lt;r:script&gt;
-	&lt;g:applyCodec encodeAs="none"&gt;
-		var data = ${data};
-    &lt;/g:applyCodec&gt;
-&lt;/r:script&gt;
+<p>These are the two type of tests you can implement:</p> 
+<h2>Integration Test</h2> 
+<p>First of all, forget about the <code>@TestFor</code> annotations, because those are just for unit tests.</p> 
+<p>This is how the integration test looks like:</p> 
+<pre><code class="language-groovy">import grails.test.spock.IntegrationSpec
+import rest.sample.Book
+import rest.sample.BookController
+import spock.lang.Shared
+
+class BookControllerSpec extends IntegrationSpec {
+
+    @Shared BookController controller = new BookController()
+
+    def setup() {
+        // Initialize DB
+        new Book(title: "title1").save()
+    }
+
+    def cleanup() {
+    }
+
+    void "test creating a book"() {
+        when:
+        // Set request JSON body
+        controller.request.json = [
+            title: "title2"
+        ]
+        controller.save()
+        def response = controller.response.json
+
+        then:
+        response.title == "title2"
+        Book.count == 2
+    }
+}
 </code></pre> 
-<p>as a result you will see that is has been rendered properly:</p> 
-<pre><code class="language-html">&lt;script&gt;
-	var data = {"whatever":"whatever"};
-&lt;script&gt;
-</code></pre> 
-<p>Link to related issues:</p> 
+<p>As you can appreciate <strong>this is not really the best way to test a REST API</strong> in my opinion. Not only look a bit cumbersome but also and more importantly, it is not a really end to end (e2e) test.</p> 
+<p>So how do we implemet a complete e2e test using a REST client if the Integration tests does not run a web server and Grails lacks built-in support for Functional testing (Grails 3.x <a href="http://grails.github.io/grails-doc/3.0.x/guide/testing.html#functionalTesting">has it</a>)? Let's find the answer in the next section.</p> 
+<h2>Functional Test</h2> 
+<p>First of all we need to enable functional test via plugin. There are quite a few to choose from but we need those that support Spock tests like:</p> 
 <ul> 
- <li><a href="https://jira.grails.org/browse/GRAILS-11829">https://jira.grails.org/browse/GRAILS-11829</a></li> 
+ <li><a href="https://grails.org/plugin/funky-spock">Funcky Spock Plugin</a>: which is good enough to test a REST API.</li> 
+ <li><a href="https://grails.org/plugin/geb">Geb integration for Grails Plugin</a>: on top of enabling functional Spock tests, it also allows you to use the <a href="http://www.gebish.org/"><strong>Geb</strong> e2e browser testing framework</a></li> 
 </ul> 
-<h2>Update</h2> 
-<p>You can also use gsp page directives like these ones to set the encoding mechanism on a single page basis:<br> - Remove enconding from EL expressions:</p> 
-<pre><code>&lt;%@ expressionCodec="none" %&gt;
+<p>Although the first one is more than enough, I chose the Geb plugin to be inline with Grails 3 choice :-) <strong>To integrate the Geb plugin</strong>, we need to add the following dependencies in our <code>BuildConfig.groovy</code>:</p> 
+<pre><code>dependencies {
+  ...
+  test "org.gebish:geb-spock:0.10.0"
+  ...
+}
+
+plugins {
+  ...
+  test ":geb:0.10.0"
+  ...
+}
 </code></pre> 
-<ul> 
- <li>Remove encoding from scriplets:</li> 
-</ul> 
-<pre><code>&lt;%@ scriptletCodec="none" %&gt;
+<p>Then I had to create the folder: <code>/tests/functional</code> to put our functional tests there.</p> 
+<p>As the REST client I will be using the <a href="http://grails.org/plugin/rest-client-builder"><strong>Rest Client Builder plugin</strong></a>.</p> 
+<p>This is how the functional test looks like with the forementioned "ingredients":</p> 
+<pre><code class="language-groovy">import grails.plugins.rest.client.RestBuilder
+import grails.plugins.rest.client.RestResponse
+import grails.test.spock.IntegrationSpec
+import rest.sample.Book
+import spock.lang.Shared
+
+class BookControllerFunctionalSpec extends IntegrationSpec {
+    
+    @Shared
+    def grailsApplication
+
+    def setup() {
+        // Initialize DB
+        new Book(title: "title1").save()
+    }
+
+    def cleanup() {
+    }
+
+    void "test creating a book"() {
+        given:
+        RestBuilder rest = new RestBuilder()
+
+        when:
+        RestResponse response = rest.post("http://localhost:8080/${grailsApplication.metadata.'app.name'}/books") {
+            json([
+                title: "title2"
+            ])
+        }
+
+        then:
+        response.status == 200
+        response.json.title == "title2"
+        Book.count == 2
+    }
+}
 </code></pre> 
-<ul> 
- <li>Remove encoding everywhere in the page:</li> 
-</ul> 
-<pre><code>&lt;%@ defaultCodec="none" %&gt;
-</code></pre>
+<p>Thank you for reaching this paragraph. I hope it helped you. If any of you guys think there is a better approach, by all means, please let me know.</p> 
+<p>You can find the rpoject with the source code here: <a href="https://github.com/aruizca/rest-api-test-example">https://github.com/aruizca/rest-api-test-example</a></p>
 		</div>
 
 		<div id="sharepost_willsong">

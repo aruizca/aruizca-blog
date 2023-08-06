@@ -6,9 +6,452 @@
     <atom:link href="https://aruizca.github.io/aruizca-blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sun., 6 Aug. 2023 11:04:53 +0200</pubDate>
-    <lastBuildDate>Sun., 6 Aug. 2023 11:04:53 +0200</lastBuildDate>
+    <pubDate>Sun., 6 Aug. 2023 12:54:16 +0200</pubDate>
+    <lastBuildDate>Sun., 6 Aug. 2023 12:54:16 +0200</lastBuildDate>
 
+    <item>
+      <title>Git housekeeping: remove &quot;obsolete&quot; branches from the remote and your local repositories</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories.html</link>
+      <pubDate>Sun., 31 Jul. 2016 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories.html</guid>
+      	<description>
+	&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2016/img/git-clean.png&quot; alt=&quot;git clean&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;Recently I was faced with the task of cleaning up a Git repository whose branches were not &quot;pruned&quot; for a few years, so I am talking about several hundreds of branches.&lt;/p&gt; 
+&lt;p&gt;This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That&apos;s why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged to a &quot;higher level&quot; branch. Because they became &lt;strong&gt;&quot;redundant&quot;&lt;/strong&gt;.&lt;/p&gt; 
+&lt;p&gt;The real task here is to clean up the remote branch as you can always clone the repo locally again and start from scratch. I started deleting them manually because I am not a Git guru and I am very cautius whenever I have to tempre with the remote repositorory. Soon enough I realized I was not getting anywhere and start looking for a script to help me.&lt;/p&gt; 
+&lt;h1&gt;Script to clean up the remote repository&lt;/h1&gt; 
+&lt;div class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt; &lt;i class=&quot;fa fa-exclamation-triangle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Please use it at your own risk. &lt;i class=&quot;fa fa-exclamation-triangle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; 
+ &lt;br&gt; It worked for me using Git 2.9.2, but it should work with earlier versions. 
+ &lt;br&gt; Although branches are removed, the metadata of the branch and the relevant commits will remain there, so it is always possible to recreate any branch that should not have been deleted. 
+&lt;/div&gt; 
+&lt;pre&gt;&lt;code&gt;## Remove remote branches that are already merged with master
+git checkout master
+# Dry-run: check the branch names list before they get deleted for good
+git branch -ar --merged master | grep -v HEAD | grep -v master
+# If you are really sure, then remove them from remote repo
+git branch -ar --merged master | grep -v HEAD | grep -v master | sed &quot;s/origin\///&quot; | xargs -n 1 git push origin --delete
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h2&gt;Breaking it down&lt;/h2&gt; 
+&lt;pre&gt;&lt;code&gt;git checkout master
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;In this case I chose the master branch, but if you want to clean more recent branches you can replace all the &lt;code&gt;master&lt;/code&gt; branch references with &lt;code&gt;develop&lt;/code&gt; in all the commands.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;git branch -ar --merged master
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Get list of remote branches that have already been merged with the &lt;code&gt;master&lt;/code&gt; branch&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;grep -v HEAD | grep -v master
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Remove those items from the list that contains the words &lt;code&gt;HEAD&lt;/code&gt; or &lt;code&gt;master&lt;/code&gt;&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sed &quot;s/origin\///&quot;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;For each remaining element in the list, remove the &lt;code&gt;origin/&lt;/code&gt; name prefix&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;xargs -n 1 git push origin --delete
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Execute the git remote branch delete command for each element in the list.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;h1&gt;Script to clean up the local repository&lt;/h1&gt; 
+&lt;div class=&quot;alert alert-danger&quot; role=&quot;alert&quot;&gt; 
+ &lt;h3&gt;Deprecated&lt;/h3&gt; 
+ &lt;p&gt;Just use &lt;a href=&quot;https://github.com/tj/git-extras&quot; target=&quot;_blank&quot;&gt;Git Extras&lt;/a&gt; instead (eg: `git delete-merged-branches` or `git delete-squashed-branches`&lt;/p&gt; 
+&lt;/div&gt; 
+&lt;p&gt;If you have been working on a repository for a while, it might be that you have local copy of a few branches that are no longer valid and need to be &quot;pruned&quot;.&lt;/p&gt; 
+&lt;p&gt;To achieve that we can execute a small variation of the previous script.&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;## Remove local branches that are already merged with master
+
+git checkout master
+# Dry-run: check the branch names list before they are deleted
+git branch --merged master | grep -v &quot;master&quot;
+# If you are really sure, then remove them from local repo
+git branch --merged master | grep -v &quot;master&quot; | xargs -n 1 git branch -d
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Acknowlegment&lt;/h3&gt; 
+&lt;p&gt;Thanks to &lt;a href=&quot;https://twitter.com/stevenharman&quot;&gt;@StevenHarman&lt;/a&gt;, whose &lt;a href=&quot;http://stevenharman.net/git-clean-delete-already-merged-branches&quot;&gt;post&lt;/a&gt; showed me how to clean the local repo and gave me the idea to do same on the remote repo.&lt;/p&gt; 
+&lt;p&gt;Feedback and improvements are welcome!! :-)&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>Extract Webjars static resources with Gradle for jBake (or anything really...)</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2015/04-extract-webjars-static-resources-with-gradle.html</link>
+      <pubDate>Mon., 31 Aug. 2015 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2015/04-extract-webjars-static-resources-with-gradle.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;https://www.webjars.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2015/img/gradle-webjars.png&quot; alt=&quot;gradle and webjars&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;For those of you who never heard of it before, &lt;a href=&quot;http://www.webjars.org/&quot;&gt;WebJars&lt;/a&gt; is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file that contains a set of curated files (Classic WebJars) for a given library. Recently you can also reference Bower and NPM packages but I would not recommend it.&lt;/p&gt; 
+&lt;p&gt;Previously I have tried using Bower alongside both Grunt and Gulp and they brought me straight back to the times were Ant was the predominant build tool in the Java EE world where everyone was doing its own thing with a complete lack of conventions.&lt;/p&gt; 
+&lt;p&gt;After using WebJars in Java web projects I started looking how to use it in static web sites, more especifically those generated with &lt;a href=&quot;http://jbake.org/&quot;&gt;jBake&lt;/a&gt;.&lt;/p&gt; 
+&lt;p&gt;The final aim is to avoid checking in the web dependencies, like Javaacript based libraries, in our SCM tool. It turns out that &lt;a href=&quot;http://melix.github.io/blog/2014/02/hosting-jbake-github.html&quot;&gt;jBake can be used with Gradle&lt;/a&gt;, which means that we have the chance of managing all my dependencies using a single tool that happens to be a lot better than anything available on the Javascript-Node ecosystem.&lt;/p&gt; 
+&lt;p&gt;Declaring your WebJars dependency is as easy as declaring any other Maven based dependency, but in this case we group them in a &lt;a href=&quot;https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html#configurations&quot;&gt;custom Gradle dependency configuration&lt;/a&gt; that we will call &lt;code&gt;webjars&lt;/code&gt;:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;...
+dependencies {
+    webjars &apos;org.webjars:jquery:2.1.3&apos;
+    webjars &apos;org.webjars:bootstrap:3.3.4&apos;
+    webjars &apos;org.webjars:highlightjs:8.4-4&apos;
+    webjars &apos;org.webjars:font-awesome:4.3.0-1&apos;
+    webjars &apos;org.webjars:jquery.tocify.js:1.9.0&apos;
+    webjars &apos;org.webjars:Magnific-Popup:1.0.0&apos;
+}
+...
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;In the case of jBake we need a custom task to extract the web dependencies assets at build time from the resolved WebJars:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;task(&apos;webjars resources extraction&apos;, type: Copy) {
+    configurations.webjars.each {jar -&amp;gt;
+
+        def config = configurations.webjars.resolvedConfiguration
+        def artifact = config.resolvedArtifacts.find {
+            it.file.toString() == jar.absolutePath
+        }
+
+        def upStreamVersion = &quot;${artifact.moduleVersion.id.version}&quot;
+        upStreamVersion = upStreamVersion.replaceAll(/(-[\d.-]+)/, &apos;&apos;)
+
+        copy {
+            from zipTree(jar)
+            into file(&quot;${buildDir}/webjars-content/${artifact.name}&quot;)
+        }
+        copy {
+            from &quot;${buildDir}/webjars-content/${artifact.name}/META-INF/resources/webjars/${artifact.name}/${upStreamVersion}&quot;,
+                 &quot;${buildDir}/webjars-content/${artifact.name}/META-INF/resources/webjars/${artifact.name}/${artifact.moduleVersion.id.version}&quot;
+
+            into &quot;${jbake.input}/assets/vendor/${artifact.name}&quot;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;This task will extract all the libraries inside a folder called &lt;code&gt;/assets/vendor/&lt;/code&gt;. As you can appreciate this script can be easily customized to fit other platforms and build processes.&lt;/p&gt; 
+&lt;p&gt;You can check my entire &lt;a href=&quot;https://github.com/aruizca/ajaxanywhere-site/blob/master/build.gradle&quot;&gt;&lt;code&gt;build.gradle&lt;/code&gt; file at GitHub for reference&lt;/a&gt;.&lt;/p&gt; 
+&lt;p&gt;There are two things that I would like to stand out and I hope, albeit improbable, the message will get out there:&lt;/p&gt; 
+&lt;ol&gt; 
+ &lt;li&gt;By 2016, no project should store their web dependencies in their SCM tool. The same way we don do it with our server side dependencies or IDE metadata.&lt;/li&gt; 
+ &lt;li&gt;The fact that I am using jBake here is just an anecdote. This proof of concept sets the basis on which to develop applications for all sort of platforms, including NodeJS, using Gradle as the build tool to perform all kind of operations including the web dependencies resolution using with the WebJars. I am pretty sure that &lt;strong&gt;Gradle + WebJars combined with the &lt;a href=&quot;https://github.com/bertramdev/asset-pipeline-core/&quot;&gt;Asset-Pipeline&lt;/a&gt; are the best toolset to develop multiplatform web applications&lt;/strong&gt;.&lt;/li&gt; 
+&lt;/ol&gt; 
+&lt;p&gt;It took me long enough time to find out, so I thought I would make a post for anyone else who is after the answer in the future.&lt;/p&gt; 
+&lt;p&gt;In Groovy code:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;log.debug(&quot;ElasticSearch Query using Java Client API:\n${searchRequestBuilder.internalBuilder()}&quot;)
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;And this in Java:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;log.debug(&quot;ElasticSearch Query using Java Client API:\n&quot; + searchRequestBuilder.internalBuilder());
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;The output is prettified by default.&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>My steps to setup elementaryOS Freya</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2015/03-my-steps-to-setup-elementaryos-freya.html</link>
+      <pubDate>Fri., 27 Mar. 2015 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2015/03-my-steps-to-setup-elementaryos-freya.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;https://elementary.io/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2015/img/elementary-os-icon.png&quot; alt=&quot;elementary os&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;I have decided to give a go to the latest release of the &lt;a href=&quot;https://elementary.io/&quot;&gt;elementaryOS Linux distribution&lt;/a&gt;, &lt;strong&gt;Freya&lt;/strong&gt;, and see if it can become my distro of choice for software development. Main reason being that: elementary OS is essentially a Ubuntu (14.04 in this case) based Linux system that just works but wrapped in a really beautiful, smooth and minimalistic interface. All its features make the elementary os usage experience to stand out from all the other Linux distributions I have tried. Even the command line terminal has its own personality, definitely contributing as a differentiation factor.&lt;/p&gt; 
+&lt;p&gt;You only have to boot the OS once and after 4 to 5 seconds (I am using a SSD) you instantly feel atracted to the aesthetics of the desktop. Then after a few minutes using it, everything: the screen transitions, the animations, the notifications, ... makes a delight to your eyes and leaves you with a pleasant sense of lightness and responsiveness. Give it a go and you&apos;ll see that the praises don&apos;t stop with the looks :-)&lt;/p&gt; 
+&lt;p&gt;So far I have been using it in a VM with good results, so I am going to leave here all the steps I followed in order to get it ready for &quot;business&quot; in my laptop after I finished the standard installation process:&lt;/p&gt; 
+&lt;h3&gt;Using &quot;oduso&quot; to install many desktop applications automatically&lt;/h3&gt; 
+&lt;p&gt;They have a wide range of common used apps available like web browsers ,text editors and many others...&lt;/p&gt; 
+&lt;p&gt;Just go to their website and choose the apps, icons sets, themes and options you want: &lt;a href=&quot;https://oduso.com/&quot;&gt;https://oduso.com/&lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;It will then generate a unique url and give you the command that needs to be executed to start the automatic installation process:&lt;/p&gt; 
+&lt;p&gt;Mine for instance is:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;wget -O - oduso.com/dt2r.sh | bash
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install Linuxbrew:&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;https://github.com/Homebrew/linuxbrew&quot;&gt;https://github.com/Homebrew/linuxbrew&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;pre&gt;&lt;code&gt;ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)&quot;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Add this to &lt;code&gt;.bashrc&lt;/code&gt; or &lt;code&gt;.profile&lt;/code&gt;:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;export PATH=&quot;$HOME/.linuxbrew/bin:$PATH&quot;
+export MANPATH=&quot;$HOME/.linuxbrew/share/man:$MANPATH&quot;
+export INFOPATH=&quot;$HOME/.linuxbrew/share/info:$INFOPATH&quot;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install JDK 8&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Original guide: &lt;a href=&quot;http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html&quot;&gt;http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;su -
+echo &quot;deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main&quot; | tee /etc/apt/sources.list.d/webupd8team-java.list
+echo &quot;deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main&quot; | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+apt-get update
+apt-get install oracle-java8-installer
+exit
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Modify &lt;code&gt;.profile&lt;/code&gt; to add &lt;code&gt;JAVA_HOME&lt;/code&gt; system variable and set bin folder inside the &lt;code&gt;PATH&lt;/code&gt; variable:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;export JAVA_HOME=&quot;/usr/lib/jvm/java-8-oracle/&quot;
+export PATH=$PATH:$JAVA_HOME/bin
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install GVM&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;http://gvmtool.net/&quot;&gt;http://gvmtool.net/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;curl -s get.gvmtool.net | bash
+source &quot;~/.gvm/bin/gvm-init.sh&quot;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install Maven&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;http://maven.apache.org/&quot;&gt;http://maven.apache.org/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;brew install maven
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install Git&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;http://git-scm.com/&quot;&gt;http://git-scm.com/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;brew install git
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install IntellijIDEA&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;https://www.jetbrains.com/idea/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Original guide: &lt;a href=&quot;http://askubuntu.com/questions/272314/setup-and-install-intellij-with-jdk&quot;&gt;http://askubuntu.com/questions/272314/setup-and-install-intellij-with-jdk&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+ &lt;li&gt;Download latest release from website: &lt;a href=&quot;https://www.jetbrains.com/idea/download/&quot;&gt;https://www.jetbrains.com/idea/download/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Extract content:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;tar -zxvf Downloads/ideaIU-xxx.tar.gz
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Move ideaIU-xxx folder to &lt;code&gt;/opt/idea&lt;/code&gt;:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;$ sudo mv idea-IU-xxx/ /opt/idea
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Create symlink inside &lt;code&gt;/usr/local/bin&lt;/code&gt; to &lt;code&gt;/opt/idea/bin/idea.sh&lt;/code&gt;:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo ln -s /opt/idea/bin/idea.sh /usr/local/bin/idea
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Create file &lt;code&gt;idea.desktop&lt;/code&gt; with the following content:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;[Desktop Entry]
+Name=IntelliJ IDEA
+Type=Application
+Exec=idea
+Terminal=false
+Icon=idea
+Comment=Integrated Development Environment
+NoDisplay=false
+Categories=Development;IDE;
+Name[en]=IntelliJ IDEA 
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Install previus file:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo desktop-file-install idea.desktop
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Install icon so it is displayed in the menu:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo cp /opt/idea/bin/idea.png /usr/share/pixmaps/idea.png
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install Applications menu editor &quot;MenuLibre&quot;&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;http://smdavis.us/projects/menulibre/&quot;&gt;http://smdavis.us/projects/menulibre/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Original guide: &lt;a href=&quot;http://eos-snippets.blogspot.com.au/2014/02/menu-editor-menulibre.html&quot;&gt;http://eos-snippets.blogspot.com.au/2014/02/menu-editor-menulibre.html&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo apt-add-repository ppa:versable/elementary-update
+sudo apt-get update
+sudo apt-get install menulibre
+
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install Microsoft fonts&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ttf-mscorefonts-installer
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install Skype&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Website: &lt;a href=&quot;http://www.skype.com/en/download-skype/skype-for-computer/&quot;&gt;http://www.skype.com/en/download-skype/skype-for-computer/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Original guide: &lt;a href=&quot;http://linuxg.net/skype-4-3-is-now-available-via-the-canonical-partner-repository-for-ubuntu-14-04-and-ubuntu-12-04-installation-instructions/&quot;&gt;http://linuxg.net/skype-4-3-is-now-available-via-the-canonical-partner-repository-for-ubuntu-14-04-and-ubuntu-12-04-installation-instructions/&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;Installation:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;sudo add-apt-repository &quot;deb http://archive.canonical.com/ trusty partner&quot;
+sudo apt-get update
+sudo apt-get install skype
+&lt;/code&gt;&lt;/pre&gt;
+	</description>
+    </item>
+    <item>
+      <title>How to reference a file inside a Grails plugin</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries.html</link>
+      <pubDate>Wed., 25 Mar. 2015 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;https://www.elastic.co/products/elasticsearch&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2015/img/elasticsearch-java-json.png&quot; alt=&quot;elasticsearch-java-json&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;It took me long enough time to find out, so I thought I would make a post for anyone else who is after the answer in the future.&lt;/p&gt; 
+&lt;p&gt;In Groovy code:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;log.debug(&quot;ElasticSearch Query using Java Client API:\n${searchRequestBuilder.internalBuilder()}&quot;)
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;And this in Java:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;log.debug(&quot;ElasticSearch Query using Java Client API:\n&quot; + searchRequestBuilder.internalBuilder());
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;The output is prettified by default.&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>Integrated vs Functional testing: how to test REST APIs in Grails using Spock</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock.html</link>
+      <pubDate>Thu., 19 Mar. 2015 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;https://spockframework.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2015/img/grails-spock.png&quot; alt=&quot;Grails and Spock&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;div class=&quot;alert alert-warning&quot;&gt; &lt;i class=&quot;fa fa-exclamation-triangle fa-fw&quot;&gt;&lt;/i&gt; This guide was written using &lt;strong&gt;Grails 2.4.4&lt;/strong&gt; although it should work the same for Grails 2.3.x and 3.x (almost the same :-P)
+ &lt;br&gt; 
+&lt;/div&gt; 
+&lt;p&gt;Since current &lt;a href=&quot;http://grails.github.io/grails-doc/2.4.x/guide/testing.html&quot;&gt;official documentation&lt;/a&gt; only covers unit testing for controllers and that it took me a while to to figure them out completely, I thought I would leave it here in case it helps someone else.&lt;/p&gt; 
+&lt;p&gt;The reason for writing these tests was to validate some REST API endpoints implemented using Grails Controllers.&lt;/p&gt; 
+&lt;p&gt;So given the following simple and pure didactic domain object:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;class Book {
+
+    String title
+
+    static constraints = {
+        title blank: false, unique: true
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;and its respective controller:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;import grails.converters.JSON
+import grails.rest.RestfulController
+
+class BookController extends RestfulController&amp;lt;Book&amp;gt; {
+    static responseFormats = [&apos;json&apos;]
+
+    BookController() {
+        super(Book)
+    }
+
+    @Override
+    def save() {
+        def jsonParams = request.JSON
+        render new Book(title: jsonParams.title).save() as JSON
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;with its respective URL mapping:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;...
+&quot;/books/$id?&quot;(controller: &apos;book&apos;) {
+	action = [POST: &apos;save&apos;]
+}
+...
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;These are the two type of tests you can implement:&lt;/p&gt; 
+&lt;h2&gt;Integration Test&lt;/h2&gt; 
+&lt;p&gt;First of all, forget about the &lt;code&gt;@TestFor&lt;/code&gt; annotations, because those are just for unit tests.&lt;/p&gt; 
+&lt;p&gt;This is how the integration test looks like:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;import grails.test.spock.IntegrationSpec
+import rest.sample.Book
+import rest.sample.BookController
+import spock.lang.Shared
+
+class BookControllerSpec extends IntegrationSpec {
+
+    @Shared BookController controller = new BookController()
+
+    def setup() {
+        // Initialize DB
+        new Book(title: &quot;title1&quot;).save()
+    }
+
+    def cleanup() {
+    }
+
+    void &quot;test creating a book&quot;() {
+        when:
+        // Set request JSON body
+        controller.request.json = [
+            title: &quot;title2&quot;
+        ]
+        controller.save()
+        def response = controller.response.json
+
+        then:
+        response.title == &quot;title2&quot;
+        Book.count == 2
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;As you can appreciate &lt;strong&gt;this is not really the best way to test a REST API&lt;/strong&gt; in my opinion. Not only look a bit cumbersome but also and more importantly, it is not a really end to end (e2e) test.&lt;/p&gt; 
+&lt;p&gt;So how do we implemet a complete e2e test using a REST client if the Integration tests does not run a web server and Grails lacks built-in support for Functional testing (Grails 3.x &lt;a href=&quot;http://grails.github.io/grails-doc/3.0.x/guide/testing.html#functionalTesting&quot;&gt;has it&lt;/a&gt;)? Let&apos;s find the answer in the next section.&lt;/p&gt; 
+&lt;h2&gt;Functional Test&lt;/h2&gt; 
+&lt;p&gt;First of all we need to enable functional test via plugin. There are quite a few to choose from but we need those that support Spock tests like:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;a href=&quot;https://grails.org/plugin/funky-spock&quot;&gt;Funcky Spock Plugin&lt;/a&gt;: which is good enough to test a REST API.&lt;/li&gt; 
+ &lt;li&gt;&lt;a href=&quot;https://grails.org/plugin/geb&quot;&gt;Geb integration for Grails Plugin&lt;/a&gt;: on top of enabling functional Spock tests, it also allows you to use the &lt;a href=&quot;http://www.gebish.org/&quot;&gt;&lt;strong&gt;Geb&lt;/strong&gt; e2e browser testing framework&lt;/a&gt;&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;Although the first one is more than enough, I chose the Geb plugin to be inline with Grails 3 choice :-) &lt;strong&gt;To integrate the Geb plugin&lt;/strong&gt;, we need to add the following dependencies in our &lt;code&gt;BuildConfig.groovy&lt;/code&gt;:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;dependencies {
+  ...
+  test &quot;org.gebish:geb-spock:0.10.0&quot;
+  ...
+}
+
+plugins {
+  ...
+  test &quot;:geb:0.10.0&quot;
+  ...
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Then I had to create the folder: &lt;code&gt;/tests/functional&lt;/code&gt; to put our functional tests there.&lt;/p&gt; 
+&lt;p&gt;As the REST client I will be using the &lt;a href=&quot;http://grails.org/plugin/rest-client-builder&quot;&gt;&lt;strong&gt;Rest Client Builder plugin&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt; 
+&lt;p&gt;This is how the functional test looks like with the forementioned &quot;ingredients&quot;:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;import grails.plugins.rest.client.RestBuilder
+import grails.plugins.rest.client.RestResponse
+import grails.test.spock.IntegrationSpec
+import rest.sample.Book
+import spock.lang.Shared
+
+class BookControllerFunctionalSpec extends IntegrationSpec {
+    
+    @Shared
+    def grailsApplication
+
+    def setup() {
+        // Initialize DB
+        new Book(title: &quot;title1&quot;).save()
+    }
+
+    def cleanup() {
+    }
+
+    void &quot;test creating a book&quot;() {
+        given:
+        RestBuilder rest = new RestBuilder()
+
+        when:
+        RestResponse response = rest.post(&quot;http://localhost:8080/${grailsApplication.metadata.&apos;app.name&apos;}/books&quot;) {
+            json([
+                title: &quot;title2&quot;
+            ])
+        }
+
+        then:
+        response.status == 200
+        response.json.title == &quot;title2&quot;
+        Book.count == 2
+    }
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Thank you for reaching this paragraph. I hope it helped you. If any of you guys think there is a better approach, by all means, please let me know.&lt;/p&gt; 
+&lt;p&gt;You can find the rpoject with the source code here: &lt;a href=&quot;https://github.com/aruizca/rest-api-test-example&quot;&gt;https://github.com/aruizca/rest-api-test-example&lt;/a&gt;&lt;/p&gt;
+	</description>
+    </item>
     <item>
       <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
       <link>https://aruizca.github.io/aruizca-blog/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag.html</link>
@@ -77,8 +520,7 @@
       <pubDate>Tue., 27 May 2014 00:00:00 +0200</pubDate>
       <guid isPermaLink="false">blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
-&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/rabbitvcs-post-logo.png&quot; alt=&quot;RabbitVCS Git client in Ubuntu&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/rabbitvcs-post-logo.png&quot; alt=&quot;RabbitVCS Git client in Ubuntu&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;There are still some instances of very nice applications that do not work straight away after installing them via the apt package manager and unfortunately RabbitVCS is one of them.&lt;/p&gt; 
 &lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;RabbitVCS&lt;/a&gt; is for Linux what &lt;a href=&quot;https://code.google.com/p/tortoisegit/&quot; title=&quot;TortoiseGit website&quot; target=&quot;_blank&quot;&gt;TortoiseGit&lt;/a&gt; and &lt;a href=&quot;http://tortoisesvn.net/&quot; title=&quot;TortoiseSVN website&quot; target=&quot;_blank&quot;&gt;TortoiseSVN&lt;/a&gt; are for the Windows platform. It is a SCM client that integrates itself with the OS file manager to manage local Git or SVN repositories.&lt;/p&gt; 
 &lt;p&gt;Today I wanted to install RabbitVCS (v0.16.0) in Ubuntu 14.04 which has the tool already available in the default package repositories. So normally, it should be enough to execute the following commands and have it ready to go:&lt;/p&gt; 
@@ -577,108 +1019,6 @@ grails.project.ivy.authentication = {
 &lt;/ol&gt; 
 &lt;p&gt;I hope you find it useful. Please let me know if you have any problems.&lt;/p&gt; 
 &lt;p&gt;Cheers,&lt;/p&gt;
-	</description>
-    </item>
-    <item>
-      <title>Oliver&amp;#8217;s Post</title>
-      <link>https://aruizca.github.io/aruizca-blog/blog/2013/fifth-post.html</link>
-      <pubDate>Mon., 11 Nov. 2013 00:00:00 +0100</pubDate>
-      <guid isPermaLink="false">blog/2013/fifth-post.html</guid>
-      	<description>
-	&lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Oliver’s first post and the fifth post at all.&lt;/p&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt; 
-&lt;/div&gt;
-	</description>
-    </item>
-    <item>
-      <title>Fourth Post</title>
-      <link>https://aruizca.github.io/aruizca-blog/blog/2013/fourth-post.html</link>
-      <pubDate>Thu., 17 Oct. 2013 00:00:00 +0200</pubDate>
-      <guid isPermaLink="false">blog/2013/fourth-post.html</guid>
-      	<description>
-	&lt;div class=&quot;imageblock&quot;&gt; 
- &lt;div class=&quot;content&quot;&gt; 
-  &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt; 
- &lt;/div&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;ulist&quot;&gt; 
- &lt;ul&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot; class=&quot;bare&quot;&gt;http://example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
- &lt;/ul&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt; 
-&lt;/div&gt;
-	</description>
-    </item>
-    <item>
-      <title>Third Post</title>
-      <link>https://aruizca.github.io/aruizca-blog/blog/2013/third-post.html</link>
-      <pubDate>Thu., 26 Sep. 2013 00:00:00 +0200</pubDate>
-      <guid isPermaLink="false">blog/2013/third-post.html</guid>
-      	<description>
-	&lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;ulist&quot;&gt; 
- &lt;ul&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot; class=&quot;bare&quot;&gt;http://example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
-  &lt;li&gt; &lt;p&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/p&gt; &lt;/li&gt; 
- &lt;/ul&gt; 
-&lt;/div&gt; 
-&lt;div class=&quot;paragraph&quot;&gt; 
- &lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales. In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt; 
-&lt;/div&gt;
-	</description>
-    </item>
-    <item>
-      <title>Second Post</title>
-      <link>https://aruizca.github.io/aruizca-blog/blog/2013/second-post.html</link>
-      <pubDate>Sun., 25 Aug. 2013 00:00:00 +0200</pubDate>
-      <guid isPermaLink="false">blog/2013/second-post.html</guid>
-      	<description>
-	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;ul&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;http://example.org&lt;/a&gt;&lt;/li&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/li&gt; 
-&lt;/ul&gt; 
-&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt;public class Test {
-
-}
-&lt;/code&gt;&lt;/pre&gt; 
-&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt;&lt;/p&gt;
-	</description>
-    </item>
-    <item>
-      <title>First Post</title>
-      <link>https://aruizca.github.io/aruizca-blog/blog/2013/first-post.html</link>
-      <pubDate>Wed., 24 Jul. 2013 00:00:00 +0200</pubDate>
-      <guid isPermaLink="false">blog/2013/first-post.html</guid>
-      	<description>
-	&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel diam purus. Curabitur ut nisi lacus.&lt;/p&gt; 
-&lt;ul&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;http://example.org&lt;/a&gt;&lt;/li&gt; 
- &lt;li&gt;&lt;a href=&quot;http://example.org&quot;&gt;Example.org&lt;/a&gt;&lt;/li&gt; 
-&lt;/ul&gt; 
-&lt;p&gt;Nam id nisl quam. Donec a lorem sit amet libero pretium vulputate vel ut purus. Suspendisse leo arcu, mattis et imperdiet luctus, pulvinar vitae mi. Quisque fermentum sollicitudin feugiat. Mauris nec leo ligula. Vestibulum tristique odio ut risus ultricies a hendrerit quam iaculis. Duis tempor elit sit amet ligula vehicula et iaculis sem placerat. Fusce dictum, metus at volutpat lacinia, elit massa auctor risus, id auctor arcu enim eu augue. Donec ultrices turpis in mi imperdiet ac venenatis sapien sodales.&lt;/p&gt; 
-&lt;pre class=&quot;prettyprint&quot;&gt;&lt;code&gt;
-package org.jbake;
-
-public class Oven {
-	public static void main(String[] args) {
-		System.out.print(&quot;Baking!&quot;);
-  }
-}
-&lt;/code&gt;
-&lt;/pre&gt; 
-&lt;p&gt;In consequat imperdiet nunc quis bibendum. Nulla semper, erat quis ornare tristique, lectus massa posuere libero, ut vehicula lectus nunc ut lorem. Aliquam erat volutpat.&lt;/p&gt;
 	</description>
     </item>
 

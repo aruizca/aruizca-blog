@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
+    <title>Extract Webjars static resources with Gradle for jBake (or anything really...)</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -81,70 +81,73 @@
 <section id="main_willsong" role="main">
 	<article id="thearticle_willsong" class="respowidth_willsong" role="article" itemscope
 			 itemtype="http://schema.org/Article">
-		<h2 class="posttitle_willsong" itemprop="headline">How to render JSON properly (without escaping quotes) inside a GSP script tag</h2>
+		<h2 class="posttitle_willsong" itemprop="headline">Extract Webjars static resources with Gradle for jBake (or anything really...)</h2>
 
 		<div class="articledetails_willsong">
 
-			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="19 November 2014" itemprop="datePublished">19 November 2014</time></span>
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="31 August 2015" itemprop="datePublished">31 August 2015</time></span>
 			<i class="fa fa-user fa-lg"></i><span>Angel Ruiz</span>
-			<i class="fa fa-tag fa-lg"></i><span>grails, how-to, javascript, json</span>
+			<i class="fa fa-tag fa-lg"></i><span>gradle, java, webjars, static resources</span>
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
-<div class="alert alert-warning">
-  This issue was encountered while using Grails version 2.3.11 
-</div> 
-<p>In theory it should be as simple as:</p> 
-<ol> 
- <li>Return JSON in your model from your controller</li> 
-</ol> 
-<pre><code class="language-groovy">def index() = {
-	[data: data as JSON]
+			<p><a href="https://www.webjars.org/" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2015/img/gradle-webjars.png" alt="gradle and webjars"><br> </a></p> 
+<p>For those of you who never heard of it before, <a href="http://www.webjars.org/">WebJars</a> is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file that contains a set of curated files (Classic WebJars) for a given library. Recently you can also reference Bower and NPM packages but I would not recommend it.</p> 
+<p>Previously I have tried using Bower alongside both Grunt and Gulp and they brought me straight back to the times were Ant was the predominant build tool in the Java EE world where everyone was doing its own thing with a complete lack of conventions.</p> 
+<p>After using WebJars in Java web projects I started looking how to use it in static web sites, more especifically those generated with <a href="http://jbake.org/">jBake</a>.</p> 
+<p>The final aim is to avoid checking in the web dependencies, like Javaacript based libraries, in our SCM tool. It turns out that <a href="http://melix.github.io/blog/2014/02/hosting-jbake-github.html">jBake can be used with Gradle</a>, which means that we have the chance of managing all my dependencies using a single tool that happens to be a lot better than anything available on the Javascript-Node ecosystem.</p> 
+<p>Declaring your WebJars dependency is as easy as declaring any other Maven based dependency, but in this case we group them in a <a href="https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html#configurations">custom Gradle dependency configuration</a> that we will call <code>webjars</code>:</p> 
+<pre><code>...
+dependencies {
+    webjars 'org.webjars:jquery:2.1.3'
+    webjars 'org.webjars:bootstrap:3.3.4'
+    webjars 'org.webjars:highlightjs:8.4-4'
+    webjars 'org.webjars:font-awesome:4.3.0-1'
+    webjars 'org.webjars:jquery.tocify.js:1.9.0'
+    webjars 'org.webjars:Magnific-Popup:1.0.0'
+}
+...
+</code></pre> 
+<p>In the case of jBake we need a custom task to extract the web dependencies assets at build time from the resolved WebJars:</p> 
+<pre><code>task('webjars resources extraction', type: Copy) {
+    configurations.webjars.each {jar -&gt;
+
+        def config = configurations.webjars.resolvedConfiguration
+        def artifact = config.resolvedArtifacts.find {
+            it.file.toString() == jar.absolutePath
+        }
+
+        def upStreamVersion = "${artifact.moduleVersion.id.version}"
+        upStreamVersion = upStreamVersion.replaceAll(/(-[\d.-]+)/, '')
+
+        copy {
+            from zipTree(jar)
+            into file("${buildDir}/webjars-content/${artifact.name}")
+        }
+        copy {
+            from "${buildDir}/webjars-content/${artifact.name}/META-INF/resources/webjars/${artifact.name}/${upStreamVersion}",
+                 "${buildDir}/webjars-content/${artifact.name}/META-INF/resources/webjars/${artifact.name}/${artifact.moduleVersion.id.version}"
+
+            into "${jbake.input}/assets/vendor/${artifact.name}"
+        }
+    }
 }
 </code></pre> 
+<p>This task will extract all the libraries inside a folder called <code>/assets/vendor/</code>. As you can appreciate this script can be easily customized to fit other platforms and build processes.</p> 
+<p>You can check my entire <a href="https://github.com/aruizca/ajaxanywhere-site/blob/master/build.gradle"><code>build.gradle</code> file at GitHub for reference</a>.</p> 
+<p>There are two things that I would like to stand out and I hope, albeit improbable, the message will get out there:</p> 
 <ol> 
- <li>Render the model attribute without encoding using the raw() method</li> 
+ <li>By 2016, no project should store their web dependencies in their SCM tool. The same way we don do it with our server side dependencies or IDE metadata.</li> 
+ <li>The fact that I am using jBake here is just an anecdote. This proof of concept sets the basis on which to develop applications for all sort of platforms, including NodeJS, using Gradle as the build tool to perform all kind of operations including the web dependencies resolution using with the WebJars. I am pretty sure that <strong>Gradle + WebJars combined with the <a href="https://github.com/bertramdev/asset-pipeline-core/">Asset-Pipeline</a> are the best toolset to develop multiplatform web applications</strong>.</li> 
 </ol> 
-<pre><code class="language-groovy">&lt;r:script&gt;
-	var data = ${raw(data)};
-&lt;/r:script&gt;
+<p>It took me long enough time to find out, so I thought I would make a post for anyone else who is after the answer in the future.</p> 
+<p>In Groovy code:</p> 
+<pre><code class="language-groovy">log.debug("ElasticSearch Query using Java Client API:\n${searchRequestBuilder.internalBuilder()}")
 </code></pre> 
-<p>Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:</p> 
-<pre><code class="language-html">&lt;script&gt;
-	var data = {&amp;quot;whatever&amp;quot;:&amp;quot;whatever&amp;quot;};
-&lt;script&gt;
+<p>And this in Java:</p> 
+<pre><code class="language-java">log.debug("ElasticSearch Query using Java Client API:\n" + searchRequestBuilder.internalBuilder());
 </code></pre> 
-<p>It took me a while to find a way of doing it using the <strong>applyCodec</strong> taglib. Just replace the previous second step with this:</p> 
-<pre><code class="language-groovy">&lt;r:script&gt;
-	&lt;g:applyCodec encodeAs="none"&gt;
-		var data = ${data};
-    &lt;/g:applyCodec&gt;
-&lt;/r:script&gt;
-</code></pre> 
-<p>as a result you will see that is has been rendered properly:</p> 
-<pre><code class="language-html">&lt;script&gt;
-	var data = {"whatever":"whatever"};
-&lt;script&gt;
-</code></pre> 
-<p>Link to related issues:</p> 
-<ul> 
- <li><a href="https://jira.grails.org/browse/GRAILS-11829">https://jira.grails.org/browse/GRAILS-11829</a></li> 
-</ul> 
-<h2>Update</h2> 
-<p>You can also use gsp page directives like these ones to set the encoding mechanism on a single page basis:<br> - Remove enconding from EL expressions:</p> 
-<pre><code>&lt;%@ expressionCodec="none" %&gt;
-</code></pre> 
-<ul> 
- <li>Remove encoding from scriplets:</li> 
-</ul> 
-<pre><code>&lt;%@ scriptletCodec="none" %&gt;
-</code></pre> 
-<ul> 
- <li>Remove encoding everywhere in the page:</li> 
-</ul> 
-<pre><code>&lt;%@ defaultCodec="none" %&gt;
-</code></pre>
+<p>The output is prettified by default.</p>
 		</div>
 
 		<div id="sharepost_willsong">

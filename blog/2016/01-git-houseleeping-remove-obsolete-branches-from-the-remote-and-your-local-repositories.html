@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
+    <title>Git housekeeping: remove "obsolete" branches from the remote and your local repositories</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -81,70 +81,76 @@
 <section id="main_willsong" role="main">
 	<article id="thearticle_willsong" class="respowidth_willsong" role="article" itemscope
 			 itemtype="http://schema.org/Article">
-		<h2 class="posttitle_willsong" itemprop="headline">How to render JSON properly (without escaping quotes) inside a GSP script tag</h2>
+		<h2 class="posttitle_willsong" itemprop="headline">Git housekeeping: remove "obsolete" branches from the remote and your local repositories</h2>
 
 		<div class="articledetails_willsong">
 
-			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="19 November 2014" itemprop="datePublished">19 November 2014</time></span>
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="31 July 2016" itemprop="datePublished">31 July 2016</time></span>
 			<i class="fa fa-user fa-lg"></i><span>Angel Ruiz</span>
-			<i class="fa fa-tag fa-lg"></i><span>grails, how-to, javascript, json</span>
+			<i class="fa fa-tag fa-lg"></i><span>clean, clean-up, remove, repositories, prune, local, remote, branches</span>
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
-<div class="alert alert-warning">
-  This issue was encountered while using Grails version 2.3.11 
+			<p><img src="https://aruizca.github.io/aruizca-blog/blog/2016/img/git-clean.png" alt="git clean"></p> 
+<p>Recently I was faced with the task of cleaning up a Git repository whose branches were not "pruned" for a few years, so I am talking about several hundreds of branches.</p> 
+<p>This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That's why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged to a "higher level" branch. Because they became <strong>"redundant"</strong>.</p> 
+<p>The real task here is to clean up the remote branch as you can always clone the repo locally again and start from scratch. I started deleting them manually because I am not a Git guru and I am very cautius whenever I have to tempre with the remote repositorory. Soon enough I realized I was not getting anywhere and start looking for a script to help me.</p> 
+<h1>Script to clean up the remote repository</h1> 
+<div class="alert alert-danger" role="alert"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Please use it at your own risk. <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 
+ <br> It worked for me using Git 2.9.2, but it should work with earlier versions. 
+ <br> Although branches are removed, the metadata of the branch and the relevant commits will remain there, so it is always possible to recreate any branch that should not have been deleted. 
 </div> 
-<p>In theory it should be as simple as:</p> 
-<ol> 
- <li>Return JSON in your model from your controller</li> 
-</ol> 
-<pre><code class="language-groovy">def index() = {
-	[data: data as JSON]
-}
+<pre><code>## Remove remote branches that are already merged with master
+git checkout master
+# Dry-run: check the branch names list before they get deleted for good
+git branch -ar --merged master | grep -v HEAD | grep -v master
+# If you are really sure, then remove them from remote repo
+git branch -ar --merged master | grep -v HEAD | grep -v master | sed "s/origin\///" | xargs -n 1 git push origin --delete
 </code></pre> 
-<ol> 
- <li>Render the model attribute without encoding using the raw() method</li> 
-</ol> 
-<pre><code class="language-groovy">&lt;r:script&gt;
-	var data = ${raw(data)};
-&lt;/r:script&gt;
-</code></pre> 
-<p>Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:</p> 
-<pre><code class="language-html">&lt;script&gt;
-	var data = {&amp;quot;whatever&amp;quot;:&amp;quot;whatever&amp;quot;};
-&lt;script&gt;
-</code></pre> 
-<p>It took me a while to find a way of doing it using the <strong>applyCodec</strong> taglib. Just replace the previous second step with this:</p> 
-<pre><code class="language-groovy">&lt;r:script&gt;
-	&lt;g:applyCodec encodeAs="none"&gt;
-		var data = ${data};
-    &lt;/g:applyCodec&gt;
-&lt;/r:script&gt;
-</code></pre> 
-<p>as a result you will see that is has been rendered properly:</p> 
-<pre><code class="language-html">&lt;script&gt;
-	var data = {"whatever":"whatever"};
-&lt;script&gt;
-</code></pre> 
-<p>Link to related issues:</p> 
-<ul> 
- <li><a href="https://jira.grails.org/browse/GRAILS-11829">https://jira.grails.org/browse/GRAILS-11829</a></li> 
-</ul> 
-<h2>Update</h2> 
-<p>You can also use gsp page directives like these ones to set the encoding mechanism on a single page basis:<br> - Remove enconding from EL expressions:</p> 
-<pre><code>&lt;%@ expressionCodec="none" %&gt;
+<h2>Breaking it down</h2> 
+<pre><code>git checkout master
 </code></pre> 
 <ul> 
- <li>Remove encoding from scriplets:</li> 
+ <li>In this case I chose the master branch, but if you want to clean more recent branches you can replace all the <code>master</code> branch references with <code>develop</code> in all the commands.</li> 
 </ul> 
-<pre><code>&lt;%@ scriptletCodec="none" %&gt;
+<pre><code>git branch -ar --merged master
 </code></pre> 
 <ul> 
- <li>Remove encoding everywhere in the page:</li> 
+ <li>Get list of remote branches that have already been merged with the <code>master</code> branch</li> 
 </ul> 
-<pre><code>&lt;%@ defaultCodec="none" %&gt;
-</code></pre>
+<pre><code>grep -v HEAD | grep -v master
+</code></pre> 
+<ul> 
+ <li>Remove those items from the list that contains the words <code>HEAD</code> or <code>master</code></li> 
+</ul> 
+<pre><code>sed "s/origin\///"
+</code></pre> 
+<ul> 
+ <li>For each remaining element in the list, remove the <code>origin/</code> name prefix</li> 
+</ul> 
+<pre><code>xargs -n 1 git push origin --delete
+</code></pre> 
+<ul> 
+ <li>Execute the git remote branch delete command for each element in the list.</li> 
+</ul> 
+<h1>Script to clean up the local repository</h1> 
+<div class="alert alert-danger" role="alert"> 
+ <h3>Deprecated</h3> 
+ <p>Just use <a href="https://github.com/tj/git-extras" target="_blank">Git Extras</a> instead (eg: `git delete-merged-branches` or `git delete-squashed-branches`</p> 
+</div> 
+<p>If you have been working on a repository for a while, it might be that you have local copy of a few branches that are no longer valid and need to be "pruned".</p> 
+<p>To achieve that we can execute a small variation of the previous script.</p> 
+<pre><code>## Remove local branches that are already merged with master
+
+git checkout master
+# Dry-run: check the branch names list before they are deleted
+git branch --merged master | grep -v "master"
+# If you are really sure, then remove them from local repo
+git branch --merged master | grep -v "master" | xargs -n 1 git branch -d
+</code></pre> 
+<h3>Acknowlegment</h3> 
+<p>Thanks to <a href="https://twitter.com/stevenharman">@StevenHarman</a>, whose <a href="http://stevenharman.net/git-clean-delete-already-merged-branches">post</a> showed me how to clean the local repo and gave me the idea to do same on the remote repo.</p> 
+<p>Feedback and improvements are welcome!! :-)</p>
 		</div>
 
 		<div id="sharepost_willsong">
