@@ -266,7 +266,7 @@
                             <p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
 <p>Recently I had to creat a Groovy script that copies some files from my plugin to the host application. The problem is I did not know how to reference those files inside my plugin.</p> 
 <p>If you have the same problem here is the solution:</p> 
-<pre><code>String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == 
+<p>String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == 'your-plugin-name' 
                         </div>
 
                         <a href="blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin.html" class="readmore_willsong">Read More</a>

@@ -6,8 +6,8 @@
     <atom:link href="https://aruizca.github.io/aruizca-blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sun., 6 Aug. 2023 10:54:08 +0200</pubDate>
-    <lastBuildDate>Sun., 6 Aug. 2023 10:54:08 +0200</lastBuildDate>
+    <pubDate>Sun., 6 Aug. 2023 11:02:52 +0200</pubDate>
+    <lastBuildDate>Sun., 6 Aug. 2023 11:02:52 +0200</lastBuildDate>
 
     <item>
       <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
@@ -240,8 +240,7 @@
 	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;Recently I had to creat a Groovy script that copies some files from my plugin to the host application. The problem is I did not know how to reference those files inside my plugin.&lt;/p&gt; 
 &lt;p&gt;If you have the same problem here is the solution:&lt;/p&gt; 
-&lt;pre&gt;&lt;code&gt;String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == &apos;your-plugin-name&apos; }.pluginDir
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == &apos;your-plugin-name&apos; }.pluginDir&lt;/p&gt;
 	</description>
     </item>
     <item>
