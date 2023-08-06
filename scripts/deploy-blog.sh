@@ -4,7 +4,7 @@
 
 cd "$(dirname "$0")"/..
 
-directory=blog
+directory=output
 branch=gh-pages
 build_command() {
   mvn jbake:generate

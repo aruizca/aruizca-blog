@@ -26,7 +26,7 @@
                 <version>${jbake.maven.version}</version>
                 <configuration>
                     <inputDirectory>${project.basedir}/src/main/resources/jbake</inputDirectory>
-                    <outputDirectory>${project.basedir}/blog</outputDirectory>
+                    <outputDirectory>${project.basedir}/output</outputDirectory>
                 </configuration>
                 <executions>
                     <execution>
