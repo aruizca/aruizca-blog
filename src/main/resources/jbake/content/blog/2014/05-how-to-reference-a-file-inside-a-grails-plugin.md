@@ -11,9 +11,6 @@ status=published
 </a>
 
 Recently I had to creat a Groovy script that copies some files from my plugin to the host application. The problem is I did not know how to reference those files inside my plugin.
-
-If you have the same problem here is the solution:
-
 ```
 String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == 'your-plugin-name' }.pluginDir
 ```

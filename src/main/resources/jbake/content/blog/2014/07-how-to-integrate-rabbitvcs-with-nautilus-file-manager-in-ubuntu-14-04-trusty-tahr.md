@@ -6,10 +6,6 @@ tags=ubuntu, rabbitvcs, nautilus, integration, git
 status=published
 ~~~~~~
 
-<a href="http://grails.org" target="_blank"> 
-![Grails logo](img/grails.png)
-</a>
-
 <a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank">
 ![RabbitVCS Git client in Ubuntu](img/rabbitvcs-post-logo.png)
 </a>

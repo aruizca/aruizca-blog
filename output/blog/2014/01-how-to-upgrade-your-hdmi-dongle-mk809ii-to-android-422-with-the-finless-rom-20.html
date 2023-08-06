@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><img src="blog/2014/img/mk809II-Android-4.2.png" alt="mk809II"></p> 
+			<p><img src="http://127.0.0.1:8820/blog/2014/img/mk809II-Android-4.2.png" alt="mk809II"></p> 
 <p>This post is a concise and comprehensive summary of the steps I have followed to upgrade my HDMI dongle MK809II (Rochip RK3066 chipset) to use the <strong>4.2.2</strong> version of <strong>Android</strong>.</p> 
 <p>After reading plenty of confusing guides, finally I stambled upon this video bellow which explains the process for the older 1.7 version of the Finless ROM. But if all you want is to flash a ROM, you can <strong>skip to the 26:30 minute</strong>.</p> <iframe width="560" height="315" src="//www.youtube.com/embed/VYdMydq7css" frameborder="0" allowfullscreen></iframe> 
 <p>Once I watched the video, I had to search for un updated version of the ROM, tools and drivers, as the Finless ROM version 1.7 that appears on the video is based on Android 4.1.1. For your conveniece, I have included here all the files that are required to flash the new ROM:</p> 
@@ -106,10 +106,10 @@
 <ol> 
  <li> <p>Connect your device to your PC using the microUSB connector located at the bottom which is labeled as <code>"DC"</code>.<br> Remember that in order to provide with enough electric current, generally you need to connect the device to either a USB 3.0 port, 2 USB 2.0 ports or a USB 2.0 hub with external power supply.</p> </li> 
  <li> <p>Enable the option <code>"Connect to PC"</code>in your device. This options is located under <code>Settings -&gt; USB</code>.</p> </li> 
- <li> <p>Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:<br> <img src="blog/2014/img/RKBatchTool.png" alt="Rockchip batch Tool"></p> </li> 
+ <li> <p>Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:<br> <img src="http://127.0.0.1:8820/blog/2014/img/RKBatchTool.png" alt="Rockchip batch Tool"></p> </li> 
  <li> <p>All you need to do is click on the <code>"Switch"</code> button. If you had it connected to a screen you should see the video go off.</p> </li> 
  <li> <p>The first time you do this, Windows will try to install the new device without success and that is why you have the drivers included in one of the files listed above. Use the <code>"Windows Device Manager"</code> to install the drivers.</p> </li> 
- <li> <p>Now is time to open the ROM Flash tool <code>"RKAndoidTool"</code> included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:<br> <img src="blog/2014/img/RKAndroidTool.png" alt="Flash ROM tool RKAndroidTool"></p> </li> 
+ <li> <p>Now is time to open the ROM Flash tool <code>"RKAndoidTool"</code> included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:<br> <img src="http://127.0.0.1:8820/blog/2014/img/RKAndroidTool.png" alt="Flash ROM tool RKAndroidTool"></p> </li> 
  <li> <p>Notice that in the footer of the tool, it should appera the message: <code>"Found RKAndroid Mass Storage USB"</code>. If that's the case, you are good to press the <code>"Flash ROM"</code> button.</p> </li> 
  <li> <p>Once it is finished the device will reboot itself. Please be patient and wait for the first boot to happen.</p> </li> 
 </ol> 
@@ -156,7 +156,7 @@
     <p id="copyright_willsong">
         <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">aruizca's blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://aruizca.com" property="cc:attributionName" rel="cc:attributionURL">Angel Ruiz Calvo</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
         <br/>
-        Prowdly powered by <a href="http://ghost.org" target="_blank">Ghost</a>. Look&Feel based on Wilson theme created by <a href="http://marcosn.com" target="_blank">Marcosn.com</a>
+        Proudly baked with <a href="https://jbake.org/" target="_blank">JBake</a>. Look&Feel based on Wilson theme created by <a href="http://marcosn.com" target="_blank">Marcosn.com</a>
     </p>
 </footer>
 
