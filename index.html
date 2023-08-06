@@ -131,7 +131,7 @@
 }
 </code></pre> 
 <ol> 
- <li>Render the model 
+ <li>Render the model attribute 
                         </div>
 
                         <a href="blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag.html" class="readmore_willsong">Read More</a>
@@ -176,7 +176,7 @@
                         <div class="postcontent_willsong">
                             <p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
 <p><a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/rabbitvcs-post-logo.png" alt="RabbitVCS Git client in Ubuntu"><br> </a></p> 
-<p>There are still some instances of very nice applications that do not work straight away after installing them via 
+<p>There are still some instances of very nice applications that do not work straight away after installing them via the apt 
                         </div>
 
                         <a href="blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr.html" class="readmore_willsong">Read More</a>
@@ -220,7 +220,7 @@
 
                         <div class="postcontent_willsong">
                             <p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png" alt="Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes"></p> 
-<p>Since the advent of the <a href="http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29" title="Infrastructure as a Service" target="_blank">IaaS</a> and <a href="http://en.wikipedia.org/wiki/Platform_as_a_service" title="Platform as a Service" target="_blank">PaaS</a> providers, the decline in usage 
+<p>Since the advent of the <a href="http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29" title="Infrastructure as a Service" target="_blank">IaaS</a> and <a href="http://en.wikipedia.org/wiki/Platform_as_a_service" title="Platform as a Service" target="_blank">PaaS</a> providers, the decline in usage of 
                         </div>
 
                         <a href="blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox.html" class="readmore_willsong">Read More</a>
@@ -265,8 +265,8 @@
                         <div class="postcontent_willsong">
                             <p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
 <p>Recently I had to creat a Groovy script that copies some files from my plugin to the host application. The problem is I did not know how to reference those files inside my plugin.</p> 
-<p>If you have the same problem here is the solution:</p> 
-<p>String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == 'your-plugin-name' 
+<pre><code>String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == 'your-plugin-name' }.pluginDir
+</code></pre>
                         </div>
 
                         <a href="blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin.html" class="readmore_willsong">Read More</a>
@@ -313,7 +313,7 @@
 <p>I am writing this post to record all the things I have done in order to migrate an existing Grails 2.2.x app to 2.3.x.</p> 
 <p>The reasons for me to upgrade are:</p> 
 <ul> 
- <li>Project progress is at an early stage where is not very risky to do that. We also have a considerable amount of automatic tests. You have also need to take 
+ <li>Project progress is at an early stage where is not very risky to do that. We also have a considerable amount of automatic tests. You have also need to take into 
                         </div>
 
                         <a href="blog/2014/04-migrating-from-grails-22-to-23.html" class="readmore_willsong">Read More</a>
