@@ -14,8 +14,8 @@
         <maven.compiler.release>11</maven.compiler.release>
         <jbake.maven.version>0.3.5</jbake.maven.version>
         <asciidoctor.version>2.5.5</asciidoctor.version>
-        <markdown.version>0.64.0</markdown.version>
-        <freemarker.version>2.3.31</freemarker.version>
+        <markdown.version>0.64.8</markdown.version>
+        <freemarker.version>2.3.32</freemarker.version>
     </properties>
 
     <build>
