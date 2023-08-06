@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><img src="blog/2014/img/adobe-air-logo.png" alt="Adobe Air logo"></p> 
+			<p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/adobe-air-logo.png" alt="Adobe Air logo"></p> 
 <h2>What is it?</h2> 
 <p>I have known about the <a href="https://get.adobe.com/air/">Adobe AIR runtime</a> and its concept for quite a long time, which were initially introduced back in 2007. It was an attempt to bridge the existing gap between the desktop and browser based apps, keeping as many of their respective advantages as possible.</p> 
 <p>For what I know, basically there are two ways of using Adobe AIR:</p> 
@@ -101,7 +101,7 @@
 </ol> 
 <p>Probably, the most important Abobe Air application to ever exist using the first approach was the version of <strong>Tweetdeck</strong> that existed before it was adquired by Twitter and decided to replace it with a worse native implementation IMO, with less features and "heavier". It sort of works, but since Twitter changed their APIs, it does not retrieve any messages. If you want to try the last version (0.38.2) anyway click <a href="https://dl.dropboxusercontent.com/u/8256463/blog-files/TweetDeck_0_38.2.air"><strong>here</strong></a>.</p> 
 <p>Another instance I normally use is a little application called <a href="http://code.google.com/p/pomodairo/">"Pomodairo"</a>. It aims to replace the physical timer for those who use the <a href="http://pomodorotechnique.com/">"Pomodoro Technique"</a> to increase their productivity. A more well know app built in Adobe Air would be the prototyping tool called <a href="http://balsamiq.com/download/">balsamiq</a>.</p> 
-<p>The second approach, which is the one covered in this post, is the easiest.<br> The first time I thought about it was when I tried to use <a href="https://trello.com/">Trello</a>. Given the way I work or how my brain works, or both, somehow I found it cumbersome to have it opened in one tab of my browser and then I thought that maybe someone felt the same way and used Adobe Air to wrap it. <a href="https://trello.com/" target="_blank"><img src="/content/images/trello-logo.png" class="left img-responsive" alt="trello homepage"></a>That is the moment when I came acroos <a href="http://trellodesktop.com/">TrelloDesktop</a> (<strong>Note</strong>: Sign-in page not working at the time of writing this article).</p> 
+<p>The second approach, which is the one covered in this post, is the easiest.<br> The first time I thought about it was when I tried to use <a href="https://trello.com/">Trello</a>. Given the way I work or how my brain works, or both, somehow I found it cumbersome to have it opened in one tab of my browser and then I thought that maybe someone felt the same way and used Adobe Air to wrap it. <a href="https://trello.com/" target="_blank"><img src="https://aruizca.github.io/aruizca-blog/content/images/trello-logo.png" class="left img-responsive" alt="trello homepage"></a>That is the moment when I came acroos <a href="http://trellodesktop.com/">TrelloDesktop</a> (<strong>Note</strong>: Sign-in page not working at the time of writing this article).</p> 
 <div> 
  <p>There are some other examples like <a href="http://www.robertnyman.com/gmdesk/" target="_blank">GMDesk</a> to run GMail, Google Calendar, Docs and Maps as a desktop application. You also have <a href="http://www.robertnyman.com/facedesk/" target="_blank">FaceDesk</a> to do the same with Facebook and many others.</p> 
  <p><a name="linux-support-info"></a></p> 
@@ -187,17 +187,17 @@
  <p>To generate your own certificate just type in the following command making the modifications you consider appropriate.</p> 
  <p><code>adt -certificate -cn mycertificate 1024-RSA mycertificatefile.p12 password</code></p> 
  <h3>9. Package and sign the application</h3> 
- <p>Next is the command I used to generate the <code>.air</code> package.<br> <img src="blog/2014/img/adobe-air-package.png" alt="Adobe Air Package"></p> 
+ <p>Next is the command I used to generate the <code>.air</code> package.<br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/adobe-air-package.png" alt="Adobe Air Package"></p> 
  <p>Please note that all the files that are to be packaged should be explicitly referenced. Otherwise you will get the famous <strong>"<a href="https://www.google.com.au/search?q=error+303%3A+icon+xxx+is+missing+from+package&amp;ie=utf-8&amp;oe=utf-8&amp;aq=t&amp;rls=org.mozilla:en-US:official&amp;client=firefox-a&amp;gfe_rd=cr&amp;ei=phDuUsXVJqeN8Qfz9oHYBQ#q=adobe+air+error+303:+is+missing+from+package&amp;rls=org.mozilla:en-US:official">error 303: icon xxx is missing from package</a>"</strong>.</p> 
  <pre><code>adt -package -storetype pkcs12 -keystore mycertificatefile.p12 iView-Desktop.air application.xml redirect.html AIRUpdater-1.0.js icons\iview128.png icons\iview16.png icons\iview32.png icons\iview48.png
 </code></pre> 
  <h3>10. Create launcher page (optional)</h3> 
- <p>To distribute your app you can create a page like the ones used in the apps I put as examples earlier.<br> <a href="http://iview-desktop.aruizca.com/" class="right" target="_blank"><br> <img src="blog/2014/img/iview-desktop-badge.png" alt="iView Desktop"><br> </a></p> 
+ <p>To distribute your app you can create a page like the ones used in the apps I put as examples earlier.<br> <a href="http://iview-desktop.aruizca.com/" class="right" target="_blank"><br> <img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/iview-desktop-badge.png" alt="iView Desktop"><br> </a></p> 
  <p>In those you can appreciate that they all use a flash component to trigger the installation. This component seamlessly takes care of installing the app and the Adobe Air Runtime if it is not already installed in the system.</p> 
  <p>The installer badge is a flash component usually distributed in the samples included in the SDK, but there is a better resource in this Adobe tutorial:<a href="http://www.adobe.com/devnet/air/articles/badge_for_air.html"><strong>"Getting started with the custom install badge"</strong></a>.</p> 
  <h3>11. App. Installation</h3> 
  <p>Either through the installation badge or just clicking on the .air package generated on step 9 (if you have the Adobe Air runtime already installed), you should be able to install the app and run it. If succesful you should see something like this snapshot:</p> 
- <p><img src="blog/2014/img/iview-desktop-snapshot.png" alt="iView Desktop Snapshot"></p> 
+ <p><img src="https://aruizca.github.io/aruizca-blog/blog/2014/img/iview-desktop-snapshot.png" alt="iView Desktop Snapshot"></p> 
  <h2>Resources summary</h2> 
  <ul> 
   <li><a href="http://iview-desktop.aruizca.com/">ABC iview-desktop app website.</a></li> 
