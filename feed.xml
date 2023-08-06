@@ -6,9 +6,535 @@
     <atom:link href="https://aruizca.github.io/aruizca-blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Mon., 15 Aug. 2022 16:30:22 +0200</pubDate>
-    <lastBuildDate>Mon., 15 Aug. 2022 16:30:22 +0200</lastBuildDate>
+    <pubDate>Sun., 6 Aug. 2023 10:06:21 +0200</pubDate>
+    <lastBuildDate>Sun., 6 Aug. 2023 10:06:21 +0200</lastBuildDate>
 
+    <item>
+      <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag.html</link>
+      <pubDate>Wed., 19 Nov. 2014 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;div class=&quot;alert alert-warning&quot;&gt;
+  This issue was encountered while using Grails version 2.3.11 
+&lt;/div&gt; 
+&lt;p&gt;In theory it should be as simple as:&lt;/p&gt; 
+&lt;ol&gt; 
+ &lt;li&gt;Return JSON in your model from your controller&lt;/li&gt; 
+&lt;/ol&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;def index() = {
+	[data: data as JSON]
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ol&gt; 
+ &lt;li&gt;Render the model attribute without encoding using the raw() method&lt;/li&gt; 
+&lt;/ol&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;&amp;lt;r:script&amp;gt;
+	var data = ${raw(data)};
+&amp;lt;/r:script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;script&amp;gt;
+	var data = {&amp;amp;quot;whatever&amp;amp;quot;:&amp;amp;quot;whatever&amp;amp;quot;};
+&amp;lt;script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;It took me a while to find a way of doing it using the &lt;strong&gt;applyCodec&lt;/strong&gt; taglib. Just replace the previous second step with this:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;&amp;lt;r:script&amp;gt;
+	&amp;lt;g:applyCodec encodeAs=&quot;none&quot;&amp;gt;
+		var data = ${data};
+    &amp;lt;/g:applyCodec&amp;gt;
+&amp;lt;/r:script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;as a result you will see that is has been rendered properly:&lt;/p&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;script&amp;gt;
+	var data = {&quot;whatever&quot;:&quot;whatever&quot;};
+&amp;lt;script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Link to related issues:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;a href=&quot;https://jira.grails.org/browse/GRAILS-11829&quot;&gt;https://jira.grails.org/browse/GRAILS-11829&lt;/a&gt;&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;h2&gt;Update&lt;/h2&gt; 
+&lt;p&gt;You can also use gsp page directives like these ones to set the encoding mechanism on a single page basis:&lt;br&gt; - Remove enconding from EL expressions:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ expressionCodec=&quot;none&quot; %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Remove encoding from scriplets:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ scriptletCodec=&quot;none&quot; %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Remove encoding everywhere in the page:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;&amp;lt;%@ defaultCodec=&quot;none&quot; %&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+	</description>
+    </item>
+    <item>
+      <title>How to integrate RabbitVCS with Nautilus file manager in Ubuntu 14.04 Trusty Tahr</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr.html</link>
+      <pubDate>Tue., 27 May 2014 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;blog/2014/img/rabbitvcs-post-logo.png&quot; alt=&quot;RabbitVCS Git client in Ubuntu&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;There are still some instances of very nice applications that do not work straight away after installing them via the apt package manager and unfortunately RabbitVCS is one of them.&lt;/p&gt; 
+&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;RabbitVCS&lt;/a&gt; is for Linux what &lt;a href=&quot;https://code.google.com/p/tortoisegit/&quot; title=&quot;TortoiseGit website&quot; target=&quot;_blank&quot;&gt;TortoiseGit&lt;/a&gt; and &lt;a href=&quot;http://tortoisesvn.net/&quot; title=&quot;TortoiseSVN website&quot; target=&quot;_blank&quot;&gt;TortoiseSVN&lt;/a&gt; are for the Windows platform. It is a SCM client that integrates itself with the OS file manager to manage local Git or SVN repositories.&lt;/p&gt; 
+&lt;p&gt;Today I wanted to install RabbitVCS (v0.16.0) in Ubuntu 14.04 which has the tool already available in the default package repositories. So normally, it should be enough to execute the following commands and have it ready to go:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo apt-get update
+	$ sudo apt-get install rabbitvcs-nautilus3
+    # Optional
+    $ sudo apt-get install rabbitvcs-gedit
+	$ sudo apt-get install rabbitvcs-cli
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;sadly that did not happen for me, so I decided to summarize the set of commands I have gathered to make it work:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;~~Create symlinks~~&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo ln -sf /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 /usr/lib/
+	$ sudo ln -sf /usr/lib/x86_64-linux-gnu/libpython2.7.so.1 /usr/lib/
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;~~Replace RabbitVCS.py script with latest from source code~~&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;    $ wget http://rabbitvcs.googlecode.com/svn/trunk/clients/nautilus-3.0/RabbitVCS.py  /usr/share/nautilus-python/extensions
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Change access rights to your local RabbitCVS configuration folder. It did not worked until I did this, so previous steps might not be needed. If you try let me know please.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;    $ chown -R $USER:$USER ~/.config/rabbitvcs
+    
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;When working you should be able to see the RabbitVCS context submenu when using Nautilus like in the following snapshot:&lt;/p&gt; 
+&lt;p&gt;&lt;img src=&quot;blog/2014/img/rabbitvcs-nautilus-integration.png&quot; alt=&quot;RabbitVCS Nautilus integration&quot;&gt;&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>Steps to create a Vagrant Base Box with Ubuntu 14.04 Desktop (GUI) and VirtualBox</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox.html</link>
+      <pubDate>Fri., 23 May 2014 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox.html</guid>
+      	<description>
+	&lt;p&gt;&lt;img src=&quot;blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png&quot; alt=&quot;Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;Since the advent of the &lt;a href=&quot;http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29&quot; title=&quot;Infrastructure as a Service&quot; target=&quot;_blank&quot;&gt;IaaS&lt;/a&gt; and &lt;a href=&quot;http://en.wikipedia.org/wiki/Platform_as_a_service&quot; title=&quot;Platform as a Service&quot; target=&quot;_blank&quot;&gt;PaaS&lt;/a&gt; providers, the decline in usage of monolithic architectures (e.g.: application server + relational DB) and the need for distributed and automatically scalable applications, as software developers we have to be increasingly more aware and skilled in the tools and techniques used to orchestrate and automate the deployment of all the different components that our architecture might end up with.&lt;/p&gt; 
+&lt;p&gt;Among these tools, normally encompassed in the DevOps space, I am currently very interested in &lt;a href=&quot;http://www.vagrantup.com/&quot; title=&quot;Vagrant Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Vagrant&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&quot;https://www.docker.io/&quot; title=&quot;Docker Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Docker&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&quot;http://www.ansible.com&quot; title=&quot;Ansible Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Ansible&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&quot;https://juju.ubuntu.com/&quot; title=&quot;Ubuntu JuJu Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Ubuntu JuJu&lt;/strong&gt;&lt;/a&gt;. Although I already use Vagrant, today I decided I wanted to know how to create my own &lt;a href=&quot;http://docs.vagrantup.com/v2/boxes/base.html&quot; title=&quot;What is a Vagrant Base Box?&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Base Boxes&lt;/strong&gt;&lt;/a&gt; that I can reuse. My idea is to have two Linux Base Boxes with Ubuntu Server and Ubuntu Desktop respectively and then another two with Windows 7 and 8. Once Vagrant is covered I want to get deeper with Docker because I see a lot of potential in lightweight containers instead of using heavy virtual machines.&lt;/p&gt; 
+&lt;p&gt;Most of the guides out there focus on Linux distributions without GUI, so I decided that while I am creating my Vagrant Base Box with Ubuntu 14.04 Desktop I would document all the relevant steps next:&lt;/p&gt; 
+&lt;hr&gt; 
+&lt;h2&gt;Step 1: Create the Virtual Machine with Virtual Box&lt;/h2&gt; 
+&lt;h3&gt;- Install VirtualBox&lt;/h3&gt; 
+&lt;p&gt;Download relevant VirtualBox installable package for your host system from the website: &lt;a href=&quot;https://www.virtualbox.org/&quot;&gt;https://www.virtualbox.org/&lt;/a&gt;&lt;/p&gt; 
+&lt;h3&gt;- Download Ubuntu ISO&lt;/h3&gt; 
+&lt;p&gt;I have downloaded the 64bit Desktop ISO: &lt;a href=&quot;http://www.ubuntu.com/download/desktop&quot;&gt;http://www.ubuntu.com/download/desktop&lt;/a&gt;&lt;/p&gt; 
+&lt;h3&gt;- Define your Virtual Machine taking into consideration that:&lt;/h3&gt; 
+&lt;ol&gt; 
+ &lt;li&gt;The first network interface (adapter 1) must be a NAT adapter.&lt;/li&gt; 
+ &lt;li&gt;For convenience the Virtual Disk should be Dynamic (&lt;strong&gt;VMDK&lt;/strong&gt;), so don&apos;t bee too stingy with the disk size ( &amp;gt;= 10GB IMO ).&lt;/li&gt; 
+&lt;/ol&gt; 
+&lt;p&gt;&lt;img src=&quot;blog/2014/img/virtualbox-settings.png&quot; alt=&quot;VirtualBox settings&quot;&gt;&lt;/p&gt; 
+&lt;h3&gt;- Load the ISO as part of the VM storage and install the OS.&lt;/h3&gt; 
+&lt;h3&gt;- Username and Password should be: &lt;strong&gt;vagrant&lt;/strong&gt; (for convenience, not for security).&lt;/h3&gt; 
+&lt;h3&gt;- Once installed unload the ISO and restart the VM.&lt;/h3&gt; 
+&lt;h3&gt;- Install the &lt;strong&gt;&quot;Guest Additions&quot;&lt;/strong&gt;&lt;/h3&gt; 
+&lt;p&gt;Before installing the Guest Additions, you will have to prepare your guest system for building external kernel modules:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo apt-get install dkms
+	$ sudo /etc/init.d/vboxadd setup
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;and install the build-essential package and linux headers to compile the Guest Additions propertly&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo apt-get install -y build-essential linux-headers-server
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Then Mount guest additions ISO via virtualbox window and follow the indications to run the installation script :&lt;/p&gt; 
+&lt;p&gt;&lt;img src=&quot;blog/2014/img/vitualbox-guest-addtions.png&quot; alt=&quot;VirtualBox Guest Additions&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;If the sytems does not install it automatically you can use the following commands:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo mount /dev/cdrom /media/cdrom
+	$ sudo /media/cdrom/VBoxLinuxAdditions.run
+	$ sudo umount /media/cdrom
+	$ sudo apt-get clean
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h2&gt;Step 2: Setup guest OS (Ubuntu 14.04 64bit) with the minimum necessary.&lt;/h2&gt; 
+&lt;h3&gt;- Use &quot;Software Updater&quot; to get latest updates. Or if you are using the command line:&lt;/h3&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo apt-get update -y
+	$ sudo apt-get upgrade -y
+	# Restart the machine
+	$ sudo shutdown -r now
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;- Add the &lt;strong&gt;vagrant&lt;/strong&gt; user to sudoers file:&lt;/h3&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo su -
+	$ visudo
+	# Add the following line to the end of the file.
+	vagrant ALL=(ALL) NOPASSWD:ALL
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;- Install Vagrant Public Keys&lt;/h3&gt; 
+&lt;p&gt;This way we can SSH to the machine without entering the password:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ mkdir -p /home/vagrant/.ssh
+	$ wget --no-check-certificate https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
+	# Ensure we have the correct permissions set
+	$ chmod 0700 /home/vagrant/.ssh
+	$ chmod 0600 /home/vagrant/.ssh/authorized_keys
+	$ chown -R vagrant /home/vagrant/.ssh
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Install OpenSSH Server&lt;/h3&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo apt-get install -y openssh-server
+	$ sudo vi /etc/ssh/sshd_config
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Ensure the following is set:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Port 22&lt;/li&gt; 
+ &lt;li&gt;PubKeyAuthentication yes&lt;/li&gt; 
+ &lt;li&gt;AuthorizedKeysFile %h/.ssh/authorized_keys&lt;/li&gt; 
+ &lt;li&gt;PermitEmptyPasswords no&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo service ssh restart
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Save &amp;amp; close the file then restart SSH.&lt;/p&gt; 
+&lt;h2&gt;Step 3: Package the Box&lt;/h2&gt; 
+&lt;h3&gt;Compact space and shut the VM down&lt;/h3&gt; 
+&lt;p&gt;You can remove those packages that you don&apos;t consider necessary (e.g.: LibreOffice) and execute the following commands to save space and shut the VM down:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ sudo dd if=/dev/zero of=/EMPTY bs=1M
+	$ sudo rm -f /EMPTY
+	# Shutdown the machine
+	$ sudo shutdown -h now
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Create Vagrant Base Box&lt;/h3&gt; 
+&lt;p&gt;Asuming you already have Vagrant installed in the host system, just run the following command:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant package –-base &amp;lt;VitualBox VM Name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;in my case:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant package –-base Ubuntu-14.04-64-Desktop
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;this will create a file called &lt;strong&gt;package.box&lt;/strong&gt;&lt;/p&gt; 
+&lt;h3&gt;Install the box&lt;/h3&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant box add {boxname} package.box
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;in my case:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant box add Ubuntu-14.04-64-Desktop package.box
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Init a Vagrant Box by referencing the Base one we have created&lt;/h3&gt; 
+&lt;p&gt;Go to a different folder and type:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant init {boxname}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;in my case:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant init Ubuntu-14.04-64-Desktop
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Enable GUI&lt;/h3&gt; 
+&lt;p&gt;Edit the generated &lt;strong&gt;Vagrantfile&lt;/strong&gt; by uncommenting the following lines:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;	config.vm.provider &quot;virtualbox&quot; do |v|
+	v.gui = true
+	end
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;Spin it up!&lt;/h3&gt; 
+&lt;pre&gt;&lt;code&gt;	$ vagrant up
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;and you should be able to SSH the machine and see the VM running:&lt;/p&gt; 
+&lt;p&gt;&lt;img src=&quot;blog/2014/img/vagrant-box-running.png&quot; alt=&quot;VirtualBox Guest Running&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;Please let me know if you find something that is incorrect or inaccurate.&lt;/p&gt; 
+&lt;p&gt;Cheers.&lt;/p&gt;
+	</description>
+    </item>
+    <item>
+      <title>How to reference a file inside a Grails plugin</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin.html</link>
+      <pubDate>Mon., 7 Apr. 2014 00:00:00 +0200</pubDate>
+      <guid isPermaLink="false">blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;Recently I had to creat a Groovy script that copies some files from my plugin to the host application. The problem is I did not know how to reference those files inside my plugin.&lt;/p&gt; 
+&lt;p&gt;If you have the same problem here is the solution:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == &apos;your-plugin-name&apos; }.pluginDir
+&lt;/code&gt;&lt;/pre&gt;
+	</description>
+    </item>
+    <item>
+      <title>Migrating from Grails 2.2 to 2.3</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/04-migrating-from-grails-22-to-23.html</link>
+      <pubDate>Fri., 14 Mar. 2014 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2014/04-migrating-from-grails-22-to-23.html</guid>
+      	<description>
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+&lt;p&gt;I am writing this post to record all the things I have done in order to migrate an existing Grails 2.2.x app to 2.3.x.&lt;/p&gt; 
+&lt;p&gt;The reasons for me to upgrade are:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Project progress is at an early stage where is not very risky to do that. We also have a considerable amount of automatic tests. You have also need to take into consideration that the more major versions you skip, the harder it gets to migrate to the latest version.&lt;/li&gt; 
+ &lt;li&gt;Switched dependency resolution engine from Ivy to Aether. I have had problems with Ivy resolving transitive dependencies and snapshots of my own plugin dependencies.&lt;/li&gt; 
+ &lt;li&gt;&lt;strong&gt;&quot;Forked Execution&quot;&lt;/strong&gt; and the &lt;strong&gt;&quot;Test Runner Daemon&quot;&lt;/strong&gt; should speed up the tests execution and therefore speed up&lt;br&gt; the tests development. This is one of the mayor caveats I have found in Grails so far. We&apos;ll see if they have fixed it with this two new features.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;First of all I have read the following posts about this subject, which I think are essential to perform the task at hand:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;a href=&quot;http://grails.org/doc/2.3.x/guide/upgradingFromPreviousVersionsOfGrails.html&quot;&gt;Upgrading from Grails 2.2 - Reference Documentation&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;a href=&quot;http://www.objectpartners.com/2013/10/08/migrating-to-grails-2-3/&quot;&gt;Migrating to Grails 2.3&lt;/a&gt;&lt;/li&gt; 
+ &lt;li&gt;&lt;a href=&quot;http://blog.milesburton.com/2013/12/11/upgrading-to-grails-2-3-gotchas/&quot;&gt;Upgrading to Grails 2.3 – Gotchas&lt;/a&gt;&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;I decided to follow a different approach by specifying what files need to be changed, why and how:&lt;/p&gt; 
+&lt;h2&gt;Files I had to alter:&lt;/h2&gt; 
+&lt;hr&gt; 
+&lt;h3&gt;application.properties&lt;/h3&gt; 
+&lt;p&gt;You need to upgrade the grails version number:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;app.grails.version=2.3.7
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;BuildConfig.groovy&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt; &lt;p&gt;The groupId should be now in the Config.groovy file. Se next file changes&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Enable forked execution (host app and plugins):&lt;/p&gt; &lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;grails.project.fork = [
+    // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
+    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+
+    // configure settings for the test-app JVM, uses the daemon by default
+    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    // configure settings for the run-app JVM
+    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    // configure settings for the run-war JVM
+    war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    // configure settings for the Console UI JVM
+    console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
+]
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;div class=&quot;alert alert-warning&quot;&gt; &lt;i class=&quot;fa fa-exclamation-triangle fa-fw&quot;&gt;&lt;/i&gt; &lt;strong&gt;Important note!!&lt;/strong&gt;
+ &lt;br&gt; At the end I had to disable the forked execution becaue it does not get along very well with IntelliJ IDEA debugging :-( 
+&lt;/div&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Explicitely set Maven Aether as the default dependency resolution engine (host app and plugins):&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;grails.project.dependency.resolver = &quot;maven&quot; // or ivy
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Upgrade the following plugin dependencies if you are planning to upgrade a Grails host app:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;// plugins for the build system only
+build &quot;:tomcat:7.0.52.1&quot;
+
+// plugins for the compile step
+compile &quot;:scaffolding:2.0.3&quot;
+
+// plugins needed at runtime but not for compilation
+runtime &quot;:hibernate4:4.3.4.1&quot; // or &quot;:hibernate:3.6.10.9&quot;
+runtime &quot;:database-migration:1.3.8&quot;
+runtime &quot;:resources:1.2.7&quot;
+// Uncomment these (or add new ones) to enable additional resources capabilities
+//runtime &quot;:zipped-resources:1.0.1&quot;
+//runtime &quot;:cached-resources:1.1&quot;
+//runtime &quot;:yui-minify-resources:0.1.5&quot;
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;If as the snipped above, you want to use Hibernate 4 instead of Hibernate 3, you will have to make sure that your plugin dependencies exclude the Hibernate 3 dependency. This is due to the fact that they are using different artifactId (&quot;&lt;strong&gt;hibernate4&lt;/strong&gt;&quot; instead of &quot;&lt;strong&gt;hibernate&lt;/strong&gt;&quot;). You can exclude dependencies in plugins like this:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;compile(&apos;:plugin-artifactId:version&apos;) {
+    excludes &quot;hibernate&quot;
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt; &lt;p&gt;Remove Spock dependencies as they already come built-in with Grails 2.3 (host app and plugins).&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Upgrade the following plugin dependencies if you are planning to upgrade a Grails plugin:&lt;/p&gt; &lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;build(&quot;:release:3.0.1&quot;,
+    &quot;:rest-client-builder:1.0.3&quot;) {
+    export = false
+}
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;Note that you might need to upgrade some other plugins.&lt;/p&gt; 
+&lt;h3&gt;Config.groovy&lt;/h3&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;Automatic reloading is not enabled by default, so if you want it back add the following line:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;grails.reload.enabled = true
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;And then the change mentioned in teh previous section that says that the groupId should be specified here now:&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;pre&gt;&lt;code&gt;grails.project.groupId = &quot;whatever&quot; // change this to alter the default package name and Maven publishing destination
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;There are quite a few other little changes. So I suggest creating a new empty Grails app from scratch using Grails 2.3.x and compare the resulting Config.groovy file with your own.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;h3&gt;All Integration Tests that extend GroovyTestCase&lt;/h3&gt; 
+&lt;p&gt;All these tests need to remove that inheritance and annotate the class with this Mixin:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;@TestMixin(IntegrationTestMixin)
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;h3&gt;~/.grails/settings.groovy&lt;/h3&gt; 
+&lt;p&gt;If like me, you have your repositories and credentials declared globally, then your settings.xml file should go from this:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;...
+grails.project.ivy.authentication = {
+    repositories {
+        mavenRepo &quot;whatever url&quot;
+
+    credentials {
+        realm = &quot;Sonatype Nexus Repository Manager&quot;
+        host = &quot;whatever&quot;
+        username = &quot;whatever&quot;
+        password = &quot;whatever&quot;
+    }
+}
+...
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;to this:&lt;/p&gt; 
+&lt;pre&gt;&lt;code&gt;...
+grails.project.ivy.authentication = {
+    repositories {
+    	mavenLocal()
+        mavenRepo(&quot;whatever url&quot;) {
+          if (owner.grailsVersion ==~ /2\.3\..*/) {
+              updatePolicy &quot;always&quot;
+              auth([
+                  username: &apos;whatever&apos;,
+                  password: &apos;whatever&apos;
+              ])
+          }
+    	}
+    }
+
+    credentials {
+        realm = &quot;Sonatype Nexus Repository Manager&quot;
+        host = &quot;whatever&quot;
+        username = &quot;whatever&quot;
+        password = &quot;whatever&quot;
+    }
+}
+...
+&lt;/code&gt;&lt;/pre&gt; 
+&lt;p&gt;The possible values for &lt;strong&gt;&lt;em&gt;&quot;updatePolicy&quot;&lt;/em&gt;&lt;/strong&gt; are:&lt;/p&gt; 
+&lt;ul&gt; 
+ &lt;li&gt;&lt;strong&gt;never&lt;/strong&gt; – Never check for new snapshots.&lt;/li&gt; 
+ &lt;li&gt;&lt;strong&gt;always&lt;/strong&gt; – Always check for new snapshots.&lt;/li&gt; 
+ &lt;li&gt;&lt;strong&gt;daily&lt;/strong&gt; – Check once a day for new snapshots (the default).&lt;/li&gt; 
+ &lt;li&gt;&lt;strong&gt;interval:x&lt;/strong&gt; – Check once every x minutes for new snapshots.&lt;/li&gt; 
+&lt;/ul&gt; 
+&lt;p&gt;I will keep updating this post if I encounter another migration issue.&lt;/p&gt; 
+&lt;p&gt;I hope you find it useful. Cheers.&lt;/p&gt; 
+&lt;hr&gt; 
+&lt;ul&gt; 
+ &lt;li&gt; &lt;p&gt;&lt;strong&gt;Update 1&lt;/strong&gt;: Class reloading has to be enabled inside the Config.groovy file not the BuildConfig.groovy file.&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;&lt;strong&gt;Update 2&lt;/strong&gt;: Disabled forked execution because it breaks debugging in IntelliJ IDEA&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;&lt;strong&gt;Update 3&lt;/strong&gt;: Added possible values for the updatePolicy maven repository settings parameter&lt;/p&gt; &lt;/li&gt; 
+&lt;/ul&gt;
+	</description>
+    </item>
+    <item>
+      <title>ABC iView Desktop - Using Adobe AIR to wrap your Web Application as a cross-platform Desktop Application</title>
+      <link>https://aruizca.github.io/aruizca-blog/blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application.html</link>
+      <pubDate>Tue., 28 Jan. 2014 00:00:00 +0100</pubDate>
+      <guid isPermaLink="false">blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application.html</guid>
+      	<description>
+	&lt;p&gt;&lt;img src=&quot;blog/2014/img/adobe-air-logo.png&quot; alt=&quot;Adobe Air logo&quot;&gt;&lt;/p&gt; 
+&lt;h2&gt;What is it?&lt;/h2&gt; 
+&lt;p&gt;I have known about the &lt;a href=&quot;https://get.adobe.com/air/&quot;&gt;Adobe AIR runtime&lt;/a&gt; and its concept for quite a long time, which were initially introduced back in 2007. It was an attempt to bridge the existing gap between the desktop and browser based apps, keeping as many of their respective advantages as possible.&lt;/p&gt; 
+&lt;p&gt;For what I know, basically there are two ways of using Adobe AIR:&lt;/p&gt; 
+&lt;ol&gt; 
+ &lt;li&gt;You can develop an application using web technologies like HTML or Flash/&lt;a href=&quot;http://www.adobe.com/au/products/flex.html&quot;&gt;Flex&lt;/a&gt; expecifically targeting this distribution platform, or&lt;/li&gt; 
+ &lt;li&gt;You can develop your web application as usual and then wrap it around this &quot;envelope&quot;.&lt;/li&gt; 
+&lt;/ol&gt; 
+&lt;p&gt;Probably, the most important Abobe Air application to ever exist using the first approach was the version of &lt;strong&gt;Tweetdeck&lt;/strong&gt; that existed before it was adquired by Twitter and decided to replace it with a worse native implementation IMO, with less features and &quot;heavier&quot;. It sort of works, but since Twitter changed their APIs, it does not retrieve any messages. If you want to try the last version (0.38.2) anyway click &lt;a href=&quot;https://dl.dropboxusercontent.com/u/8256463/blog-files/TweetDeck_0_38.2.air&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt; 
+&lt;p&gt;Another instance I normally use is a little application called &lt;a href=&quot;http://code.google.com/p/pomodairo/&quot;&gt;&quot;Pomodairo&quot;&lt;/a&gt;. It aims to replace the physical timer for those who use the &lt;a href=&quot;http://pomodorotechnique.com/&quot;&gt;&quot;Pomodoro Technique&quot;&lt;/a&gt; to increase their productivity. A more well know app built in Adobe Air would be the prototyping tool called &lt;a href=&quot;http://balsamiq.com/download/&quot;&gt;balsamiq&lt;/a&gt;.&lt;/p&gt; 
+&lt;p&gt;The second approach, which is the one covered in this post, is the easiest.&lt;br&gt; The first time I thought about it was when I tried to use &lt;a href=&quot;https://trello.com/&quot;&gt;Trello&lt;/a&gt;. Given the way I work or how my brain works, or both, somehow I found it cumbersome to have it opened in one tab of my browser and then I thought that maybe someone felt the same way and used Adobe Air to wrap it. &lt;a href=&quot;https://trello.com/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;/content/images/trello-logo.png&quot; class=&quot;left img-responsive&quot; alt=&quot;trello homepage&quot;&gt;&lt;/a&gt;That is the moment when I came acroos &lt;a href=&quot;http://trellodesktop.com/&quot;&gt;TrelloDesktop&lt;/a&gt; (&lt;strong&gt;Note&lt;/strong&gt;: Sign-in page not working at the time of writing this article).&lt;/p&gt; 
+&lt;div&gt; 
+ &lt;p&gt;There are some other examples like &lt;a href=&quot;http://www.robertnyman.com/gmdesk/&quot; target=&quot;_blank&quot;&gt;GMDesk&lt;/a&gt; to run GMail, Google Calendar, Docs and Maps as a desktop application. You also have &lt;a href=&quot;http://www.robertnyman.com/facedesk/&quot; target=&quot;_blank&quot;&gt;FaceDesk&lt;/a&gt; to do the same with Facebook and many others.&lt;/p&gt; 
+ &lt;p&gt;&lt;a name=&quot;linux-support-info&quot;&gt;&lt;/a&gt;&lt;/p&gt; 
+ &lt;p&gt;&lt;/p&gt; 
+ &lt;div class=&quot;alert alert-warning&quot;&gt; &lt;i class=&quot;fa fa-exclamation-triangle fa-fw&quot;&gt;&lt;/i&gt; &lt;strong&gt;Important note!!&lt;/strong&gt;
+  &lt;br&gt; After finishing this post, I realized that &lt;strong&gt;Adobe Air does not support Linux anymore&lt;/strong&gt; as you can see in their &lt;a href=&quot;http://www.adobe.com/products/air/tech-specs.html&quot; target=&quot;_blank&quot;&gt;system requirements page&lt;/a&gt;. According to Adobe, they decided to drop Linux support after version 2.6 due to little demand from this platform and in order to shift more efforts to Phonegap. Personally I think that complete cross-platform compatibility was its main competitive advantage. You can check their &lt;a href=&quot;http://www.adobe.com/au/products/air/faq.html#linux&quot; target=&quot;_blank&quot;&gt;FAQ&lt;/a&gt; reagarding this matter. I understand that this is a kind a deal breaker for many :-( The only viable alternative is to use Adobe Air on Linux is to use &lt;a href=&quot;http://appdb.winehq.org/objectManager.php?sClass=application&amp;amp;iId=5842&quot; target=&quot;_blank&quot;&gt;Wine&lt;/a&gt;. There is no problem too big with a bit of wine XDD 
+ &lt;/div&gt; 
+ &lt;h2&gt;Why did I use it?&lt;/h2&gt; 
+ &lt;p&gt;As you can see, the main scenario where an approach like this could be interesting is to wrap &lt;a href=&quot;http://en.wikipedia.org/wiki/Single-page_application&quot;&gt;SPI (Single Page Interface) applications&lt;/a&gt;. It is of course a matter of personal preference as there is not a clear advantage of doing this unless, like me you agree with these points:&lt;/p&gt; 
+ &lt;ul&gt; 
+  &lt;li&gt;In a browser is not very easy to switch to the right tab using the keyboard.&lt;/li&gt; 
+  &lt;li&gt;From time to time your browser instance is closed either by accident or a crash.&lt;/li&gt; 
+  &lt;li&gt;With the advent of mobile apps it happens that an SPI app sometimes feels like it is more convenient as a desktop app without the browser menus, url bars and back and forth buttons issues.&lt;/li&gt; 
+ &lt;/ul&gt; 
+ &lt;p&gt;I got into creating my own desktop application using Adobe Air as I was trying to watch one of the &lt;a href=&quot;http://en.wikipedia.org/wiki/Grand_Designs&quot;&gt;&quot;Kevin McCloud&apos;s Grand Designs&quot;&lt;/a&gt; episodes using the ABC iView web application, which is a Flash App. There I thought I&apos;d rather have this as a separate app as it should not be very difficult using this platform. So next I am going to put the steps I followed to create my own cross platform &quot;ABC iView Destop&quot; app, although &lt;strong&gt;it would apply to any app you&apos;d like to wrap&lt;/strong&gt;.&lt;/p&gt; 
+ &lt;h2&gt;Steps:&lt;/h2&gt; 
+ &lt;h3&gt;1. Download Adobe Air SDK&lt;/h3&gt; 
+ &lt;p&gt;It can be downloaded from the following &lt;a href=&quot;http://www.adobe.com/devnet/air/air-sdk-download.html&quot;&gt;link&lt;/a&gt;. At the time of writing this post, the available version of the runtime was the &lt;strong&gt;4.0&lt;/strong&gt;).&lt;/p&gt; 
+ &lt;h3&gt;2. Install Adobe Air SDK&lt;/h3&gt; 
+ &lt;p&gt;It is as easy as unzipping the previous downloaded file in a location of your choice and then add the path to the SDK &lt;code&gt;/bin&lt;/code&gt; folder to your &lt;code&gt;PATH&lt;/code&gt; system variable.&lt;/p&gt; 
+ &lt;h3&gt;3. Create Air application description&lt;/h3&gt; 
+ &lt;p&gt;Firt of all we create an xml file with the name of our choice. In this instance I called it &lt;code&gt;application.xml&lt;/code&gt;.&lt;/p&gt; 
+ &lt;p&gt;This file will contain the basic properties of our application. To know more about the available elements have a look at this &lt;a href=&quot;http://help.adobe.com/en_US/air/build/WS2d929364fa0b81374fa5df4f129dca62884-8000.html&quot;&gt;document about setting application properties&lt;/a&gt; and at the &lt;a href=&quot;http://help.adobe.com/en_US/air/build/WS5b3ccc516d4fbf351e63e3d118666ade46-7ff1.html&quot;&gt;&lt;strong&gt;the reference guide&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt; 
+ &lt;p&gt;Next there is the application description for the iView-Desktop app:&lt;/p&gt; 
+ &lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&apos;1.0&apos; encoding=&apos;utf-8&apos;?&amp;gt;
+&amp;lt;application xmlns=&quot;http://ns.adobe.com/air/application/3.7&quot;&amp;gt;
+	&amp;lt;id&amp;gt;iViewDesktop&amp;lt;/id&amp;gt;
+	&amp;lt;name&amp;gt;iView - Desktop&amp;lt;/name&amp;gt;
+	&amp;lt;filename&amp;gt;iViewDesktop&amp;lt;/filename&amp;gt;
+	&amp;lt;versionNumber&amp;gt;1.0.0&amp;lt;/versionNumber&amp;gt;
+	&amp;lt;installFolder&amp;gt;iView-Desktop&amp;lt;/installFolder&amp;gt;
+	&amp;lt;initialWindow&amp;gt;
+		&amp;lt;title&amp;gt;iView - Desktop&amp;lt;/title&amp;gt;
+		&amp;lt;content&amp;gt;redirect.html&amp;lt;/content&amp;gt;
+		&amp;lt;systemChrome&amp;gt;standard&amp;lt;/systemChrome&amp;gt;
+		&amp;lt;transparent&amp;gt;false&amp;lt;/transparent&amp;gt;
+		&amp;lt;visible&amp;gt;true&amp;lt;/visible&amp;gt;
+		&amp;lt;resizable&amp;gt;true&amp;lt;/resizable&amp;gt; 
+		&amp;lt;renderMode&amp;gt;direct&amp;lt;/renderMode&amp;gt;
+		&amp;lt;aspectRatio&amp;gt;landscape&amp;lt;/aspectRatio&amp;gt; 
+		&amp;lt;autoOrients&amp;gt;true&amp;lt;/autoOrients&amp;gt;
+		&amp;lt;width&amp;gt;1024&amp;lt;/width&amp;gt;	
+		&amp;lt;height&amp;gt;768&amp;lt;/height&amp;gt;	
+	&amp;lt;/initialWindow&amp;gt;
+    &amp;lt;icon&amp;gt;
+        &amp;lt;image16x16&amp;gt;icons/iview-16x16.png&amp;lt;/image16x16&amp;gt;
+        &amp;lt;image32x32&amp;gt;icons/iview-32x32.png&amp;lt;/image32x32&amp;gt;
+        &amp;lt;image48x48&amp;gt;icons/iview-48x48.png&amp;lt;/image48x48&amp;gt;
+        &amp;lt;image128x128&amp;gt;icons/iview-48x48.png&amp;lt;/image128x128&amp;gt;
+    &amp;lt;/icon&amp;gt;
+&amp;lt;/application&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+ &lt;p&gt;As you can appreciate the &lt;a href=&quot;http://help.adobe.com/en_US/air/build/WSfffb011ac560372f2fea1812938a6e463-8000.html#WSfffb011ac560372f2fea1812938a6e463-7ff4&quot;&gt;initialWindow -&amp;gt; content node&lt;/a&gt; is the most important property, as it contains the URL relative to the root of the application installation folder. This URL points to the &lt;code&gt;.HTML&lt;/code&gt; or &lt;code&gt;.SWF&lt;/code&gt; file that contains your app.&lt;/p&gt; 
+ &lt;h3&gt;4. Point to the web app URL&lt;/h3&gt; 
+ &lt;p&gt;For this particular case of the ABC iView app I though it would be enough to download the &apos;.SWF&apos; file and reference it in the content property. For some reason I don&apos;t know it did not work. So at the end, I just created a HTML file that contains a script with a redirection to the iView URL:&lt;/p&gt; 
+ &lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html&amp;gt;  
+&amp;lt;html lang=&quot;en&quot;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&amp;gt;
+  &amp;lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot;&amp;gt;
+
+  &amp;lt;script src=&quot;AIRUpdater-1.0.js&quot;&amp;gt;&amp;lt;/script&amp;gt; 
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;script&amp;gt;
+  window.location.replace(&quot;http://www.abc.net.au/iview&quot;);  
+&amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt; 
+ &lt;p&gt;Just replacing the URL you can pretty much load any web application you want.&lt;/p&gt; 
+ &lt;h3&gt;5. Integrate an automatic upgrade mechanism (optional)&lt;/h3&gt; 
+ &lt;p&gt;This step is optional but recommended, as it enables the application to be able to check if there is a new version at start up time and install the upgrade almost automatically.&lt;/p&gt; 
+ &lt;p&gt;There is a project called &lt;a href=&quot;http://code.google.com/p/airupdater/&quot;&gt;AirUpdater&lt;/a&gt; which provides a sample script to achieve this just by modifying a few URLs, the application name and by following the instricutions included as inline comments. As you can see in the html file above, this script has been customized and included.&lt;/p&gt; 
+ &lt;h3&gt;6. Checking that your app is working&lt;/h3&gt; 
+ &lt;p&gt;Using the Adobe Air Debug Launcher (ADL) command-line tool that comes with the SDK, we can run our application without packaging and installation to check that everything is working all right. If the step 1 was performed correctly, you would just need to type in the following command from your project root folder:&lt;/p&gt; 
+ &lt;p&gt;&lt;code&gt;adl application.xml&lt;/code&gt;&lt;/p&gt; 
+ &lt;h3&gt;7. Creating some icons (optional)&lt;/h3&gt; 
+ &lt;p&gt;The icons are used as the application file, shortcut, and program menu icons. The application icon should be supplied as a set of at least 16x16, 32x32, 48x48, and 128x128 pixels PNG images. But more if required can also be specified. If those are not provided the default ones will be used.&lt;/p&gt; 
+ &lt;p&gt;Specify the path to the icon files &lt;a href=&quot;http://help.adobe.com/en_US/air/build/WSfffb011ac560372f2fea1812938a6e463-8000.html#WSfffb011ac560372f2fea1812938a6e463-7ff6&quot;&gt;in the icon element of the application descriptor file&lt;/a&gt;. Have a look at the application descriptor above to see one example.&lt;/p&gt; 
+ &lt;h3&gt;8. Generate a digital certificate to sign the installation package (optional)&lt;/h3&gt; 
+ &lt;p&gt;This step is not optional if you don&apos;t have a legit digital certificate.&lt;/p&gt; 
+ &lt;p&gt;To generate your own certificate just type in the following command making the modifications you consider appropriate.&lt;/p&gt; 
+ &lt;p&gt;&lt;code&gt;adt -certificate -cn mycertificate 1024-RSA mycertificatefile.p12 password&lt;/code&gt;&lt;/p&gt; 
+ &lt;h3&gt;9. Package and sign the application&lt;/h3&gt; 
+ &lt;p&gt;Next is the command I used to generate the &lt;code&gt;.air&lt;/code&gt; package.&lt;br&gt; &lt;img src=&quot;blog/2014/img/adobe-air-package.png&quot; alt=&quot;Adobe Air Package&quot;&gt;&lt;/p&gt; 
+ &lt;p&gt;Please note that all the files that are to be packaged should be explicitly referenced. Otherwise you will get the famous &lt;strong&gt;&quot;&lt;a href=&quot;https://www.google.com.au/search?q=error+303%3A+icon+xxx+is+missing+from+package&amp;amp;ie=utf-8&amp;amp;oe=utf-8&amp;amp;aq=t&amp;amp;rls=org.mozilla:en-US:official&amp;amp;client=firefox-a&amp;amp;gfe_rd=cr&amp;amp;ei=phDuUsXVJqeN8Qfz9oHYBQ#q=adobe+air+error+303:+is+missing+from+package&amp;amp;rls=org.mozilla:en-US:official&quot;&gt;error 303: icon xxx is missing from package&lt;/a&gt;&quot;&lt;/strong&gt;.&lt;/p&gt; 
+ &lt;pre&gt;&lt;code&gt;adt -package -storetype pkcs12 -keystore mycertificatefile.p12 iView-Desktop.air application.xml redirect.html AIRUpdater-1.0.js icons\iview128.png icons\iview16.png icons\iview32.png icons\iview48.png
+&lt;/code&gt;&lt;/pre&gt; 
+ &lt;h3&gt;10. Create launcher page (optional)&lt;/h3&gt; 
+ &lt;p&gt;To distribute your app you can create a page like the ones used in the apps I put as examples earlier.&lt;br&gt; &lt;a href=&quot;http://iview-desktop.aruizca.com/&quot; class=&quot;right&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;blog/2014/img/iview-desktop-badge.png&quot; alt=&quot;iView Desktop&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+ &lt;p&gt;In those you can appreciate that they all use a flash component to trigger the installation. This component seamlessly takes care of installing the app and the Adobe Air Runtime if it is not already installed in the system.&lt;/p&gt; 
+ &lt;p&gt;The installer badge is a flash component usually distributed in the samples included in the SDK, but there is a better resource in this Adobe tutorial:&lt;a href=&quot;http://www.adobe.com/devnet/air/articles/badge_for_air.html&quot;&gt;&lt;strong&gt;&quot;Getting started with the custom install badge&quot;&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt; 
+ &lt;h3&gt;11. App. Installation&lt;/h3&gt; 
+ &lt;p&gt;Either through the installation badge or just clicking on the .air package generated on step 9 (if you have the Adobe Air runtime already installed), you should be able to install the app and run it. If succesful you should see something like this snapshot:&lt;/p&gt; 
+ &lt;p&gt;&lt;img src=&quot;blog/2014/img/iview-desktop-snapshot.png&quot; alt=&quot;iView Desktop Snapshot&quot;&gt;&lt;/p&gt; 
+ &lt;h2&gt;Resources summary&lt;/h2&gt; 
+ &lt;ul&gt; 
+  &lt;li&gt;&lt;a href=&quot;http://iview-desktop.aruizca.com/&quot;&gt;ABC iview-desktop app website.&lt;/a&gt;&lt;/li&gt; 
+  &lt;li&gt;&lt;a href=&quot;https://github.com/aruizca/iview-desktop&quot;&gt;Source code in GitHub.&lt;/a&gt;&lt;/li&gt; 
+  &lt;li&gt;&lt;a href=&quot;https://get.adobe.com/air/&quot;&gt;Adobe Air Runtime.&lt;/a&gt;&lt;/li&gt; 
+  &lt;li&gt;&lt;a href=&quot;http://www.adobe.com/devnet/air/air-sdk-download.html&quot;&gt;Adobe Air SDK.&lt;/a&gt;&lt;/li&gt; 
+  &lt;li&gt;&lt;a href=&quot;http://help.adobe.com/en_US/air/build/WSfffb011ac560372f20b57e08128cc91aa2f-8000.html&quot;&gt;Guide: &quot;Developing AIR applications for the desktop&quot;.&lt;/a&gt;&lt;/li&gt; 
+  &lt;li&gt;&lt;a href=&quot;http://help.adobe.com/en_US/air/build/WS5b3ccc516d4fbf351e63e3d118666ade46-7ff1.html&quot;&gt;Adobe Air application descriptor reference guide.&lt;/a&gt;&lt;/li&gt; 
+  &lt;li&gt;&lt;a href=&quot;http://www.adobe.com/devnet/air/articles/badge_for_air.html&quot;&gt;Article: &quot;Getting started with the custom install badge&quot;.&lt;/a&gt;&lt;/li&gt; 
+ &lt;/ul&gt; 
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>My MongoDB presentation at the CJUG</title>
       <link>https://aruizca.github.io/aruizca-blog/blog/2014/02-my-mongodb-presentation-at-the-cjug.html</link>
@@ -28,7 +554,7 @@
       <pubDate>Sun., 12 Jan. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20.html</guid>
       	<description>
-	&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/mk809II-Android-4.2.png&quot; alt=&quot;mk809II&quot;&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;img src=&quot;blog/2014/img/mk809II-Android-4.2.png&quot; alt=&quot;mk809II&quot;&gt;&lt;/p&gt; 
 &lt;p&gt;This post is a concise and comprehensive summary of the steps I have followed to upgrade my HDMI dongle MK809II (Rochip RK3066 chipset) to use the &lt;strong&gt;4.2.2&lt;/strong&gt; version of &lt;strong&gt;Android&lt;/strong&gt;.&lt;/p&gt; 
 &lt;p&gt;After reading plenty of confusing guides, finally I stambled upon this video bellow which explains the process for the older 1.7 version of the Finless ROM. But if all you want is to flash a ROM, you can &lt;strong&gt;skip to the 26:30 minute&lt;/strong&gt;.&lt;/p&gt; &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/VYdMydq7css&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
 &lt;p&gt;Once I watched the video, I had to search for un updated version of the ROM, tools and drivers, as the Finless ROM version 1.7 that appears on the video is based on Android 4.1.1. For your conveniece, I have included here all the files that are required to flash the new ROM:&lt;/p&gt; 
@@ -43,10 +569,10 @@
 &lt;ol&gt; 
  &lt;li&gt; &lt;p&gt;Connect your device to your PC using the microUSB connector located at the bottom which is labeled as &lt;code&gt;&quot;DC&quot;&lt;/code&gt;.&lt;br&gt; Remember that in order to provide with enough electric current, generally you need to connect the device to either a USB 3.0 port, 2 USB 2.0 ports or a USB 2.0 hub with external power supply.&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;Enable the option &lt;code&gt;&quot;Connect to PC&quot;&lt;/code&gt;in your device. This options is located under &lt;code&gt;Settings -&amp;gt; USB&lt;/code&gt;.&lt;/p&gt; &lt;/li&gt; 
- &lt;li&gt; &lt;p&gt;Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/RKBatchTool.png&quot; alt=&quot;Rockchip batch Tool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:&lt;br&gt; &lt;img src=&quot;blog/2014/img/RKBatchTool.png&quot; alt=&quot;Rockchip batch Tool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;All you need to do is click on the &lt;code&gt;&quot;Switch&quot;&lt;/code&gt; button. If you had it connected to a screen you should see the video go off.&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;The first time you do this, Windows will try to install the new device without success and that is why you have the drivers included in one of the files listed above. Use the &lt;code&gt;&quot;Windows Device Manager&quot;&lt;/code&gt; to install the drivers.&lt;/p&gt; &lt;/li&gt; 
- &lt;li&gt; &lt;p&gt;Now is time to open the ROM Flash tool &lt;code&gt;&quot;RKAndoidTool&quot;&lt;/code&gt; included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:&lt;br&gt; &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2014/img/RKAndroidTool.png&quot; alt=&quot;Flash ROM tool RKAndroidTool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Now is time to open the ROM Flash tool &lt;code&gt;&quot;RKAndoidTool&quot;&lt;/code&gt; included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:&lt;br&gt; &lt;img src=&quot;blog/2014/img/RKAndroidTool.png&quot; alt=&quot;Flash ROM tool RKAndroidTool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;Notice that in the footer of the tool, it should appera the message: &lt;code&gt;&quot;Found RKAndroid Mass Storage USB&quot;&lt;/code&gt;. If that&apos;s the case, you are good to press the &lt;code&gt;&quot;Flash ROM&quot;&lt;/code&gt; button.&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;Once it is finished the device will reboot itself. Please be patient and wait for the first boot to happen.&lt;/p&gt; &lt;/li&gt; 
 &lt;/ol&gt; 
@@ -76,7 +602,7 @@
       	<description>
 	&lt;div class=&quot;imageblock&quot;&gt; 
  &lt;div class=&quot;content&quot;&gt; 
-  &lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt; 
+  &lt;img src=&quot;blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt; 
  &lt;/div&gt; 
 &lt;/div&gt; 
 &lt;div class=&quot;paragraph&quot;&gt; 
@@ -128,7 +654,7 @@
 
 }
 &lt;/code&gt;&lt;/pre&gt; 
-&lt;p&gt;&lt;img src=&quot;https://aruizca.github.io/aruizca-blog/blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;blog/2013/img/beach.jpg&quot; alt=&quot;Beach&quot;&gt;&lt;/p&gt;
 	</description>
     </item>
     <item>

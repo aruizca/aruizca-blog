@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>How to upgrade your HDMI dongle MK809II to Android 4.2.2 with the Finless ROM 2.0</title>
+    <title>How to integrate RabbitVCS with Nautilus file manager in Ubuntu 14.04 Trusty Tahr</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -81,40 +81,47 @@
 <section id="main_willsong" role="main">
 	<article id="thearticle_willsong" class="respowidth_willsong" role="article" itemscope
 			 itemtype="http://schema.org/Article">
-		<h2 class="posttitle_willsong" itemprop="headline">How to upgrade your HDMI dongle MK809II to Android 4.2.2 with the Finless ROM 2.0</h2>
+		<h2 class="posttitle_willsong" itemprop="headline">How to integrate RabbitVCS with Nautilus file manager in Ubuntu 14.04 Trusty Tahr</h2>
 
 		<div class="articledetails_willsong">
 
-			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="12 January 2014" itemprop="datePublished">12 January 2014</time></span>
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="27 May 2014" itemprop="datePublished">27 May 2014</time></span>
 			<i class="fa fa-user fa-lg"></i><span>Angel Ruiz</span>
-			<i class="fa fa-tag fa-lg"></i><span>android, hack</span>
+			<i class="fa fa-tag fa-lg"></i><span>ubuntu, rabbitvcs, nautilus, integration, git</span>
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><img src="blog/2014/img/mk809II-Android-4.2.png" alt="mk809II"></p> 
-<p>This post is a concise and comprehensive summary of the steps I have followed to upgrade my HDMI dongle MK809II (Rochip RK3066 chipset) to use the <strong>4.2.2</strong> version of <strong>Android</strong>.</p> 
-<p>After reading plenty of confusing guides, finally I stambled upon this video bellow which explains the process for the older 1.7 version of the Finless ROM. But if all you want is to flash a ROM, you can <strong>skip to the 26:30 minute</strong>.</p> <iframe width="560" height="315" src="//www.youtube.com/embed/VYdMydq7css" frameborder="0" allowfullscreen></iframe> 
-<p>Once I watched the video, I had to search for un updated version of the ROM, tools and drivers, as the Finless ROM version 1.7 that appears on the video is based on Android 4.1.1. For your conveniece, I have included here all the files that are required to flash the new ROM:</p> 
+			<p><a href="http://grails.org" target="_blank"><br> <img src="blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
+<p><a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank"><br> <img src="blog/2014/img/rabbitvcs-post-logo.png" alt="RabbitVCS Git client in Ubuntu"><br> </a></p> 
+<p>There are still some instances of very nice applications that do not work straight away after installing them via the apt package manager and unfortunately RabbitVCS is one of them.</p> 
+<p><a href="http://rabbitvcs.org/" title="RabbitVCS website" target="_blank">RabbitVCS</a> is for Linux what <a href="https://code.google.com/p/tortoisegit/" title="TortoiseGit website" target="_blank">TortoiseGit</a> and <a href="http://tortoisesvn.net/" title="TortoiseSVN website" target="_blank">TortoiseSVN</a> are for the Windows platform. It is a SCM client that integrates itself with the OS file manager to manage local Git or SVN repositories.</p> 
+<p>Today I wanted to install RabbitVCS (v0.16.0) in Ubuntu 14.04 which has the tool already available in the default package repositories. So normally, it should be enough to execute the following commands and have it ready to go:</p> 
+<pre><code>	$ sudo apt-get update
+	$ sudo apt-get install rabbitvcs-nautilus3
+    # Optional
+    $ sudo apt-get install rabbitvcs-gedit
+	$ sudo apt-get install rabbitvcs-cli
+</code></pre> 
+<p>sadly that did not happen for me, so I decided to summarize the set of commands I have gathered to make it work:</p> 
 <ul> 
- <li><a href="https://dl.dropboxusercontent.com/u/8256463/blog-files/imito_mx1_2_finless_20_jb422.zip">Finless ROM 2.0 for imito MX1 and MX2 devices (compatible) + the ROM Flashing tool RKAndroidTool 1.35</a>.</li> 
- <li><a href="https://dl.dropboxusercontent.com/u/8256463/blog-files/Rockchip_Batch_Tool_v1.7.rar">Rockchip Batch Tool 1.7 + Rock USB drivers 3.5 for Windows</a>.</li> 
+ <li>~~Create symlinks~~</li> 
 </ul> 
-<div class="alert alert-warning">
-  Disclaimer!! Perform these steps at your own risk. I performed them succesfully in my device, but there is not 100% guaratee that you won't have some sort of issue along the way. 
-</div> 
-<p>Next are the steps I followed to flash de ROM:</p> 
-<ol> 
- <li> <p>Connect your device to your PC using the microUSB connector located at the bottom which is labeled as <code>"DC"</code>.<br> Remember that in order to provide with enough electric current, generally you need to connect the device to either a USB 3.0 port, 2 USB 2.0 ports or a USB 2.0 hub with external power supply.</p> </li> 
- <li> <p>Enable the option <code>"Connect to PC"</code>in your device. This options is located under <code>Settings -&gt; USB</code>.</p> </li> 
- <li> <p>Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:<br> <img src="blog/2014/img/RKBatchTool.png" alt="Rockchip batch Tool"></p> </li> 
- <li> <p>All you need to do is click on the <code>"Switch"</code> button. If you had it connected to a screen you should see the video go off.</p> </li> 
- <li> <p>The first time you do this, Windows will try to install the new device without success and that is why you have the drivers included in one of the files listed above. Use the <code>"Windows Device Manager"</code> to install the drivers.</p> </li> 
- <li> <p>Now is time to open the ROM Flash tool <code>"RKAndoidTool"</code> included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:<br> <img src="blog/2014/img/RKAndroidTool.png" alt="Flash ROM tool RKAndroidTool"></p> </li> 
- <li> <p>Notice that in the footer of the tool, it should appera the message: <code>"Found RKAndroid Mass Storage USB"</code>. If that's the case, you are good to press the <code>"Flash ROM"</code> button.</p> </li> 
- <li> <p>Once it is finished the device will reboot itself. Please be patient and wait for the first boot to happen.</p> </li> 
-</ol> 
-<p>I hope you find it useful. Please let me know if you have any problems.</p> 
-<p>Cheers,</p>
+<pre><code>	$ sudo ln -sf /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 /usr/lib/
+	$ sudo ln -sf /usr/lib/x86_64-linux-gnu/libpython2.7.so.1 /usr/lib/
+</code></pre> 
+<ul> 
+ <li>~~Replace RabbitVCS.py script with latest from source code~~</li> 
+</ul> 
+<pre><code>    $ wget http://rabbitvcs.googlecode.com/svn/trunk/clients/nautilus-3.0/RabbitVCS.py  /usr/share/nautilus-python/extensions
+</code></pre> 
+<ul> 
+ <li>Change access rights to your local RabbitCVS configuration folder. It did not worked until I did this, so previous steps might not be needed. If you try let me know please.</li> 
+</ul> 
+<pre><code>    $ chown -R $USER:$USER ~/.config/rabbitvcs
+    
+</code></pre> 
+<p>When working you should be able to see the RabbitVCS context submenu when using Nautilus like in the following snapshot:</p> 
+<p><img src="blog/2014/img/rabbitvcs-nautilus-integration.png" alt="RabbitVCS Nautilus integration"></p>
 		</div>
 
 		<div id="sharepost_willsong">
