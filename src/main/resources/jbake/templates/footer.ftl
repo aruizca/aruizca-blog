@@ -3,8 +3,7 @@
     <!--Social Media -->
     <div id="socialmedia_willsong">
         <a href="https://twitter.com/aruizca" class="sociallink_willsong"><i class="fa fa-twitter fa-lg"></i></a>
-        <a href="https://plus.google.com/u/0/+ÁngelRuiz" class="sociallink_willsong"><i class="fa fa-google-plus-square fa-lg"></i></a>
-        <a href="http://au.linkedin.com/in/angelruiz/" target="linkedin" class="sociallink_willsong"><i class="fa fa-linkedin fa-lg"></i></a>
+        <a href="https://www.linkedin.com/in/angelruiz/" target="linkedin" class="sociallink_willsong"><i class="fa fa-linkedin fa-lg"></i></a>
         <a href="{{@blog.url}}/rss" target="_rss" class="sociallink_willsong"><i class="fa fa-rss fa-lg"></i></a>
     </div>
 

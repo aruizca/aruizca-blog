@@ -8,7 +8,7 @@
 <section id="main_willsong" role="main">
     <div id="articles_willsong" class="respowidth_willsong">
         <#list posts as post>
-            <#assign postUri = post.uri>
+            <#assign postUri = post.uri?keep_before("index.html")>
             <#if (currentPageNumber > 1)>
                 <#assign postUri = "../" + post.uri>
             </#if>
