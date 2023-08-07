@@ -10,7 +10,7 @@
         <#list posts as post>
             <#assign postUri = post.uri?keep_before("index.html")>
             <#if (currentPageNumber > 1)>
-                <#assign postUri = "../" + post.uri>
+                <#assign postUri = "../" + postUri>
             </#if>
             <#if (post.status == "published"  && post?index >= (currentPageNumber-1) * config.index_posts_per_page?eval && post?index < currentPageNumber * config.index_posts_per_page?eval)>
                 <article class="article_willsong" role="article" itemscope itemtype="http://schema.org/Article">
