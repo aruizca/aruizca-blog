@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Migrating from Grails 2.2 to 2.3</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="generator" content="JBake">
+
+    <!--Responsive Meta Tags-->
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--Bing search engine validation-->
+    <meta name="msvalidate.01" content="C6990C0351F7B20ED3C944A3BB3BECD9"/>
+
+    <!--Styles, change style.css-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Poly|Roboto:400,700,300|Roboto+Condensed' rel='stylesheet' type="text/css">
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css"/>
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/googlecode.min.css">
+    <style>
+        #themecover_mobileworking_willsong {
+            background: url(../../../img/background.png) repeat-y;
+            background-size: 100%;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 30px;
+            width: 100%;
+            z-index: -100;
+        }
+    </style>
+
+    <!--Scripts-->
+    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="../../../favicon.ico">
+</head>
+<div id="themecover_mobileworking_willsong"></div>
+	<!-- Fixed navbar -->
+    <nav id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="blogname_willsong" class="navbar-brand" href="../../../">
+            aruizca&#x27;s blog = brain.collect {stuff -&gt; post(stuff)}
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+<header id="indexhead_willsong">
+    <div id="description_willsong" class="respowidth_willsong">
+        <h3>- For anything that is worth writing in more than 140 characters -</h3>
+
+        <h3>For everything else follow me <a href="https://twitter.com/aruizca" target="_twitter">@aruizca <i class="fa fa-twitter fa-lg"></i></a></h3>
+    </div>
+</header>
+<section id="main_willsong" role="main">
+	<article id="thearticle_willsong" class="respowidth_willsong" role="article" itemscope
+			 itemtype="http://schema.org/Article">
+		<h2 class="posttitle_willsong" itemprop="headline">Migrating from Grails 2.2 to 2.3</h2>
+
+		<div class="articledetails_willsong">
+
+			<i class="fa fa-clock-o fa-lg"></i><span><time class="date_willsong" datetime="14 March 2014" itemprop="datePublished">14 March 2014</time></span>
+			<i class="fa fa-user fa-lg"></i><span>Angel Ruiz</span>
+			<i class="fa fa-tag fa-lg"></i><span>grails, migration, groovy</span>
+		</div>
+
+		<div class="postcontent_willsong">
+			<p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.com/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
+<p>I am writing this post to record all the things I have done in order to migrate an existing Grails 2.2.x app to 2.3.x.</p> 
+<p>The reasons for me to upgrade are:</p> 
+<ul> 
+ <li>Project progress is at an early stage where is not very risky to do that. We also have a considerable amount of automatic tests. You have also need to take into consideration that the more major versions you skip, the harder it gets to migrate to the latest version.</li> 
+ <li>Switched dependency resolution engine from Ivy to Aether. I have had problems with Ivy resolving transitive dependencies and snapshots of my own plugin dependencies.</li> 
+ <li><strong>"Forked Execution"</strong> and the <strong>"Test Runner Daemon"</strong> should speed up the tests execution and therefore speed up<br> the tests development. This is one of the mayor caveats I have found in Grails so far. We'll see if they have fixed it with this two new features.</li> 
+</ul> 
+<p>First of all I have read the following posts about this subject, which I think are essential to perform the task at hand:</p> 
+<ul> 
+ <li><a href="http://grails.org/doc/2.3.x/guide/upgradingFromPreviousVersionsOfGrails.html">Upgrading from Grails 2.2 - Reference Documentation</a></li> 
+ <li><a href="http://www.objectpartners.com/2013/10/08/migrating-to-grails-2-3/">Migrating to Grails 2.3</a></li> 
+ <li><a href="http://blog.milesburton.com/2013/12/11/upgrading-to-grails-2-3-gotchas/">Upgrading to Grails 2.3 – Gotchas</a></li> 
+</ul> 
+<p>I decided to follow a different approach by specifying what files need to be changed, why and how:</p> 
+<h2>Files I had to alter:</h2> 
+<hr> 
+<h3>application.properties</h3> 
+<p>You need to upgrade the grails version number:</p> 
+<pre><code>app.grails.version=2.3.7
+</code></pre> 
+<h3>BuildConfig.groovy</h3> 
+<ul> 
+ <li> <p>The groupId should be now in the Config.groovy file. Se next file changes</p> </li> 
+ <li> <p>Enable forked execution (host app and plugins):</p> </li> 
+</ul> 
+<pre><code class="language-groovy">grails.project.fork = [
+    // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
+    //  compile: [maxMemory: 256, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+
+    // configure settings for the test-app JVM, uses the daemon by default
+    test: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, daemon:true],
+    // configure settings for the run-app JVM
+    run: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    // configure settings for the run-war JVM
+    war: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256, forkReserve:false],
+    // configure settings for the Console UI JVM
+    console: [maxMemory: 768, minMemory: 64, debug: false, maxPerm: 256]
+]
+</code></pre> 
+<div class="alert alert-warning"> <i class="fa fa-exclamation-triangle fa-fw"></i> <strong>Important note!!</strong>
+ <br> At the end I had to disable the forked execution becaue it does not get along very well with IntelliJ IDEA debugging :-( 
+</div> 
+<ul> 
+ <li>Explicitely set Maven Aether as the default dependency resolution engine (host app and plugins):</li> 
+</ul> 
+<pre><code>grails.project.dependency.resolver = "maven" // or ivy
+</code></pre> 
+<ul> 
+ <li>Upgrade the following plugin dependencies if you are planning to upgrade a Grails host app:</li> 
+</ul> 
+<pre><code>// plugins for the build system only
+build ":tomcat:7.0.52.1"
+
+// plugins for the compile step
+compile ":scaffolding:2.0.3"
+
+// plugins needed at runtime but not for compilation
+runtime ":hibernate4:4.3.4.1" // or ":hibernate:3.6.10.9"
+runtime ":database-migration:1.3.8"
+runtime ":resources:1.2.7"
+// Uncomment these (or add new ones) to enable additional resources capabilities
+//runtime ":zipped-resources:1.0.1"
+//runtime ":cached-resources:1.1"
+//runtime ":yui-minify-resources:0.1.5"
+</code></pre> 
+<ul> 
+ <li>If as the snipped above, you want to use Hibernate 4 instead of Hibernate 3, you will have to make sure that your plugin dependencies exclude the Hibernate 3 dependency. This is due to the fact that they are using different artifactId ("<strong>hibernate4</strong>" instead of "<strong>hibernate</strong>"). You can exclude dependencies in plugins like this:</li> 
+</ul> 
+<pre><code>compile(':plugin-artifactId:version') {
+    excludes "hibernate"
+}
+</code></pre> 
+<ul> 
+ <li> <p>Remove Spock dependencies as they already come built-in with Grails 2.3 (host app and plugins).</p> </li> 
+ <li> <p>Upgrade the following plugin dependencies if you are planning to upgrade a Grails plugin:</p> </li> 
+</ul> 
+<pre><code>build(":release:3.0.1",
+    ":rest-client-builder:1.0.3") {
+    export = false
+}
+</code></pre> 
+<p>Note that you might need to upgrade some other plugins.</p> 
+<h3>Config.groovy</h3> 
+<ul> 
+ <li>Automatic reloading is not enabled by default, so if you want it back add the following line:</li> 
+</ul> 
+<pre><code>grails.reload.enabled = true
+</code></pre> 
+<ul> 
+ <li>And then the change mentioned in teh previous section that says that the groupId should be specified here now:</li> 
+</ul> 
+<pre><code>grails.project.groupId = "whatever" // change this to alter the default package name and Maven publishing destination
+</code></pre> 
+<ul> 
+ <li>There are quite a few other little changes. So I suggest creating a new empty Grails app from scratch using Grails 2.3.x and compare the resulting Config.groovy file with your own.</li> 
+</ul> 
+<h3>All Integration Tests that extend GroovyTestCase</h3> 
+<p>All these tests need to remove that inheritance and annotate the class with this Mixin:</p> 
+<pre><code>@TestMixin(IntegrationTestMixin)
+</code></pre> 
+<h3>~/.grails/settings.groovy</h3> 
+<p>If like me, you have your repositories and credentials declared globally, then your settings.xml file should go from this:</p> 
+<pre><code>...
+grails.project.ivy.authentication = {
+    repositories {
+        mavenRepo "whatever url"
+
+    credentials {
+        realm = "Sonatype Nexus Repository Manager"
+        host = "whatever"
+        username = "whatever"
+        password = "whatever"
+    }
+}
+...
+</code></pre> 
+<p>to this:</p> 
+<pre><code>...
+grails.project.ivy.authentication = {
+    repositories {
+    	mavenLocal()
+        mavenRepo("whatever url") {
+          if (owner.grailsVersion ==~ /2\.3\..*/) {
+              updatePolicy "always"
+              auth([
+                  username: 'whatever',
+                  password: 'whatever'
+              ])
+          }
+    	}
+    }
+
+    credentials {
+        realm = "Sonatype Nexus Repository Manager"
+        host = "whatever"
+        username = "whatever"
+        password = "whatever"
+    }
+}
+...
+</code></pre> 
+<p>The possible values for <strong><em>"updatePolicy"</em></strong> are:</p> 
+<ul> 
+ <li><strong>never</strong> – Never check for new snapshots.</li> 
+ <li><strong>always</strong> – Always check for new snapshots.</li> 
+ <li><strong>daily</strong> – Check once a day for new snapshots (the default).</li> 
+ <li><strong>interval:x</strong> – Check once every x minutes for new snapshots.</li> 
+</ul> 
+<p>I will keep updating this post if I encounter another migration issue.</p> 
+<p>I hope you find it useful. Cheers.</p> 
+<hr> 
+<ul> 
+ <li> <p><strong>Update 1</strong>: Class reloading has to be enabled inside the Config.groovy file not the BuildConfig.groovy file.</p> </li> 
+ <li> <p><strong>Update 2</strong>: Disabled forked execution because it breaks debugging in IntelliJ IDEA</p> </li> 
+ <li> <p><strong>Update 3</strong>: Added possible values for the updatePolicy maven repository settings parameter</p> </li> 
+</ul>
+		</div>
+
+		<div id="sharepost_willsong">
+			<span>Share this post:</span><br><br>
+			<a class="sharelink_willsong" target="_blank"
+			   href="http://www.facebook.com/sharer.php?u={{url absolute="true"}}"><i class="fa fa-facebook fa-lg"></i></a>
+			<a class="sharelink_willsong" target="_blank"
+			   href="http://twitter.com/share?text={{title}}&url={{url absolute="true"}}"><i class="fa fa-twitter fa-lg"></i></a>
+			<a class="sharelink_willsong" target="_blank"
+			   href="https://plus.google.com/share?url={{url absolute="true"}}"><i class="fa fa-google-plus-square fa-lg"></i></a>
+		</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'aruizca'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>	</article>
+</section>
+
+	
+
+<footer>
+    <!--Social Media -->
+    <div id="socialmedia_willsong">
+        <a href="https://twitter.com/aruizca" class="sociallink_willsong"><i class="fa fa-twitter fa-lg"></i></a>
+        <a href="https://www.linkedin.com/in/angelruiz/" target="linkedin" class="sociallink_willsong"><i class="fa fa-linkedin fa-lg"></i></a>
+        <a href="{{@blog.url}}/rss" target="_rss" class="sociallink_willsong"><i class="fa fa-rss fa-lg"></i></a>
+    </div>
+
+    <p id="copyright_willsong">
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">aruizca's blog</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://aruizca.com" property="cc:attributionName" rel="cc:attributionURL">Angel Ruiz Calvo</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        <br/>
+        Proudly baked with <a href="https://jbake.org/" target="_blank">JBake</a>. Look&Feel based on Wilson theme created by <a href="http://marcosn.com" target="_blank">Marcosn.com</a>
+    </p>
+</footer>
+
+<script src="../../../vendor/jquery/jquery.fitvids.js"></script>
+<script src="../../../vendor/jquery/jquery.appear.js"></script>
+<script src="../../../js/main.js"></script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41135257-3', 'aruizca.com');
+    ga('require', 'linkid', 'linkid.js');
+    ga('send', 'pageview');
+
+</script>
+    
