@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JBake</title>
-    <link>http://127.0.0.1:8820</link>
-    <atom:link href="http://127.0.0.1:8820/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://aruizca.com</link>
+    <atom:link href="https://aruizca.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Mon., 7 Aug. 2023 13:03:10 +0200</pubDate>
-    <lastBuildDate>Mon., 7 Aug. 2023 13:03:10 +0200</lastBuildDate>
+    <pubDate>Mon., 7 Aug. 2023 13:05:09 +0200</pubDate>
+    <lastBuildDate>Mon., 7 Aug. 2023 13:05:09 +0200</lastBuildDate>
 
     <item>
       <title>Git housekeeping: remove &quot;obsolete&quot; branches from the remote and your local repositories</title>
-      <link>http://127.0.0.1:8820/blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</link>
+      <link>https://aruizca.com/blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</link>
       <pubDate>Sun., 31 Jul. 2016 00:00:00 +0200</pubDate>
       <guid isPermaLink="false">blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2016/img/git-clean.png&quot; alt=&quot;git clean&quot;&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2016/img/git-clean.png&quot; alt=&quot;git clean&quot;&gt;&lt;/p&gt; 
 &lt;p&gt;Recently I was faced with the task of cleaning up a Git repository whose branches were not &quot;pruned&quot; for a few years, so I am talking about several hundreds of branches.&lt;/p&gt; 
 &lt;p&gt;This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That&apos;s why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged to a &quot;higher level&quot; branch. Because they became &lt;strong&gt;&quot;useless&quot;&lt;/strong&gt; and only add noise.&lt;/p&gt; 
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
@@ -80,11 +80,11 @@ git branch --merged master | grep -v &quot;master&quot; | xargs -n 1 git branch 
     </item>
     <item>
       <title>Extract Webjars static resources with Gradle for jBake (or anything really...)</title>
-      <link>http://127.0.0.1:8820/blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</link>
+      <link>https://aruizca.com/blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</link>
       <pubDate>Mon., 31 Aug. 2015 00:00:00 +0200</pubDate>
       <guid isPermaLink="false">blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;https://www.webjars.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2015/img/gradle-webjars.png&quot; alt=&quot;gradle and webjars&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;https://www.webjars.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/gradle-webjars.png&quot; alt=&quot;gradle and webjars&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;For those of you who never heard of it before, &lt;a href=&quot;http://www.webjars.org/&quot;&gt;WebJars&lt;/a&gt; is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file that contains a set of curated files (Classic WebJars) for a given library. Recently you can also reference Bower and NPM packages but I would not recommend it.&lt;/p&gt; 
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
 &lt;p&gt;Previously I have tried using Bower alongside both Grunt and Gulp and they brought me straight back to the times were Ant was the predominant build tool in the Java EE world where everyone was doing its own thing with a complete lack of conventions.&lt;/p&gt; 
@@ -146,11 +146,11 @@ dependencies {
     </item>
     <item>
       <title>My steps to setup elementaryOS Freya</title>
-      <link>http://127.0.0.1:8820/blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</link>
+      <link>https://aruizca.com/blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</link>
       <pubDate>Fri., 27 Mar. 2015 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;https://elementary.io/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2015/img/elementary-os-icon.png&quot; alt=&quot;elementary os&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;https://elementary.io/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/elementary-os-icon.png&quot; alt=&quot;elementary os&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;I have decided to give a go to the latest release of the &lt;a href=&quot;https://elementary.io/&quot;&gt;elementaryOS Linux distribution&lt;/a&gt;, &lt;strong&gt;Freya&lt;/strong&gt;, and see if it can become my distro of choice for software development. Main reason being that: elementary OS is essentially a Ubuntu (14.04 in this case) based Linux system that just works but wrapped in a really beautiful, smooth and minimalistic interface. All its features make the elementary os usage experience to stand out from all the other Linux distributions I have tried. Even the command line terminal has its own personality, definitely contributing as a differentiation factor.&lt;/p&gt; 
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
 &lt;p&gt;You only have to boot the OS once and after 4 to 5 seconds (I am using a SSD) you instantly feel atracted to the aesthetics of the desktop. Then after a few minutes using it, everything: the screen transitions, the animations, the notifications, ... makes a delight to your eyes and leaves you with a pleasant sense of lightness and responsiveness. Give it a go and you&apos;ll see that the praises don&apos;t stop with the looks :-)&lt;/p&gt; 
@@ -292,11 +292,11 @@ sudo apt-get install skype
     </item>
     <item>
       <title>How to reference a file inside a Grails plugin</title>
-      <link>http://127.0.0.1:8820/blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</link>
+      <link>https://aruizca.com/blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</link>
       <pubDate>Wed., 25 Mar. 2015 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;https://www.elastic.co/products/elasticsearch&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2015/img/elasticsearch-java-json.png&quot; alt=&quot;elasticsearch-java-json&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;https://www.elastic.co/products/elasticsearch&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/elasticsearch-java-json.png&quot; alt=&quot;elasticsearch-java-json&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;It took me long enough time to find out, so I thought I would make a post for anyone else who is after the answer in the future.&lt;/p&gt; 
 &lt;p&gt;In Groovy code:&lt;/p&gt; 
 &lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;log.debug(&quot;ElasticSearch Query using Java Client API:\n${searchRequestBuilder.internalBuilder()}&quot;)
@@ -309,11 +309,11 @@ sudo apt-get install skype
     </item>
     <item>
       <title>Integrated vs Functional testing: how to test REST APIs in Grails using Spock</title>
-      <link>http://127.0.0.1:8820/blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</link>
+      <link>https://aruizca.com/blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</link>
       <pubDate>Thu., 19 Mar. 2015 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;https://spockframework.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2015/img/grails-spock.png&quot; alt=&quot;Grails and Spock&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;https://spockframework.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/grails-spock.png&quot; alt=&quot;Grails and Spock&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;div class=&quot;alert alert-warning&quot;&gt; &lt;i class=&quot;fa fa-exclamation-triangle fa-fw&quot;&gt;&lt;/i&gt; This guide was written using &lt;strong&gt;Grails 2.4.4&lt;/strong&gt; although it should work the same for Grails 2.3.x and 3.x (almost the same :-P)
  &lt;br&gt; 
 &lt;/div&gt; 
@@ -458,11 +458,11 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     </item>
     <item>
       <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
-      <link>http://127.0.0.1:8820/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</link>
+      <link>https://aruizca.com/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</link>
       <pubDate>Wed., 19 Nov. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;div class=&quot;alert alert-warning&quot;&gt;
   This issue was encountered while using Grails version 2.3.11 
 &lt;/div&gt; 
@@ -522,11 +522,11 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     </item>
     <item>
       <title>How to integrate RabbitVCS with Nautilus file manager in Ubuntu 14.04 Trusty Tahr</title>
-      <link>http://127.0.0.1:8820/blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</link>
+      <link>https://aruizca.com/blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</link>
       <pubDate>Tue., 27 May 2014 00:00:00 +0200</pubDate>
       <guid isPermaLink="false">blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/rabbitvcs-post-logo.png&quot; alt=&quot;RabbitVCS Git client in Ubuntu&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/rabbitvcs-post-logo.png&quot; alt=&quot;RabbitVCS Git client in Ubuntu&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;There are still some instances of very nice applications that do not work straight away after installing them via the apt package manager and unfortunately RabbitVCS is one of them.&lt;/p&gt; 
 &lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;RabbitVCS&lt;/a&gt; is for Linux what &lt;a href=&quot;https://code.google.com/p/tortoisegit/&quot; title=&quot;TortoiseGit website&quot; target=&quot;_blank&quot;&gt;TortoiseGit&lt;/a&gt; and &lt;a href=&quot;http://tortoisesvn.net/&quot; title=&quot;TortoiseSVN website&quot; target=&quot;_blank&quot;&gt;TortoiseSVN&lt;/a&gt; are for the Windows platform. It is a SCM client that integrates itself with the OS file manager to manage local Git or SVN repositories.&lt;/p&gt; 
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
@@ -556,16 +556,16 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     
 &lt;/code&gt;&lt;/pre&gt; 
 &lt;p&gt;When working you should be able to see the RabbitVCS context submenu when using Nautilus like in the following snapshot:&lt;/p&gt; 
-&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/rabbitvcs-nautilus-integration.png&quot; alt=&quot;RabbitVCS Nautilus integration&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/rabbitvcs-nautilus-integration.png&quot; alt=&quot;RabbitVCS Nautilus integration&quot;&gt;&lt;/p&gt;
 	</description>
     </item>
     <item>
       <title>Steps to create a Vagrant Base Box with Ubuntu 14.04 Desktop (GUI) and VirtualBox</title>
-      <link>http://127.0.0.1:8820/blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</link>
+      <link>https://aruizca.com/blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</link>
       <pubDate>Fri., 23 May 2014 00:00:00 +0200</pubDate>
       <guid isPermaLink="false">blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png&quot; alt=&quot;Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes&quot;&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png&quot; alt=&quot;Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes&quot;&gt;&lt;/p&gt; 
 &lt;p&gt;Since the advent of the &lt;a href=&quot;http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29&quot; title=&quot;Infrastructure as a Service&quot; target=&quot;_blank&quot;&gt;IaaS&lt;/a&gt; and &lt;a href=&quot;http://en.wikipedia.org/wiki/Platform_as_a_service&quot; title=&quot;Platform as a Service&quot; target=&quot;_blank&quot;&gt;PaaS&lt;/a&gt; providers, the decline in usage of monolithic architectures (e.g.: application server + relational DB) and the need for distributed and automatically scalable applications, as software developers we have to be increasingly more aware and skilled in the tools and techniques used to orchestrate and automate the deployment of all the different components that our architecture might end up with.&lt;/p&gt; 
 &lt;p&gt;Among these tools, normally encompassed in the DevOps space, I am currently very interested in &lt;a href=&quot;http://www.vagrantup.com/&quot; title=&quot;Vagrant Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Vagrant&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&quot;https://www.docker.io/&quot; title=&quot;Docker Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Docker&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&quot;http://www.ansible.com&quot; title=&quot;Ansible Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Ansible&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&quot;https://juju.ubuntu.com/&quot; title=&quot;Ubuntu JuJu Website&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Ubuntu JuJu&lt;/strong&gt;&lt;/a&gt;. Although I already use Vagrant, today I decided I wanted to know how to create my own &lt;a href=&quot;http://docs.vagrantup.com/v2/boxes/base.html&quot; title=&quot;What is a Vagrant Base Box?&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Base Boxes&lt;/strong&gt;&lt;/a&gt; that I can reuse. My idea is to have two Linux Base Boxes with Ubuntu Server and Ubuntu Desktop respectively and then another two with Windows 7 and 8. Once Vagrant is covered I want to get deeper with Docker because I see a lot of potential in lightweight containers instead of using heavy virtual machines.&lt;/p&gt; 
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
@@ -581,7 +581,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
  &lt;li&gt;The first network interface (adapter 1) must be a NAT adapter.&lt;/li&gt; 
  &lt;li&gt;For convenience the Virtual Disk should be Dynamic (&lt;strong&gt;VMDK&lt;/strong&gt;), so don&apos;t bee too stingy with the disk size ( &amp;gt;= 10GB IMO ).&lt;/li&gt; 
 &lt;/ol&gt; 
-&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/virtualbox-settings.png&quot; alt=&quot;VirtualBox settings&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/virtualbox-settings.png&quot; alt=&quot;VirtualBox settings&quot;&gt;&lt;/p&gt; 
 &lt;h3&gt;- Load the ISO as part of the VM storage and install the OS.&lt;/h3&gt; 
 &lt;h3&gt;- Username and Password should be: &lt;strong&gt;vagrant&lt;/strong&gt; (for convenience, not for security).&lt;/h3&gt; 
 &lt;h3&gt;- Once installed unload the ISO and restart the VM.&lt;/h3&gt; 
@@ -594,7 +594,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
 &lt;pre&gt;&lt;code&gt;	$ sudo apt-get install -y build-essential linux-headers-server
 &lt;/code&gt;&lt;/pre&gt; 
 &lt;p&gt;Then Mount guest additions ISO via virtualbox window and follow the indications to run the installation script :&lt;/p&gt; 
-&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/vitualbox-guest-addtions.png&quot; alt=&quot;VirtualBox Guest Additions&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/vitualbox-guest-addtions.png&quot; alt=&quot;VirtualBox Guest Additions&quot;&gt;&lt;/p&gt; 
 &lt;p&gt;If the sytems does not install it automatically you can use the following commands:&lt;/p&gt; 
 &lt;pre&gt;&lt;code&gt;	$ sudo mount /dev/cdrom /media/cdrom
 	$ sudo /media/cdrom/VBoxLinuxAdditions.run
@@ -676,18 +676,18 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
 &lt;pre&gt;&lt;code&gt;	$ vagrant up
 &lt;/code&gt;&lt;/pre&gt; 
 &lt;p&gt;and you should be able to SSH the machine and see the VM running:&lt;/p&gt; 
-&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/vagrant-box-running.png&quot; alt=&quot;VirtualBox Guest Running&quot;&gt;&lt;/p&gt; 
+&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/vagrant-box-running.png&quot; alt=&quot;VirtualBox Guest Running&quot;&gt;&lt;/p&gt; 
 &lt;p&gt;Please let me know if you find something that is incorrect or inaccurate.&lt;/p&gt; 
 &lt;p&gt;Cheers.&lt;/p&gt;
 	</description>
     </item>
     <item>
       <title>How to reference a file inside a Grails plugin</title>
-      <link>http://127.0.0.1:8820/blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</link>
+      <link>https://aruizca.com/blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</link>
       <pubDate>Mon., 7 Apr. 2014 00:00:00 +0200</pubDate>
       <guid isPermaLink="false">blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;Recently I had to creat a Groovy script that copies some files from my plugin to the host application. The problem is I did not know how to reference those files inside my plugin.&lt;/p&gt; 
 &lt;pre&gt;&lt;code&gt;String yourPluginDir = GrailsPluginUtils.pluginInfos.find { it.name == &apos;your-plugin-name&apos; }.pluginDir
 &lt;/code&gt;&lt;/pre&gt;
@@ -695,11 +695,11 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     </item>
     <item>
       <title>Migrating from Grails 2.2 to 2.3</title>
-      <link>http://127.0.0.1:8820/blog/2014/04-migrating-from-grails-22-to-23/index.html</link>
+      <link>https://aruizca.com/blog/2014/04-migrating-from-grails-22-to-23/index.html</link>
       <pubDate>Fri., 14 Mar. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/04-migrating-from-grails-22-to-23/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
 &lt;p&gt;I am writing this post to record all the things I have done in order to migrate an existing Grails 2.2.x app to 2.3.x.&lt;/p&gt; 
 &lt;p&gt;The reasons for me to upgrade are:&lt;/p&gt; 
 &lt;ul&gt; 
@@ -861,11 +861,11 @@ grails.project.ivy.authentication = {
     </item>
     <item>
       <title>ABC iView Desktop - Using Adobe AIR to wrap your Web Application as a cross-platform Desktop Application</title>
-      <link>http://127.0.0.1:8820/blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</link>
+      <link>https://aruizca.com/blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</link>
       <pubDate>Tue., 28 Jan. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/adobe-air-logo.png&quot; alt=&quot;Adobe Air logo&quot;&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/adobe-air-logo.png&quot; alt=&quot;Adobe Air logo&quot;&gt;&lt;/p&gt; 
 &lt;h2&gt;What is it?&lt;/h2&gt; 
 &lt;p&gt;I have known about the &lt;a href=&quot;https://get.adobe.com/air/&quot;&gt;Adobe AIR runtime&lt;/a&gt; and its concept for quite a long time, which were initially introduced back in 2007. It was an attempt to bridge the existing gap between the desktop and browser based apps, keeping as many of their respective advantages as possible.&lt;/p&gt; 
 &lt;p&gt;For what I know, basically there are two ways of using Adobe AIR:&lt;/p&gt; 
@@ -876,7 +876,7 @@ grails.project.ivy.authentication = {
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
 &lt;p&gt;Probably, the most important Abobe Air application to ever exist using the first approach was the version of &lt;strong&gt;Tweetdeck&lt;/strong&gt; that existed before it was adquired by Twitter and decided to replace it with a worse native implementation IMO, with less features and &quot;heavier&quot;. It sort of works, but since Twitter changed their APIs, it does not retrieve any messages. If you want to try the last version (0.38.2) anyway click &lt;a href=&quot;https://dl.dropboxusercontent.com/u/8256463/blog-files/TweetDeck_0_38.2.air&quot;&gt;&lt;strong&gt;here&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt; 
 &lt;p&gt;Another instance I normally use is a little application called &lt;a href=&quot;http://code.google.com/p/pomodairo/&quot;&gt;&quot;Pomodairo&quot;&lt;/a&gt;. It aims to replace the physical timer for those who use the &lt;a href=&quot;http://pomodorotechnique.com/&quot;&gt;&quot;Pomodoro Technique&quot;&lt;/a&gt; to increase their productivity. A more well know app built in Adobe Air would be the prototyping tool called &lt;a href=&quot;http://balsamiq.com/download/&quot;&gt;balsamiq&lt;/a&gt;.&lt;/p&gt; 
-&lt;p&gt;The second approach, which is the one covered in this post, is the easiest.&lt;br&gt; The first time I thought about it was when I tried to use &lt;a href=&quot;https://trello.com/&quot;&gt;Trello&lt;/a&gt;. Given the way I work or how my brain works, or both, somehow I found it cumbersome to have it opened in one tab of my browser and then I thought that maybe someone felt the same way and used Adobe Air to wrap it. &lt;a href=&quot;https://trello.com/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://127.0.0.1:8820/content/images/trello-logo.png&quot; class=&quot;left img-responsive&quot; alt=&quot;trello homepage&quot;&gt;&lt;/a&gt;That is the moment when I came acroos &lt;a href=&quot;http://trellodesktop.com/&quot;&gt;TrelloDesktop&lt;/a&gt; (&lt;strong&gt;Note&lt;/strong&gt;: Sign-in page not working at the time of writing this article).&lt;/p&gt; 
+&lt;p&gt;The second approach, which is the one covered in this post, is the easiest.&lt;br&gt; The first time I thought about it was when I tried to use &lt;a href=&quot;https://trello.com/&quot;&gt;Trello&lt;/a&gt;. Given the way I work or how my brain works, or both, somehow I found it cumbersome to have it opened in one tab of my browser and then I thought that maybe someone felt the same way and used Adobe Air to wrap it. &lt;a href=&quot;https://trello.com/&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;https://aruizca.com/content/images/trello-logo.png&quot; class=&quot;left img-responsive&quot; alt=&quot;trello homepage&quot;&gt;&lt;/a&gt;That is the moment when I came acroos &lt;a href=&quot;http://trellodesktop.com/&quot;&gt;TrelloDesktop&lt;/a&gt; (&lt;strong&gt;Note&lt;/strong&gt;: Sign-in page not working at the time of writing this article).&lt;/p&gt; 
 &lt;div&gt; 
  &lt;p&gt;There are some other examples like &lt;a href=&quot;http://www.robertnyman.com/gmdesk/&quot; target=&quot;_blank&quot;&gt;GMDesk&lt;/a&gt; to run GMail, Google Calendar, Docs and Maps as a desktop application. You also have &lt;a href=&quot;http://www.robertnyman.com/facedesk/&quot; target=&quot;_blank&quot;&gt;FaceDesk&lt;/a&gt; to do the same with Facebook and many others.&lt;/p&gt; 
  &lt;p&gt;&lt;a name=&quot;linux-support-info&quot;&gt;&lt;/a&gt;&lt;/p&gt; 
@@ -962,17 +962,17 @@ grails.project.ivy.authentication = {
  &lt;p&gt;To generate your own certificate just type in the following command making the modifications you consider appropriate.&lt;/p&gt; 
  &lt;p&gt;&lt;code&gt;adt -certificate -cn mycertificate 1024-RSA mycertificatefile.p12 password&lt;/code&gt;&lt;/p&gt; 
  &lt;h3&gt;9. Package and sign the application&lt;/h3&gt; 
- &lt;p&gt;Next is the command I used to generate the &lt;code&gt;.air&lt;/code&gt; package.&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/adobe-air-package.png&quot; alt=&quot;Adobe Air Package&quot;&gt;&lt;/p&gt; 
+ &lt;p&gt;Next is the command I used to generate the &lt;code&gt;.air&lt;/code&gt; package.&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/adobe-air-package.png&quot; alt=&quot;Adobe Air Package&quot;&gt;&lt;/p&gt; 
  &lt;p&gt;Please note that all the files that are to be packaged should be explicitly referenced. Otherwise you will get the famous &lt;strong&gt;&quot;&lt;a href=&quot;https://www.google.com.au/search?q=error+303%3A+icon+xxx+is+missing+from+package&amp;amp;ie=utf-8&amp;amp;oe=utf-8&amp;amp;aq=t&amp;amp;rls=org.mozilla:en-US:official&amp;amp;client=firefox-a&amp;amp;gfe_rd=cr&amp;amp;ei=phDuUsXVJqeN8Qfz9oHYBQ#q=adobe+air+error+303:+is+missing+from+package&amp;amp;rls=org.mozilla:en-US:official&quot;&gt;error 303: icon xxx is missing from package&lt;/a&gt;&quot;&lt;/strong&gt;.&lt;/p&gt; 
  &lt;pre&gt;&lt;code&gt;adt -package -storetype pkcs12 -keystore mycertificatefile.p12 iView-Desktop.air application.xml redirect.html AIRUpdater-1.0.js icons\iview128.png icons\iview16.png icons\iview32.png icons\iview48.png
 &lt;/code&gt;&lt;/pre&gt; 
  &lt;h3&gt;10. Create launcher page (optional)&lt;/h3&gt; 
- &lt;p&gt;To distribute your app you can create a page like the ones used in the apps I put as examples earlier.&lt;br&gt; &lt;a href=&quot;http://iview-desktop.aruizca.com/&quot; class=&quot;right&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/iview-desktop-badge.png&quot; alt=&quot;iView Desktop&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
+ &lt;p&gt;To distribute your app you can create a page like the ones used in the apps I put as examples earlier.&lt;br&gt; &lt;a href=&quot;http://iview-desktop.aruizca.com/&quot; class=&quot;right&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/iview-desktop-badge.png&quot; alt=&quot;iView Desktop&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
  &lt;p&gt;In those you can appreciate that they all use a flash component to trigger the installation. This component seamlessly takes care of installing the app and the Adobe Air Runtime if it is not already installed in the system.&lt;/p&gt; 
  &lt;p&gt;The installer badge is a flash component usually distributed in the samples included in the SDK, but there is a better resource in this Adobe tutorial:&lt;a href=&quot;http://www.adobe.com/devnet/air/articles/badge_for_air.html&quot;&gt;&lt;strong&gt;&quot;Getting started with the custom install badge&quot;&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt; 
  &lt;h3&gt;11. App. Installation&lt;/h3&gt; 
  &lt;p&gt;Either through the installation badge or just clicking on the .air package generated on step 9 (if you have the Adobe Air runtime already installed), you should be able to install the app and run it. If succesful you should see something like this snapshot:&lt;/p&gt; 
- &lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/iview-desktop-snapshot.png&quot; alt=&quot;iView Desktop Snapshot&quot;&gt;&lt;/p&gt; 
+ &lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/iview-desktop-snapshot.png&quot; alt=&quot;iView Desktop Snapshot&quot;&gt;&lt;/p&gt; 
  &lt;h2&gt;Resources summary&lt;/h2&gt; 
  &lt;ul&gt; 
   &lt;li&gt;&lt;a href=&quot;http://iview-desktop.aruizca.com/&quot;&gt;ABC iview-desktop app website.&lt;/a&gt;&lt;/li&gt; 
@@ -988,7 +988,7 @@ grails.project.ivy.authentication = {
     </item>
     <item>
       <title>My MongoDB presentation at the CJUG</title>
-      <link>http://127.0.0.1:8820/blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</link>
+      <link>https://aruizca.com/blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</link>
       <pubDate>Wed., 15 Jan. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</guid>
       	<description>
@@ -1002,11 +1002,11 @@ grails.project.ivy.authentication = {
     </item>
     <item>
       <title>How to upgrade your HDMI dongle MK809II to Android 4.2.2 with the Finless ROM 2.0</title>
-      <link>http://127.0.0.1:8820/blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</link>
+      <link>https://aruizca.com/blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</link>
       <pubDate>Sun., 12 Jan. 2014 00:00:00 +0100</pubDate>
       <guid isPermaLink="false">blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</guid>
       	<description>
-	&lt;p&gt;&lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/mk809II-Android-4.2.png&quot; alt=&quot;mk809II&quot;&gt;&lt;/p&gt; 
+	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/mk809II-Android-4.2.png&quot; alt=&quot;mk809II&quot;&gt;&lt;/p&gt; 
 &lt;p&gt;This post is a concise and comprehensive summary of the steps I have followed to upgrade my HDMI dongle MK809II (Rochip RK3066 chipset) to use the &lt;strong&gt;4.2.2&lt;/strong&gt; version of &lt;strong&gt;Android&lt;/strong&gt;.&lt;/p&gt; 
 &lt;p&gt;After reading plenty of confusing guides, finally I stambled upon this video bellow which explains the process for the older 1.7 version of the Finless ROM. But if all you want is to flash a ROM, you can &lt;strong&gt;skip to the 26:30 minute&lt;/strong&gt;.&lt;/p&gt; &lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/VYdMydq7css&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
 &lt;div class=&quot;index-break&quot;&gt;&lt;/div&gt; 
@@ -1022,10 +1022,10 @@ grails.project.ivy.authentication = {
 &lt;ol&gt; 
  &lt;li&gt; &lt;p&gt;Connect your device to your PC using the microUSB connector located at the bottom which is labeled as &lt;code&gt;&quot;DC&quot;&lt;/code&gt;.&lt;br&gt; Remember that in order to provide with enough electric current, generally you need to connect the device to either a USB 3.0 port, 2 USB 2.0 ports or a USB 2.0 hub with external power supply.&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;Enable the option &lt;code&gt;&quot;Connect to PC&quot;&lt;/code&gt;in your device. This options is located under &lt;code&gt;Settings -&amp;gt; USB&lt;/code&gt;.&lt;/p&gt; &lt;/li&gt; 
- &lt;li&gt; &lt;p&gt;Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/RKBatchTool.png&quot; alt=&quot;Rockchip batch Tool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Now we need to set the device in flash mode. To do that we will use the rockchip batch tool that you can find above. Once opened you should see something similar to this screenshot:&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/RKBatchTool.png&quot; alt=&quot;Rockchip batch Tool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;All you need to do is click on the &lt;code&gt;&quot;Switch&quot;&lt;/code&gt; button. If you had it connected to a screen you should see the video go off.&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;The first time you do this, Windows will try to install the new device without success and that is why you have the drivers included in one of the files listed above. Use the &lt;code&gt;&quot;Windows Device Manager&quot;&lt;/code&gt; to install the drivers.&lt;/p&gt; &lt;/li&gt; 
- &lt;li&gt; &lt;p&gt;Now is time to open the ROM Flash tool &lt;code&gt;&quot;RKAndoidTool&quot;&lt;/code&gt; included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:&lt;br&gt; &lt;img src=&quot;http://127.0.0.1:8820/blog/2014/img/RKAndroidTool.png&quot; alt=&quot;Flash ROM tool RKAndroidTool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
+ &lt;li&gt; &lt;p&gt;Now is time to open the ROM Flash tool &lt;code&gt;&quot;RKAndoidTool&quot;&lt;/code&gt; included with the ROM. The only thing you would need to select here is if you want to use the Boot/Kernel for a 720p or a 1080p native resolution:&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/RKAndroidTool.png&quot; alt=&quot;Flash ROM tool RKAndroidTool&quot;&gt;&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;Notice that in the footer of the tool, it should appera the message: &lt;code&gt;&quot;Found RKAndroid Mass Storage USB&quot;&lt;/code&gt;. If that&apos;s the case, you are good to press the &lt;code&gt;&quot;Flash ROM&quot;&lt;/code&gt; button.&lt;/p&gt; &lt;/li&gt; 
  &lt;li&gt; &lt;p&gt;Once it is finished the device will reboot itself. Please be patient and wait for the first boot to happen.&lt;/p&gt; &lt;/li&gt; 
 &lt;/ol&gt; 
