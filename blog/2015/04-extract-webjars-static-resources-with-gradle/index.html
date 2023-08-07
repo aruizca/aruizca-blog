@@ -91,8 +91,9 @@
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><a href="https://www.webjars.org/" target="_blank"><br> <img src="https://aruizca.com/blog/2015/img/gradle-webjars.png" alt="gradle and webjars"><br> </a></p> 
+			<p><a href="https://www.webjars.org/" target="_blank"><br> <img src="http://127.0.0.1:8820/blog/2015/img/gradle-webjars.png" alt="gradle and webjars"><br> </a></p> 
 <p>For those of you who never heard of it before, <a href="http://www.webjars.org/">WebJars</a> is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file that contains a set of curated files (Classic WebJars) for a given library. Recently you can also reference Bower and NPM packages but I would not recommend it.</p> 
+<div class="index-break"></div> 
 <p>Previously I have tried using Bower alongside both Grunt and Gulp and they brought me straight back to the times were Ant was the predominant build tool in the Java EE world where everyone was doing its own thing with a complete lack of conventions.</p> 
 <p>After using WebJars in Java web projects I started looking how to use it in static web sites, more especifically those generated with <a href="http://jbake.org/">jBake</a>.</p> 
 <p>The final aim is to avoid checking in the web dependencies, like Javaacript based libraries, in our SCM tool. It turns out that <a href="http://melix.github.io/blog/2014/02/hosting-jbake-github.html">jBake can be used with Gradle</a>, which means that we have the chance of managing all my dependencies using a single tool that happens to be a lot better than anything available on the Javascript-Node ecosystem.</p> 

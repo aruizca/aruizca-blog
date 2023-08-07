@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
-        <loc>https://aruizca.com/about.html</loc>
+        <loc>http://127.0.0.1:8820/about.html</loc>
         <lastmod>2013-09-24</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</loc>
         <lastmod>2016-07-31</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</loc>
         <lastmod>2015-08-31</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</loc>
         <lastmod>2015-03-27</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</loc>
         <lastmod>2015-03-25</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</loc>
         <lastmod>2015-03-19</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</loc>
         <lastmod>2014-11-19</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</loc>
         <lastmod>2014-05-27</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</loc>
         <lastmod>2014-05-23</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</loc>
         <lastmod>2014-04-07</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/04-migrating-from-grails-22-to-23/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/04-migrating-from-grails-22-to-23/index.html</loc>
         <lastmod>2014-03-14</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</loc>
         <lastmod>2014-01-28</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</loc>
         <lastmod>2014-01-15</lastmod>
     </url>
     <url>
-        <loc>https://aruizca.com/blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</loc>
+        <loc>http://127.0.0.1:8820/blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</loc>
         <lastmod>2014-01-12</lastmod>
     </url>
 </urlset>

@@ -91,9 +91,10 @@
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><img src="https://aruizca.com/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png" alt="Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes"></p> 
+			<p><img src="http://127.0.0.1:8820/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png" alt="Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes"></p> 
 <p>Since the advent of the <a href="http://en.wikipedia.org/wiki/Cloud_computing#Infrastructure_as_a_service_.28IaaS.29" title="Infrastructure as a Service" target="_blank">IaaS</a> and <a href="http://en.wikipedia.org/wiki/Platform_as_a_service" title="Platform as a Service" target="_blank">PaaS</a> providers, the decline in usage of monolithic architectures (e.g.: application server + relational DB) and the need for distributed and automatically scalable applications, as software developers we have to be increasingly more aware and skilled in the tools and techniques used to orchestrate and automate the deployment of all the different components that our architecture might end up with.</p> 
 <p>Among these tools, normally encompassed in the DevOps space, I am currently very interested in <a href="http://www.vagrantup.com/" title="Vagrant Website" target="_blank"><strong>Vagrant</strong></a>, <a href="https://www.docker.io/" title="Docker Website" target="_blank"><strong>Docker</strong></a>, <a href="http://www.ansible.com" title="Ansible Website" target="_blank"><strong>Ansible</strong></a> and <a href="https://juju.ubuntu.com/" title="Ubuntu JuJu Website" target="_blank"><strong>Ubuntu JuJu</strong></a>. Although I already use Vagrant, today I decided I wanted to know how to create my own <a href="http://docs.vagrantup.com/v2/boxes/base.html" title="What is a Vagrant Base Box?" target="_blank"><strong>Base Boxes</strong></a> that I can reuse. My idea is to have two Linux Base Boxes with Ubuntu Server and Ubuntu Desktop respectively and then another two with Windows 7 and 8. Once Vagrant is covered I want to get deeper with Docker because I see a lot of potential in lightweight containers instead of using heavy virtual machines.</p> 
+<div class="index-break"></div> 
 <p>Most of the guides out there focus on Linux distributions without GUI, so I decided that while I am creating my Vagrant Base Box with Ubuntu 14.04 Desktop I would document all the relevant steps next:</p> 
 <hr> 
 <h2>Step 1: Create the Virtual Machine with Virtual Box</h2> 
@@ -106,7 +107,7 @@
  <li>The first network interface (adapter 1) must be a NAT adapter.</li> 
  <li>For convenience the Virtual Disk should be Dynamic (<strong>VMDK</strong>), so don't bee too stingy with the disk size ( &gt;= 10GB IMO ).</li> 
 </ol> 
-<p><img src="https://aruizca.com/blog/2014/img/virtualbox-settings.png" alt="VirtualBox settings"></p> 
+<p><img src="http://127.0.0.1:8820/blog/2014/img/virtualbox-settings.png" alt="VirtualBox settings"></p> 
 <h3>- Load the ISO as part of the VM storage and install the OS.</h3> 
 <h3>- Username and Password should be: <strong>vagrant</strong> (for convenience, not for security).</h3> 
 <h3>- Once installed unload the ISO and restart the VM.</h3> 
@@ -119,7 +120,7 @@
 <pre><code>	$ sudo apt-get install -y build-essential linux-headers-server
 </code></pre> 
 <p>Then Mount guest additions ISO via virtualbox window and follow the indications to run the installation script :</p> 
-<p><img src="https://aruizca.com/blog/2014/img/vitualbox-guest-addtions.png" alt="VirtualBox Guest Additions"></p> 
+<p><img src="http://127.0.0.1:8820/blog/2014/img/vitualbox-guest-addtions.png" alt="VirtualBox Guest Additions"></p> 
 <p>If the sytems does not install it automatically you can use the following commands:</p> 
 <pre><code>	$ sudo mount /dev/cdrom /media/cdrom
 	$ sudo /media/cdrom/VBoxLinuxAdditions.run
@@ -201,7 +202,7 @@
 <pre><code>	$ vagrant up
 </code></pre> 
 <p>and you should be able to SSH the machine and see the VM running:</p> 
-<p><img src="https://aruizca.com/blog/2014/img/vagrant-box-running.png" alt="VirtualBox Guest Running"></p> 
+<p><img src="http://127.0.0.1:8820/blog/2014/img/vagrant-box-running.png" alt="VirtualBox Guest Running"></p> 
 <p>Please let me know if you find something that is incorrect or inaccurate.</p> 
 <p>Cheers.</p>
 		</div>

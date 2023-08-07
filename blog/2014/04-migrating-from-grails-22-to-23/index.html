@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.com/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
+			<p><a href="http://grails.org" target="_blank"><br> <img src="http://127.0.0.1:8820/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
 <p>I am writing this post to record all the things I have done in order to migrate an existing Grails 2.2.x app to 2.3.x.</p> 
 <p>The reasons for me to upgrade are:</p> 
 <ul> 
@@ -99,6 +99,7 @@
  <li>Switched dependency resolution engine from Ivy to Aether. I have had problems with Ivy resolving transitive dependencies and snapshots of my own plugin dependencies.</li> 
  <li><strong>"Forked Execution"</strong> and the <strong>"Test Runner Daemon"</strong> should speed up the tests execution and therefore speed up<br> the tests development. This is one of the mayor caveats I have found in Grails so far. We'll see if they have fixed it with this two new features.</li> 
 </ul> 
+<div class="index-break"></div> 
 <p>First of all I have read the following posts about this subject, which I think are essential to perform the task at hand:</p> 
 <ul> 
  <li><a href="http://grails.org/doc/2.3.x/guide/upgradingFromPreviousVersionsOfGrails.html">Upgrading from Grails 2.2 - Reference Documentation</a></li> 

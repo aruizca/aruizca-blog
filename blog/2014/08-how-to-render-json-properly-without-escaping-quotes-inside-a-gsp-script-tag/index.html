@@ -91,7 +91,7 @@
 		</div>
 
 		<div class="postcontent_willsong">
-			<p><a href="http://grails.org" target="_blank"><br> <img src="https://aruizca.com/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
+			<p><a href="http://grails.org" target="_blank"><br> <img src="http://127.0.0.1:8820/blog/2014/img/grails.png" alt="Grails logo"><br> </a></p> 
 <div class="alert alert-warning">
   This issue was encountered while using Grails version 2.3.11 
 </div> 
@@ -110,7 +110,9 @@
 	var data = ${raw(data)};
 &lt;/r:script&gt;
 </code></pre> 
-<p>Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:</p> 
+<p>Unfortunately this does not work, at least when you are using the resources plugin.</p> 
+<div class="index-break"></div> 
+<p>You know it does not work because all the quotes have been escaped and they should have not:</p> 
 <pre><code class="language-html">&lt;script&gt;
 	var data = {&amp;quot;whatever&amp;quot;:&amp;quot;whatever&amp;quot;};
 &lt;script&gt;
