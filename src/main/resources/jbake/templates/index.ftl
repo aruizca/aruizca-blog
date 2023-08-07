@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="postcontent_willsong">
-                            ${post.body}
+                            ${post.body?keep_before("<div class=\"index-break\"></div>")}
                         </div>
                         <a href="${postUri}" class="readmore_willsong">Read More</a>
                     </div>

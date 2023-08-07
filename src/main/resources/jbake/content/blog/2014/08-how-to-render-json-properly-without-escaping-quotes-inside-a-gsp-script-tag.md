@@ -30,7 +30,11 @@ def index() = {
 </r:script>
 ```
 
-Unfortunately this does not work, at least when you are using the resources plugin. You know it does not work because all the quotes have been escaped and they should have not:
+Unfortunately this does not work, at least when you are using the resources plugin. 
+
+<div class="index-break"></div>
+
+You know it does not work because all the quotes have been escaped and they should have not:
 ```html
 <script>
 	var data = {&quot;whatever&quot;:&quot;whatever&quot;};

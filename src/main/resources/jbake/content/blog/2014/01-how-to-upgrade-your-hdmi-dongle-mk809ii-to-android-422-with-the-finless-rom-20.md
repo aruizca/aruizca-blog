@@ -14,6 +14,8 @@ After reading plenty of confusing guides, finally I stambled upon this  video be
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/VYdMydq7css" frameborder="0" allowfullscreen></iframe>
 
+<div class="index-break"></div>
+
 Once I watched the video, I had to search for un updated version of the ROM, tools and drivers, as the Finless ROM version 1.7 that appears on the video is based on Android 4.1.1. For your conveniece, I have included here all the files that are required to flash the new ROM:
 
 - [Finless ROM 2.0 for imito MX1 and MX2 devices (compatible) + the ROM Flashing tool RKAndroidTool 1.35](https://dl.dropboxusercontent.com/u/8256463/blog-files/imito_mx1_2_finless_20_jb422.zip).

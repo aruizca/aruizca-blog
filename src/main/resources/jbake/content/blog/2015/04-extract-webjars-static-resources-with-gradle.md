@@ -12,6 +12,8 @@ status=published
 
 For those of you who never heard of it before, [WebJars](http://www.webjars.org/) is an open and community driven initiative that tries to leverage the existing Maven based dependecy resolution tools and principles to manage the client side dependencies of your web application. Each WebJar is a standar JAR file that contains a set of curated files (Classic WebJars) for a given library. Recently you can also reference Bower and NPM packages but I would not recommend it.
 
+<div class="index-break"></div>
+
 Previously I have tried using Bower alongside both Grunt and Gulp and they brought me straight back to the times were Ant was the predominant build tool in the Java EE world where everyone was doing its own thing with a complete lack of conventions.
 
 After using WebJars in Java web projects I started looking how to use it in static web sites, more especifically those generated with [jBake](http://jbake.org/).

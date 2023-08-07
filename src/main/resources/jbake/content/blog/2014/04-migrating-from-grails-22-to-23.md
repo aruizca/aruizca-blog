@@ -18,6 +18,8 @@ The reasons for me to upgrade are:
 * Switched dependency resolution engine from Ivy to Aether. I have had problems with Ivy resolving transitive dependencies and snapshots of my own plugin dependencies.
 * **"Forked Execution"** and the **"Test Runner Daemon"** should speed up the tests execution and therefore speed up 
   the tests development. This is one of the mayor caveats I have found in Grails so far. We'll see if they have fixed it with this two new features.
+  
+<div class="index-break"></div>  
 
 First of all I have read the following posts about this subject, which I think are essential to perform the task at hand:
 

@@ -11,6 +11,8 @@ Since the advent of the <a href="http://en.wikipedia.org/wiki/Cloud_computing#In
 
 Among these tools, normally encompassed in the DevOps space, I am currently very interested in <a href="http://www.vagrantup.com/" title="Vagrant Website" target="_blank">**Vagrant**</a>, <a href="https://www.docker.io/" title="Docker Website" target="_blank">**Docker**</a>, <a href="http://www.ansible.com" title="Ansible Website" target="_blank">**Ansible**</a> and <a href="https://juju.ubuntu.com/" title="Ubuntu JuJu Website" target="_blank">**Ubuntu JuJu**</a>. Although I already use Vagrant, today I decided I wanted to know how to create my own <a href="http://docs.vagrantup.com/v2/boxes/base.html" title="What is a Vagrant Base Box?" target="_blank">**Base Boxes**</a> that I can reuse. My idea is to have two Linux Base Boxes with Ubuntu Server and Ubuntu Desktop respectively and then another two with Windows 7 and 8. Once Vagrant is covered I want to get deeper with Docker because I see a lot of potential in lightweight containers instead of using heavy virtual machines.
 
+<div class="index-break"></div>
+
 Most of the guides out there focus on Linux distributions without GUI, so I decided that while I am creating my Vagrant Base Box with Ubuntu 14.04 Desktop I would document all the relevant steps next:
 
 -----

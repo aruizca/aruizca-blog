@@ -18,6 +18,8 @@ Since current [official documentation](http://grails.github.io/grails-doc/2.4.x/
 
 The reason for writing these tests was to validate some REST API endpoints implemented using Grails Controllers.
 
+<div class="index-break"></div>
+
 So given the following simple and pure didactic domain object:
 ```groovy
 class Book {

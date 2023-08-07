@@ -17,6 +17,8 @@ For what I know, basically there are two ways of using Adobe AIR:
 1. You can develop an application using web technologies like HTML or Flash/[Flex](http://www.adobe.com/au/products/flex.html) expecifically targeting this distribution platform, or 
 2. You can develop your web application as usual and then wrap it around this "envelope".
 
+<div class="index-break"></div>
+
 Probably, the most important Abobe Air application to ever exist using the first approach was the version of **Tweetdeck** that existed before it was adquired by Twitter and decided to replace it with a worse native implementation IMO, with less features and "heavier". It sort of works, but since Twitter changed their APIs, it does not retrieve any messages. If you want to try the last version (0.38.2) anyway click [**here**](https://dl.dropboxusercontent.com/u/8256463/blog-files/TweetDeck_0_38.2.air). 
 
 Another instance I normally use is a little application called ["Pomodairo"](http://code.google.com/p/pomodairo/). It aims to replace the physical timer for those who use the ["Pomodoro Technique"](http://pomodorotechnique.com/) to increase their productivity. A more well know app built in Adobe Air would be the prototyping tool called [balsamiq](http://balsamiq.com/download/).

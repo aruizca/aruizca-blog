@@ -12,6 +12,8 @@ status=published
 
 I have decided to give a go to the latest release of the [elementaryOS Linux distribution](https://elementary.io/), **Freya**, and see if it can become my distro of choice for software development. Main reason being that: elementary OS is essentially a Ubuntu (14.04 in this case) based Linux system that just works but wrapped in a really beautiful, smooth and minimalistic interface. All its features make the elementary os usage experience to stand out from all the other Linux distributions I have tried. Even the command line terminal has its own personality, definitely contributing as a differentiation factor.
 
+<div class="index-break"></div>
+
 You only have to boot the OS once and after 4 to 5 seconds (I am using a SSD) you instantly feel atracted to the aesthetics of the desktop. Then after a few minutes using it, everything: the screen transitions, the animations, the notifications, ... makes a delight to your eyes and leaves you with a pleasant sense of lightness and responsiveness. Give it a go and you'll see that the praises don't stop with the looks :-)
 
 So far I have been using it in a VM with good results, so I am going to leave here all the steps I followed in order to get it ready for "business" in my laptop after I finished the standard installation process:

@@ -10,7 +10,9 @@ status=published
 
 Recently I was faced with the task of cleaning up a Git repository whose branches were not "pruned" for a few years, so I am talking about several hundreds of branches.
 
-This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That's why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged to a "higher level" branch. Because they became **"redundant"**.
+This situation can make using Git through the command line or a GUI front-end client a very cumbersome experiece. That's why I usually recommend, as a general rule, to delete any feature or bugfix branch after it gets merged to a "higher level" branch. Because they became **"useless"** and only add noise.
+
+<div class="index-break"></div>
 
 The real task here is to clean up the remote branch as you can always clone the repo locally again and start from scratch. I started deleting them manually because I am not a Git guru and I am very cautius whenever I have to tempre with the remote repositorory. Soon enough I realized I was not getting anywhere and start looking for a script to help me.
 

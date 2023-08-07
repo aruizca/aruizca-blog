@@ -14,6 +14,8 @@ the 14th of August 2013.
 Please click once inside the presentation area and then use the spacebar or the arrow keys to go through the 
 presentation.
 
+<div class="index-break"></div>
+
 The presentation was created using the [impress.js](http://bartaz.github.io/impress.js) library, which seems to be discontinued. The effects are cool but after a few slides is starts to get a bit cumbersome. At the end I was able to manage the presentation using an online editor specifically designed for impress.js called [Strut](http://strut.io/). Although now it looks like the editor supports other presentation frameworks.
 
 In my opinion, the mayor drawback of this library is the lack of partial steps within the same slide. Unfortunately when I realized about that I was too advanced to go back.
