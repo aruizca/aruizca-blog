@@ -21,8 +21,9 @@ build_command
 
 echo -e "\033[0;32mDeploying $branch branch...\033[0m"
 cd $directory &&
+  git pull &&
+  git config pull.rebase true &&
   git add --all &&
-
   git commit -m "Deploy updates $(date +'%Y-%m-%d %H:%M:%S')" &&
   git push origin $branch
 
