@@ -6,8 +6,8 @@
     <atom:link href="https://aruizca.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Mon., 7 Aug. 2023 11:23:48 +0200</pubDate>
-    <lastBuildDate>Mon., 7 Aug. 2023 11:23:48 +0200</lastBuildDate>
+    <pubDate>Mon., 7 Aug. 2023 11:29:56 +0200</pubDate>
+    <lastBuildDate>Mon., 7 Aug. 2023 11:29:56 +0200</lastBuildDate>
 
     <item>
       <title>Git housekeeping: remove &quot;obsolete&quot; branches from the remote and your local repositories</title>
