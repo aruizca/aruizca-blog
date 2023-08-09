@@ -9,6 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: chmod +x ./scripts/deploy-blog.sh
+      - run: git config --global user.email "aruizca@gmail.com"
+      - run: git config --global user.name "Angel Ruiz"
       - run: ./scripts/deploy-blog.sh
       
 
