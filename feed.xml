@@ -6,13 +6,13 @@
     <atom:link href="https://aruizca.com/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Mon., 7 Aug. 2023 19:58:01 +0200</pubDate>
-    <lastBuildDate>Mon., 7 Aug. 2023 19:58:01 +0200</lastBuildDate>
+    <pubDate>Wed, 9 Aug 2023 21:22:02 +0000</pubDate>
+    <lastBuildDate>Wed, 9 Aug 2023 21:22:02 +0000</lastBuildDate>
 
     <item>
       <title>Git housekeeping: remove &quot;obsolete&quot; branches from the remote and your local repositories</title>
       <link>https://aruizca.com/blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</link>
-      <pubDate>Sun., 31 Jul. 2016 00:00:00 +0200</pubDate>
+      <pubDate>Sun, 31 Jul 2016 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2016/01-git-houseleeping-remove-obsolete-branches-from-the-remote-and-your-local-repositories/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2016/img/git-clean.png&quot; alt=&quot;git clean&quot;&gt;&lt;/p&gt; 
@@ -81,7 +81,7 @@ git branch --merged master | grep -v &quot;master&quot; | xargs -n 1 git branch 
     <item>
       <title>Extract Webjars static resources with Gradle for jBake (or anything really...)</title>
       <link>https://aruizca.com/blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</link>
-      <pubDate>Mon., 31 Aug. 2015 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 31 Aug 2015 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2015/04-extract-webjars-static-resources-with-gradle/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;https://www.webjars.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/gradle-webjars.png&quot; alt=&quot;gradle and webjars&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -147,7 +147,7 @@ dependencies {
     <item>
       <title>My steps to setup elementaryOS Freya</title>
       <link>https://aruizca.com/blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</link>
-      <pubDate>Fri., 27 Mar. 2015 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 27 Mar 2015 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2015/03-my-steps-to-setup-elementaryos-freya/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;https://elementary.io/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/elementary-os-icon.png&quot; alt=&quot;elementary os&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -293,7 +293,7 @@ sudo apt-get install skype
     <item>
       <title>How to reference a file inside a Grails plugin</title>
       <link>https://aruizca.com/blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</link>
-      <pubDate>Wed., 25 Mar. 2015 00:00:00 +0100</pubDate>
+      <pubDate>Wed, 25 Mar 2015 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2015/02-debugging-elasticsearch-java-api-queries-as-json-rest-queries/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;https://www.elastic.co/products/elasticsearch&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/elasticsearch-java-json.png&quot; alt=&quot;elasticsearch-java-json&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -310,7 +310,7 @@ sudo apt-get install skype
     <item>
       <title>Integrated vs Functional testing: how to test REST APIs in Grails using Spock</title>
       <link>https://aruizca.com/blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</link>
-      <pubDate>Thu., 19 Mar. 2015 00:00:00 +0100</pubDate>
+      <pubDate>Thu, 19 Mar 2015 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2015/01-integrated-vs-functional-testing-how-to-test-rest-apis-in-grails-using-spock/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;https://spockframework.org/&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2015/img/grails-spock.png&quot; alt=&quot;Grails and Spock&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -459,7 +459,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     <item>
       <title>How to render JSON properly (without escaping quotes) inside a GSP script tag</title>
       <link>https://aruizca.com/blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</link>
-      <pubDate>Wed., 19 Nov. 2014 00:00:00 +0100</pubDate>
+      <pubDate>Wed, 19 Nov 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/08-how-to-render-json-properly-without-escaping-quotes-inside-a-gsp-script-tag/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -523,7 +523,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     <item>
       <title>How to integrate RabbitVCS with Nautilus file manager in Ubuntu 14.04 Trusty Tahr</title>
       <link>https://aruizca.com/blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</link>
-      <pubDate>Tue., 27 May 2014 00:00:00 +0200</pubDate>
+      <pubDate>Tue, 27 May 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/07-how-to-integrate-rabbitvcs-with-nautilus-file-manager-in-ubuntu-14-04-trusty-tahr/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://rabbitvcs.org/&quot; title=&quot;RabbitVCS website&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/rabbitvcs-post-logo.png&quot; alt=&quot;RabbitVCS Git client in Ubuntu&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -562,7 +562,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     <item>
       <title>Steps to create a Vagrant Base Box with Ubuntu 14.04 Desktop (GUI) and VirtualBox</title>
       <link>https://aruizca.com/blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</link>
-      <pubDate>Fri., 23 May 2014 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 23 May 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/06-steps-to-create-a-vagrant-base-box-with-ubuntu-14-04-desktop-gui-and-virtualbox/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/vagrant-virtualbox-ubuntu-post-title.png&quot; alt=&quot;Vagrant + VirtualBox + Ubuntu = Ubuntu Boxes&quot;&gt;&lt;/p&gt; 
@@ -684,7 +684,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     <item>
       <title>How to reference a file inside a Grails plugin</title>
       <link>https://aruizca.com/blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</link>
-      <pubDate>Mon., 7 Apr. 2014 00:00:00 +0200</pubDate>
+      <pubDate>Mon, 7 Apr 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/05-how-to-reference-a-file-inside-a-grails-plugin/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -696,7 +696,7 @@ class BookControllerFunctionalSpec extends IntegrationSpec {
     <item>
       <title>Migrating from Grails 2.2 to 2.3</title>
       <link>https://aruizca.com/blog/2014/04-migrating-from-grails-22-to-23/index.html</link>
-      <pubDate>Fri., 14 Mar. 2014 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 14 Mar 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/04-migrating-from-grails-22-to-23/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;a href=&quot;http://grails.org&quot; target=&quot;_blank&quot;&gt;&lt;br&gt; &lt;img src=&quot;https://aruizca.com/blog/2014/img/grails.png&quot; alt=&quot;Grails logo&quot;&gt;&lt;br&gt; &lt;/a&gt;&lt;/p&gt; 
@@ -862,7 +862,7 @@ grails.project.ivy.authentication = {
     <item>
       <title>ABC iView Desktop - Using Adobe AIR to wrap your Web Application as a cross-platform Desktop Application</title>
       <link>https://aruizca.com/blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</link>
-      <pubDate>Tue., 28 Jan. 2014 00:00:00 +0100</pubDate>
+      <pubDate>Tue, 28 Jan 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/03-abc-iview-desktop-using-adobe-air-to-wrap-your-web-application-as-a-cross-platform-desktop-application/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/adobe-air-logo.png&quot; alt=&quot;Adobe Air logo&quot;&gt;&lt;/p&gt; 
@@ -989,7 +989,7 @@ grails.project.ivy.authentication = {
     <item>
       <title>My MongoDB presentation at the CJUG</title>
       <link>https://aruizca.com/blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</link>
-      <pubDate>Wed., 15 Jan. 2014 00:00:00 +0100</pubDate>
+      <pubDate>Wed, 15 Jan 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/02-my-mongodb-presentation-at-the-cjug/index.html</guid>
       	<description>
 	&lt;iframe id=&quot;mongodb-preso&quot; src=&quot;https://aruizca.github.io/mongodb-presentation&quot; style=&quot;width: 100%; height: 500px&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt; 
@@ -1003,7 +1003,7 @@ grails.project.ivy.authentication = {
     <item>
       <title>How to upgrade your HDMI dongle MK809II to Android 4.2.2 with the Finless ROM 2.0</title>
       <link>https://aruizca.com/blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</link>
-      <pubDate>Sun., 12 Jan. 2014 00:00:00 +0100</pubDate>
+      <pubDate>Sun, 12 Jan 2014 00:00:00 +0000</pubDate>
       <guid isPermaLink="false">blog/2014/01-how-to-upgrade-your-hdmi-dongle-mk809ii-to-android-422-with-the-finless-rom-20/index.html</guid>
       	<description>
 	&lt;p&gt;&lt;img src=&quot;https://aruizca.com/blog/2014/img/mk809II-Android-4.2.png&quot; alt=&quot;mk809II&quot;&gt;&lt;/p&gt; 
