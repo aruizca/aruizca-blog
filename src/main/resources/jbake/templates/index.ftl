@@ -65,13 +65,13 @@
         <div id="pagination_willsong">
             <nav class="pagination" role="navigation">
                 <#if (currentPageNumber > 1)>
-                <a class="newer-posts" href="${config.site_host}/${(currentPageNumber==2)?then('', currentPageNumber-1)}">
+                <a class="newer-posts" href="/${(currentPageNumber==2)?then('', currentPageNumber-1)}">
                     <i class="fa fa-arrow-left fa-lg fa-fw"></i> Newer Posts
                 </a>
                 </#if>
                 <span class="page-number">Page ${currentPageNumber} of ${numberOfPages}</span>
                 <#if (currentPageNumber < numberOfPages)>
-                <a class="older-posts" href="${config.site_host}/${currentPageNumber + 1}">
+                <a class="older-posts" href="/${currentPageNumber + 1}">
                     Older Posts <i class="fa fa-arrow-right fa-lg fa-fw"></i>
                 </a>
                 </#if>

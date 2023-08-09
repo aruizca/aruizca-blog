@@ -1,0 +1,14 @@
+name: generate site and publish
+on:
+  push:
+    branches:
+      - master
+jobs:
+  run_script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: chmod +x ./scripts/deploy-blog.sh
+      - run: ./scripts/deploy-blog.sh
+      
+
