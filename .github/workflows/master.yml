@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v1
       - run: chmod +x ./scripts/deploy-blog.sh
       - run: git config --global user.email "aruizca@gmail.com"
-      - run: git config --global user.name "Angel Ruiz"
+      - run: git config --global user.name "aruizca"
       - run: ./scripts/deploy-blog.sh
       
 
